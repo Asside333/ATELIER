@@ -46,3 +46,9 @@ Contexte : risque réel que l'accumulation de features (Assistant, Analyste, Tec
 
 ## D-015 · Trois modèles seulement (Haiku / Sonnet / Opus)
 Contexte : Fable 5 retiré hors des États-Unis. Décision : le routage se fait désormais entre Haiku 4.5 (chores mécaniques), Sonnet 4.6 (défaut, ~85 % des sessions), et Opus 4.8 (architecture, refonte, moteur harmonique, contenu de fond). Réversibilité : additive — si un nouveau modèle intermédiaire devient disponible, il s'insère dans la table sans rien casser.
+
+## D-016 · Tone.js adopté dès v3.0 (pas de report v3.1)
+Contexte : le séquenceur `setInterval` du legacy est fragile (timing dérivant, swing approximatif). Décision : Tone.Transport remplace le setInterval dès v3.0 — timing au sample près, swing natif. Les 8 voix sont portées minimalement (parité sonore) ; le soin des timbres (sub profond, wobble LFO soigné, stab) reste cadré en v3.1 « Le Son ». Réversibilité : bonne — l'audio est isolé dans `engine.js` et `player.js`, les données n'en savent rien.
+
+## D-017 · Hints à 3 paliers écrits dès v3.0 (pas de migration à 1 hint)
+Contexte : le legacy a un seul hint par mission. Le schéma `mission/v1` prévoit `hints:[reformulation, indice, quasi-solution]`. Décision : écrire les 3 paliers pour les 39 missions lors de la migration (étape 3b, en Opus 4.8), pas reporter. Le hint legacy (souvent de niveau « indice précis ») est affûté et complété au-dessus (reformulation douce) et en dessous (quasi-solution avec pitches). Réversibilité : sans objet — pure copie pédagogique.

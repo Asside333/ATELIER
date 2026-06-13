@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#14101a">
+  <title>ATELIER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..60,500;12..60,700;12..60,800&family=Outfit:wght@300;400;500&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="logo">ATELIER.</div>
+  <div class="hud">
+    <span>SÉRIE <b id="hStreak">0</b>J</span>
+    <span><b id="hDone">0</b>/<span id="hTotal">0</span></span>
+    <button class="nmToggle" id="nmToggle" aria-label="Basculer noms de notes">DO/C</button>
+  </div>
+</header>
+
+<main>
+  <section class="view active" id="v-path">
+    <div class="eyebrow">Le chemin</div>
+    <p class="manifesto">Tu fabriques d'abord. Le nom du concept vient après. Casque conseillé.</p>
+    <div id="welcome"></div>
+    <div id="pathList"></div>
+  </section>
+
+  <section class="view" id="v-mission">
+    <div class="mhead">
+      <button class="back" id="mBack">← CHEMIN</button>
+      <h1 id="mTitle"></h1>
+      <span class="tag" id="mTag"></span>
+    </div>
+    <div class="instr" id="mInstr"></div>
+    <div id="mTip"></div>
+    <div class="ctxrow" id="mCtx"></div>
+    <div id="mBody"></div>
+    <div class="feed" id="mFeed"></div>
+    <div class="ctxrow" id="mActions"></div>
+  </section>
+
+  <section class="view" id="v-studio">
+    <div class="eyebrow">Studio libre</div>
+    <p class="manifesto">Deux pistes : une basse, un clavier. Comme un mini-Ableton.</p>
+    <div class="srow">
+      <button class="trk on" id="trkA">PISTE A · BASSE</button>
+      <button class="trk b" id="trkB">PISTE B · KEYS</button>
+    </div>
+    <div class="srow">
+      <label>SON</label><select id="stPatch"></select>
+      <label>BPM</label><input type="number" id="stBpm" min="60" max="200" value="132">
+      <label>SWING</label><input type="range" id="stSwing" min="0" max="40" value="0">
+    </div>
+    <div class="srow">
+      <label>GAMME</label>
+      <select id="stRoot"></select>
+      <select id="stMode">
+        <option value="">aucune</option>
+        <option value="min" selected>mineure</option>
+        <option value="maj">majeure</option>
+      </select>
+      <button class="btn" id="stWhat" style="padding:7px 12px">?</button>
+      <button class="btn" id="stUp">OCT +</button>
+      <button class="btn" id="stDn">OCT −</button>
+    </div>
+    <div class="infob" id="scaleInfo">
+      <b>La gamme, c'est quoi ?</b> Un filtre : 7 notes sur 12 qui sonnent bien ensemble. Choisis une racine et une couleur. Les lignes <b>éclaircies</b> sont dans le filtre — reste dessus et tout sonnera juste.
+    </div>
+    <div class="tools" id="stTools"></div>
+    <div class="gridwrap"><div class="pgrid" id="stGrid"></div></div>
+    <div class="glegend" id="stLegend"></div>
+    <div class="srow" style="margin-top:12px">
+      <button class="btn prime" id="stPlay">▶ LIRE</button>
+      <button class="btn" id="stClear">EFFACER LA PISTE</button>
+      <button class="btn" id="stSave">SAUVER</button>
+      <button class="btn" id="midiBtn">MIDI</button>
+      <span class="midistat" id="midiStat"></span>
+    </div>
+    <div class="sketches" id="stSketches"></div>
+  </section>
+
+  <section class="view" id="v-bricks">
+    <div class="eyebrow">Le carnet de briques</div>
+    <p class="manifesto">Chaque concept gagné est une brique. Relisible partout, même sans son.</p>
+    <div class="brickgrid" id="brickGrid"></div>
+    <div id="brickDetail" style="margin-top:16px"></div>
+  </section>
+</main>
+
+<div id="kbzone"><div id="kb"></div></div>
+
+<nav>
+  <button id="nav-path" class="on">CHEMIN</button>
+  <button id="nav-studio">STUDIO</button>
+  <button id="nav-bricks">BRIQUES</button>
+</nav>
+
+<div class="veil" id="veil">
+  <div class="inner">
+    <div class="acq" id="veilEyebrow">BRIQUE ACQUISE</div>
+    <div class="bdetail drop" id="veilCard"></div>
+    <div style="text-align:center;margin-top:16px">
+      <button class="btn prime" id="veilGo">CONTINUER →</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

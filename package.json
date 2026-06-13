@@ -1,0 +1,19 @@
+{
+  "name": "atelier",
+  "private": true,
+  "version": "3.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --base=/ATELIER/",
+    "preview": "vite preview --base=/ATELIER/",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "tone": "^14.7.77"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "vitest": "^2.1.0"
+  }
+}
