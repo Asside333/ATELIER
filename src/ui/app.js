@@ -7,11 +7,12 @@
 import modules from '../data/modules.json'
 import { getState, markDone, markActivity, setSeen, toggleNames } from '../core/store.js'
 import { renderPath } from './path.js'
-import { openMission, brickCard } from './mission.js'
+import { openMission } from './mission.js'
 import { stop as playerStop } from '../core/player.js'
 import { init as engineInit, isReady as engineReady } from '../core/engine.js'
 import { setKBLang } from './keyboard.js'
 import { initStudio, renderStudio } from './studio.js'
+import { renderBricks } from './bricks.js'
 
 // ── DONNÉES ───────────────────────────────────────────────────────────────────
 
@@ -81,45 +82,6 @@ function openMissionView(m) {
   })
 }
 
-// ── BRIQUES ───────────────────────────────────────────────────────────────────
-
-function renderBricks() {
-  const host = document.getElementById('brickGrid')
-  const detail = document.getElementById('brickDetail')
-  host.innerHTML = ''
-  detail.innerHTML = ''
-  const s = getState()
-
-  allMissions.forEach((m, i) => {
-    const got = s.done.includes(m.id)
-    const b = document.createElement('button')
-    b.className = 'brick' + (got ? '' : ' locked')
-    b.style.setProperty('--mh', modules[m.mod].hue)
-
-    const bno = document.createElement('div')
-    bno.className = 'bno'
-    bno.textContent = 'Nº' + (i + 1)
-
-    const bn = document.createElement('div')
-    bn.className = 'bn'
-    bn.textContent = got ? m.brick.name : '· · ·'
-
-    b.appendChild(bno)
-    b.appendChild(bn)
-
-    if (got) {
-      b.addEventListener('click', () => {
-        detail.innerHTML = ''
-        detail.appendChild(brickCard(m, { allMissions, modules }, true))
-        detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-      })
-    } else {
-      b.disabled = true
-    }
-    host.appendChild(b)
-  })
-}
-
 // ── INIT ──────────────────────────────────────────────────────────────────────
 
 export function init() {
@@ -131,7 +93,10 @@ export function init() {
     renderStudio()
     showView('studio')
   })
-  document.getElementById('nav-bricks').addEventListener('click', () => { renderBricks(); showView('bricks') })
+  document.getElementById('nav-bricks').addEventListener('click', () => {
+    renderBricks({ allMissions, modules, done: getState().done })
+    showView('bricks')
+  })
 
   // Toggle noms de notes
   document.getElementById('nmToggle').addEventListener('click', () => {

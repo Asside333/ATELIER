@@ -236,4 +236,17 @@ nav button.on { color: var(--amber); }
 
 /* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
 @media (min-width: 560px) { .brickgrid { grid-template-columns: 1fr 1fr 1fr; } }
+
+@media (max-width: 400px) {
+  header { padding: 11px 12px 9px; }
+  .hud { gap: 7px; font-size: 10px; }
+  .logo { font-size: 18px; }
+  .view { padding-left: 12px; padding-right: 12px; }
+  .earbtns { gap: 6px; }
+  .earbtns .btn { max-width: 148px; padding: 14px 8px; }
+  .btn { padding: 10px 12px; }
+  .srow { gap: 6px; }
+  nav button { font-size: 9.5px; letter-spacing: .13em; padding: 16px 0 14px; }
+}
+
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
