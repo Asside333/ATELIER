@@ -1,0 +1,343 @@
+{
+  "schema": "technique/v1",
+  "_note": "~45 techniques de production, exactes, compatibles Live 12 STANDARD (aucune n'exige Suite ni Max for Live). Alimentent le Conseil du jour, l'apparition contextuelle et le Carnet de Techniques. depth: 1=évidence libératrice, 2=intermédiaire, 3=sioux. Champ brique = lien optionnel vers une brique du chemin. Champ try = comment précharger le studio / quel .mid envoyer pour 'Essaie'.",
+  "domains": ["sidechain", "compression", "lfo", "eq", "saturation", "espace", "arrangement", "layering", "groove", "workflow", "etat-desprit"],
+  "techniques": [
+    {
+      "id": "sc-01", "domain": "sidechain", "depth": 1, "title": "LA POMPE",
+      "tip": "Tu connais ce battement où la basse 'respire' à chaque kick, dans la house et l'EDM ? C'est un compresseur sur la basse, déclenché par le kick. Le kick frappe, la basse baisse une fraction de seconde, puis revient. C'est tout.",
+      "abl": "Sur la piste de basse : Compressor, active la petite case Sidechain, choisis la piste kick comme source. Attack rapide, Release calé sur le tempo (≈1/8). Monte le Ratio jusqu'à sentir la pompe.",
+      "why": "Le kick et la basse occupent les mêmes graves. En faisant reculer la basse pile quand le kick frappe, les deux deviennent audibles au lieu de se battre — et le mouvement crée le groove.",
+      "brique": null
+    },
+    {
+      "id": "sc-02", "domain": "sidechain", "depth": 3, "title": "LA POMPE FANTÔME",
+      "tip": "Tu veux la pompe, mais ton kick est irrégulier ou syncopé (un 2-step), donc la basse pompe n'importe comment. Solution de sioux : crée un kick INVISIBLE, régulier sur les 4 temps, et sers-t'en pour déclencher — sans jamais l'entendre.",
+      "abl": "Nouvelle piste MIDI, un kick four-on-the-floor dessus, baisse son volume à zéro (ou route sa sortie vers 'Sends Only'). Utilise CETTE piste comme source de sidechain sur ta basse. Pompe régulière, zéro clic parasite.",
+      "why": "Le sidechain n'a pas besoin d'entendre le déclencheur — juste de le détecter. Découpler la pompe du vrai kick te laisse un groove de batterie libre ET une basse qui respire proprement.",
+      "brique": "r02"
+    },
+    {
+      "id": "sc-03", "domain": "sidechain", "depth": 3, "title": "LA REVERB QUI SE TAIT",
+      "tip": "Ta voix ou ton lead se noie dans la reverb ? Fais en sorte que la reverb ne sonne QUE dans les silences, entre les notes. La queue disparaît dès que le son revient.",
+      "abl": "Sur le retour de reverb : Compressor en sidechain, source = la piste sèche (voix/lead). Quand le son joue, la reverb est écrasée ; quand il s'arrête, elle fleurit.",
+      "why": "On garde la clarté du son sec ET la profondeur de l'espace, sans bouillie. C'est le secret des voix de pop ultra-claires posées dans une grande reverb.",
+      "brique": null
+    },
+    {
+      "id": "co-01", "domain": "compression", "depth": 2, "title": "LA COLLE",
+      "tip": "Tes drums sonnent comme des éléments séparés au lieu d'un seul instrument ? Mets UN compresseur sur tout le groupe de batterie, très léger. D'un coup, ça devient 'un truc'.",
+      "abl": "Sélectionne tes pistes de drums, Ctrl+G pour les grouper. Sur le groupe : Compressor, Attack lente (~10 ms), Ratio bas (2:1), vise seulement 2-3 dB de réduction. L'aiguille bouge avec la musique.",
+      "why": "Une légère compression sur un bus 'colle' les sons en les faisant réagir ensemble au même mouvement de volume. C'est la 'glue compression', sur tous les disques que tu aimes.",
+      "brique": null
+    },
+    {
+      "id": "co-02", "domain": "compression", "depth": 3, "title": "LE PARADOXE DU CLAQUEMENT",
+      "tip": "Contre-intuitif : la compression peut rendre une batterie PLUS punchy, pas plus molle. Le secret est dans l'attaque lente.",
+      "abl": "Compressor sur ton kick/snare, Attack LENTE (20-30 ms). Le transitoire (le 'clac' du début) passe AVANT que le compresseur ne se referme, puis le corps est compressé. Résultat : l'attaque ressort encore plus.",
+      "why": "Une attaque rapide écrase le clac et adoucit ; une attaque lente le laisse filer et ne compresse que la traîne. Tu sculptes la forme du son, tu ne l'aplatis pas.",
+      "brique": null
+    },
+    {
+      "id": "co-03", "domain": "compression", "depth": 3, "title": "LA COMPRESSION PARALLÈLE",
+      "tip": "Tu veux une batterie énorme et grasse SANS perdre la dynamique ? Écrase une COPIE à fond, et glisse-la tout doucement sous l'originale.",
+      "abl": "Le plus simple en Live : sur le compresseur du bus drums, baisse le bouton Dry/Wet à ~30-40 %. Tu mélanges le son compressé à mort avec le son sec. (Méthode New York / parallèle.)",
+      "why": "La copie écrasée apporte le poids et la densité ; le sec garde le claquant et la respiration. Le meilleur des deux, dosable au bouton.",
+      "brique": null
+    },
+    {
+      "id": "co-04", "domain": "compression", "depth": 1, "title": "RESPIRER, PAS ÉCRASER",
+      "tip": "Règle anti-débutant : sur un compresseur, plus n'est PAS mieux. Vise 2 à 4 dB de réduction, regarde l'aiguille bouger en rythme avec la musique. Si elle est collée en bas, tu écrases tout.",
+      "abl": "Sur n'importe quel Compressor : surveille le 'Gain Reduction' (l'aiguille / la barre). Entre -2 et -4 dB sur les pics suffit presque toujours.",
+      "why": "La compression sert à maîtriser la dynamique, pas à la tuer. Trop de compression rend un mix fatigant et sans vie. Le geste juste est subtil.",
+      "brique": null
+    },
+    {
+      "id": "lf-01", "domain": "lfo", "depth": 1, "title": "LE TREMOLO",
+      "tip": "Un LFO sur le VOLUME fait pulser un son en rythme — le tremolo. Une nappe tenue qui bat doucement devient vivante au lieu d'être plate.",
+      "abl": "Pose un Auto Pan sur ta piste, règle Phase à 0° (les deux canaux ensemble = tremolo, pas de panoramique). Rate synchronisé (1/8, 1/4). Monte Amount. La nappe pulse.",
+      "why": "L'Auto Pan est en réalité un LFO d'amplitude. À 0° de phase il module le volume des deux côtés ensemble : ton tremolo gratuit.",
+      "brique": "n16"
+    },
+    {
+      "id": "lf-02", "domain": "lfo", "depth": 2, "title": "LE MOUVEMENT STÉRÉO",
+      "tip": "Un son statique au centre s'ennuie. Fais-le dériver doucement de gauche à droite : subtil, c'est de la largeur ; extrême, c'est planant.",
+      "abl": "Auto Pan, Phase à 180°, Rate lent (1/2 ou 1 mesure), Amount modéré. Le son se balance dans le champ stéréo.",
+      "why": "L'oreille adore le mouvement. Un léger va-et-vient stéréo donne de l'espace et de la vie sans toucher aux notes ni au volume perçu.",
+      "brique": null
+    },
+    {
+      "id": "lf-03", "domain": "lfo", "depth": 3, "title": "LA VIE DISCRÈTE",
+      "tip": "Un soupçon de LFO sur la HAUTEUR (quelques cents seulement) fait 'respirer' un son comme un vieux synthé analogique. Trop, et ça donne le mal de mer ; juste ce qu'il faut, et c'est magique.",
+      "abl": "Dans Drift ou Operator : section LFO, destination = Pitch, Amount minuscule (quelques cents), Rate lent et libre (non synchronisé). Le son ondule imperceptiblement.",
+      "why": "Aucun instrument réel n'est parfaitement juste en permanence : ce micro-désaccord mouvant est exactement ce qui manque aux sons numériques pour sembler vivants.",
+      "brique": null
+    },
+    {
+      "id": "lf-04", "domain": "lfo", "depth": 3, "title": "DEUX LFO, DEUX VITESSES",
+      "tip": "Pour une texture qui ne se répète jamais vraiment : deux LFO sur le même son, à des vitesses différentes, sur des paramètres différents. Un lent sur le filtre, un rapide sur le volume.",
+      "abl": "Empile deux Auto Filter / Auto Pan (ou les LFO internes de Drift) à des Rate non multiples l'un de l'autre (ex. 1/4 et 1/3). Leurs cycles se croisent sans jamais se resynchroniser.",
+      "why": "Deux cycles de durées incommensurables produisent un motif global immense qui semble organique et imprévisible. C'est le secret des nappes 'vivantes' de l'ambient et de la techno.",
+      "brique": null
+    },
+    {
+      "id": "lf-05", "domain": "lfo", "depth": 2, "title": "SYNCHRO OU LIBRE, CHOISIS",
+      "tip": "Un LFO synchronisé au tempo = robotique, rythmique, calé (parfait pour un wobble). Un LFO libre (en Hz, non synchro) = organique, qui flotte. Ce n'est pas un détail : c'est deux mondes.",
+      "abl": "Sur tout LFO (Auto Filter, Drift) : le bouton qui bascule entre une valeur en notes (1/8, 1/4 = synchro) et une valeur en Hz (= libre). Essaie le même réglage dans les deux modes.",
+      "why": "La synchro ancre le mouvement dans la grille rythmique ; le mode libre l'en détache. Savoir choisir, c'est décider si ton mouvement sert le groove ou l'atmosphère.",
+      "brique": null
+    },
+    {
+      "id": "eq-01", "domain": "eq", "depth": 1, "title": "LE GRAND NETTOYAGE",
+      "tip": "Le secret n°1 d'un mix qui sonne pro : couper les graves inutiles de TOUT ce qui n'est pas le sub ou le kick. Tes pads, leads, charleys ont des graves dont ils n'ont pas besoin — et qui transforment ton mix en boue.",
+      "abl": "EQ Eight sur chaque piste (sauf sub/kick) : active le filtre passe-haut (la pente à gauche), monte-le jusqu'à 100-300 Hz selon l'élément, juste avant que ça ne s'amaigrisse.",
+      "why": "Vingt sons qui traînent chacun un peu de grave = un brouillard cumulé qui masque le kick et la basse. Nettoie le bas du spectre et tout respire d'un coup.",
+      "brique": null
+    },
+    {
+      "id": "eq-02", "domain": "eq", "depth": 2, "title": "CREUSER, PAS POUSSER",
+      "tip": "Un son ne ressort pas ? Réflexe d'amateur : le monter. Réflexe de sioux : CREUSER la même fréquence dans ce qui le masque. Tu fais de la place au lieu d'empiler.",
+      "abl": "EQ Eight sur l'élément gênant : repère la zone où ton son important vit, baisse-la d'un creux doux à cet endroit-là. Le son important réapparaît sans que tu l'aies touché.",
+      "why": "Additionner des boosts sature le mix et fatigue. Soustraire libère de l'espace. Un bon mix est surtout fait de coupes, pas de bosses.",
+      "brique": null
+    },
+    {
+      "id": "eq-03", "domain": "eq", "depth": 3, "title": "L'EMBOÎTEMENT KICK-BASSE",
+      "tip": "Le kick et la basse se battent dans les graves ? Fais-les s'emboîter : là où le kick est fort, creuse la basse — et inversement. Ils s'imbriquent comme deux pièces de puzzle.",
+      "abl": "Trouve la fondamentale du kick (souvent 50-80 Hz) avec l'analyseur d'EQ Eight. Creuse exactement cette fréquence dans la basse. Optionnel : creuse la fréquence forte de la basse dans le kick.",
+      "why": "Deux sons ne peuvent pas occuper la même fréquence au même volume sans bouillie. En leur attribuant des bandes complémentaires, les deux deviennent nets et puissants.",
+      "brique": "n14"
+    },
+    {
+      "id": "eq-04", "domain": "eq", "depth": 3, "title": "LA BASSE EN MONO",
+      "tip": "Garde TOUT ce qui est en dessous de ~120 Hz en mono. Une basse stéréo sonne faible et bizarre sur un gros système (et carrément peut s'annuler). En mono, elle frappe.",
+      "abl": "Utility sur ta basse/sub : monte le paramètre 'Bass Mono' (Width to Mono) jusqu'à ~120 Hz. Ou EQ Eight en mode Mid/Side. Les graves restent centrés, le reste peut être large.",
+      "why": "Les très basses fréquences en stéréo créent des différences de phase qui s'annulent sur les systèmes mono (clubs, enceintes Bluetooth). Le bas en mono = punch garanti partout.",
+      "brique": "n14"
+    },
+    {
+      "id": "eq-05", "domain": "eq", "depth": 3, "title": "ÉLARGIR PAR LE HAUT",
+      "tip": "Pour élargir un son sans toucher aux graves : passe-haut UNIQUEMENT les côtés. Le centre (et les basses) reste solide, les aigus s'écartent.",
+      "abl": "EQ Eight en mode Mid/Side : sélectionne 'Side', applique un passe-haut dessus. Les graves redeviennent mono/centrés, les hautes fréquences gardent leur largeur.",
+      "why": "C'est la version chirurgicale de la largeur stéréo : on garde la fondation centrée et puissante, et on n'ouvre l'espace que là où l'oreille le tolère, en haut.",
+      "brique": null
+    },
+    {
+      "id": "sa-01", "domain": "saturation", "depth": 3, "title": "LE SUB QUI SURVIT AU TÉLÉPHONE",
+      "tip": "Ton sub (ou ta 808) disparaît sur un petit haut-parleur ? Normal : une sinusoïde grave n'a aucun aigu, et un téléphone ne reproduit pas les graves. La parade : un soupçon de distorsion.",
+      "abl": "Saturator ou Overdrive léger sur le sub. La distorsion crée des harmoniques (des copies plus aiguës) qui rendent la note audible sur les petits systèmes — sans changer le grave d'origine.",
+      "why": "L'oreille reconstruit la hauteur d'une note à partir de ses harmoniques. En ajoutant ces harmoniques, ton sub reste senti dans un club ET entendu sur un téléphone. Indispensable en trap.",
+      "brique": "sd04"
+    },
+    {
+      "id": "sa-02", "domain": "saturation", "depth": 2, "title": "LA CHALEUR QUI COLLE",
+      "tip": "Un mix trop 'numérique', froid ? Une pointe de saturation sur le bus général réchauffe et colle l'ensemble, comme une vieille console analogique.",
+      "abl": "Saturator sur le groupe master (ou le bus 'musique'), Drive très bas (quelques dB), type Soft/Analog. Tu dois à peine l'entendre — juste sentir que ça 'tient' mieux.",
+      "why": "La saturation ajoute des harmoniques douces qui lient les éléments et flattent l'oreille. Le secret des productions qui sonnent 'chères' tient souvent à une saturation invisible.",
+      "brique": null
+    },
+    {
+      "id": "es-01", "domain": "espace", "depth": 2, "title": "LE PRÉ-DELAY QUI GARDE LE CLAC",
+      "tip": "Tu mets de la reverb et le son devient flou ? Décale le début de la reverb de quelques millisecondes : le son sec frappe net d'abord, la reverb fleurit juste après.",
+      "abl": "Sur ton Reverb : monte le Pre-Delay à 20-40 ms. Le transitoire passe avant la queue. Clarté ET profondeur.",
+      "why": "Sans pré-delay, la reverb se colle au transitoire et l'étouffe. Le petit décalage laisse l'attaque exister avant que l'espace ne s'ouvre. Standard sur les voix et les snares.",
+      "brique": null
+    },
+    {
+      "id": "es-02", "domain": "espace", "depth": 3, "title": "LA REVERB À L'ENVERS",
+      "tip": "Ce 'whoosh' qui monte juste avant qu'un snare ou un drop ne frappe ? C'est de la reverb inversée. Un balai d'air qui aspire vers l'impact.",
+      "abl": "Prends un son (un snare, un accord), bounce-le en audio avec une grosse reverb, retourne le clip audio (clic droit > Reverse), place le balai juste AVANT le coup d'origine.",
+      "why": "L'oreille entend un crescendo qui n'existe pas dans la nature : ça crée une attente irrésistible, résolue par l'impact. L'effet de transition le plus universel de l'électronique.",
+      "brique": null
+    },
+    {
+      "id": "es-03", "domain": "espace", "depth": 2, "title": "LE DELAY POINTÉ",
+      "tip": "LE delay qui remplit un groove sans le boucher : la croche pointée. Tu l'as entendu sur mille morceaux EDM et chez U2. Il tombe juste à côté du beat, jamais dessus.",
+      "abl": "Ping Pong Delay ou Delay, temps synchronisé sur 3/16 (croche pointée). Dose le Feedback et le Dry/Wet pour que ça enrichisse sans envahir.",
+      "why": "La croche pointée crée un motif rythmique décalé qui s'entrelace avec la mélodie au lieu de la doubler. Du mouvement et de l'espace, gratuitement.",
+      "brique": "n22"
+    },
+    {
+      "id": "es-04", "domain": "espace", "depth": 2, "title": "COURT COLLE, LONG ÉLOIGNE",
+      "tip": "Erreur classique : mettre une grande reverb sur tout. Résultat = lavage. La vérité : une reverb COURTE colle et donne une pièce ; une reverb LONGUE éloigne et donne de la profondeur. On ne met pas la même partout.",
+      "abl": "Une reverb courte (Decay < 1 s) sur le bus pour la cohésion. Une longue (Decay 3 s+) en envoi (Send), dosée seulement sur 1-2 éléments choisis (un lead, une nappe).",
+      "why": "Mélanger les deux crée de la perspective : des sons proches (secs/reverb courte) et lointains (reverb longue). Tout noyer dans du long efface cette profondeur.",
+      "brique": null
+    },
+    {
+      "id": "es-05", "domain": "espace", "depth": 3, "title": "LE THROW DE FIN DE PHRASE",
+      "tip": "Plutôt que de noyer toute une partie dans le delay, balance-le sur UNE seule note : la dernière du phrasé. L'écho s'envole pile quand la phrase se termine.",
+      "abl": "Mets le delay en Send. Automatise le niveau du Send : à zéro pendant la phrase, monté juste sur la dernière note. L'écho 'jette' ce mot/cette note dans l'espace.",
+      "why": "C'est le geste des ingénieurs dub et hip-hop : un accent spatial ponctuel, expressif, qui respire — au lieu d'un effet permanent qui fatigue.",
+      "brique": null
+    },
+    {
+      "id": "ar-01", "domain": "arrangement", "depth": 2, "title": "LE DROP PAR SOUSTRACTION",
+      "tip": "Un drop ne frappe pas parce que tu AJOUTES — il frappe parce que tu as RETIRÉ tout dans la mesure d'avant. Le vide rend la suite énorme.",
+      "abl": "Juste avant ton drop : coupe presque tout pendant 1-2 mesures (garde un filtre qui monte, ou rien). Puis tout revient d'un coup. Automation de volume / mute des pistes.",
+      "why": "L'impact est relatif : après le silence ou le vide, le même son paraît deux fois plus puissant. Le contraste fait la dynamique, pas le volume absolu.",
+      "brique": null
+    },
+    {
+      "id": "ar-02", "domain": "arrangement", "depth": 3, "title": "LE KICK MUET D'AVANT-DROP",
+      "tip": "Astuce de sioux : coupe le kick (lui seul) pendant 1-2 mesures avant le drop. Quand il revient sur le drop, il pèse le double.",
+      "abl": "Dans l'arrangement, supprime/mute les notes de kick sur la ou les mesures précédant le drop. Garde le reste (la tension monte sans la pulsation). Le retour du kick est un coup de poing.",
+      "why": "L'oreille s'habitue au kick régulier et l'attend. Le lui retirer crée un manque ; son retour comble ce manque avec une force décuplée.",
+      "brique": "r01"
+    },
+    {
+      "id": "ar-03", "domain": "arrangement", "depth": 2, "title": "LA RECETTE DE LA MONTÉE",
+      "tip": "La montée d'énergie avant un drop suit presque toujours la même recette : un filtre qui s'ouvre + un bruit blanc qui enfle + une cymbale inversée → impact → court silence → drop.",
+      "abl": "Empile : automation d'un passe-haut qui s'ouvre sur 4-8 mesures, un Noise/riser qui monte en volume, un crash inversé (es-02), puis une demi-seconde de blanc avant le drop.",
+      "why": "Chaque couche ajoute de la tension par un canal différent (fréquence, volume, attente). Ensemble, elles préparent l'oreille à la libération du drop. Formule universelle, à personnaliser.",
+      "brique": null
+    },
+    {
+      "id": "ar-04", "domain": "arrangement", "depth": 1, "title": "LA RÈGLE DES 8 MESURES",
+      "tip": "L'oreille attend qu'il se passe quelque chose toutes les 8 (ou 16) mesures : ajoute ou retire une couche à ces frontières. Sinon, l'auditeur décroche.",
+      "abl": "Pose des Locators dans l'arrangement tous les 8/16 temps. À chaque frontière : entrée d'un élément (hats, pad, voix) ou sortie d'un autre. Le morceau avance.",
+      "why": "La musique populaire respire en phrases de 8/16 mesures. Marquer ces frontières par un changement crée le sentiment de progression qui maintient l'attention.",
+      "brique": null
+    },
+    {
+      "id": "la-01", "domain": "layering", "depth": 3, "title": "LE KICK À DEUX ÉTAGES",
+      "tip": "Les kicks de prod pro sont souvent DEUX kicks empilés : un pour le 'clac' du haut, un pour le 'boum' du bas. Tu choisis la claque et le poids séparément.",
+      "abl": "Deux pistes/pads : kick A passe-haut (garde l'attaque/le clic), kick B passe-bas (garde le corps/les graves). EQ Eight sur chacun pour qu'ils ne se recouvrent pas. Joue-les ensemble.",
+      "why": "Aucun kick unique n'a toujours le bon haut ET le bon bas. En les séparant par couche, tu composes le kick parfait pour ton morceau. Le 'sound design' de batterie.",
+      "brique": "n14"
+    },
+    {
+      "id": "la-02", "domain": "layering", "depth": 2, "title": "LA CAISSE CLAIRE COMPOSITE",
+      "tip": "Un snare qui claque, c'est souvent trois sons : le snare (le corps), un clap (le claquement), et un éclat de bruit (l'air). Chacun couvre une zone.",
+      "abl": "Empile snare + clap + un court burst de Noise. EQ-les pour qu'ils occupent des bandes différentes (corps en bas, claquement au milieu, air en haut). Ajuste les volumes.",
+      "why": "Un snare 'designé' sonne plus gros et plus personnel qu'un sample tout fait, parce que tu contrôles chaque composante. Standard en hip-hop et en pop électronique.",
+      "brique": null
+    },
+    {
+      "id": "la-03", "domain": "layering", "depth": 3, "title": "LA REESE",
+      "tip": "Cette basse qui grogne, menaçante, dans la drum'n'bass et la dark electro ? La Reese : deux ondes en dents de scie légèrement désaccordées l'une contre l'autre. Elles 'battent' et créent le grain.",
+      "abl": "Dans Drift : deux oscillateurs en Saw, désaccorde-les de quelques cents l'un par rapport à l'autre. Un passe-bas dessus. Le frottement entre les deux = le grognement Reese.",
+      "why": "Le léger désaccord crée des battements (interférences) qui donnent ce caractère mouvant et hargneux. Inventée par Kevin Saunderson (alias Reese), copiée partout depuis.",
+      "brique": "sd04"
+    },
+    {
+      "id": "la-04", "domain": "layering", "depth": 2, "title": "LA LARGEUR PAR DÉSACCORD",
+      "tip": "Pour épaissir un lead : empile-en des copies légèrement désaccordées. Désaccord en CENTS = épaisseur et largeur (le 'supersaw' EDM). Désaccord en DEMI-TONS = harmonie.",
+      "abl": "Drift : monte le Unison/Voices et le Detune. Ou duplique la piste, désaccorde la copie de quelques cents, panoramique l'une à gauche, l'autre à droite.",
+      "why": "Plusieurs versions très légèrement décalées en hauteur fusionnent en un son plus gros et plus large que nature. Pousse le detune : tu passes du chœur au supersaw festival.",
+      "brique": "m1"
+    },
+    {
+      "id": "la-05", "domain": "layering", "depth": 2, "title": "LE CHARLEY MAISON",
+      "tip": "Tu peux fabriquer un hi-hat à partir de RIEN : du bruit blanc + une enveloppe de filtre très rapide. Court = closed, plus long = open.",
+      "abl": "Drift/Operator avec une source de Noise, une enveloppe de volume à decay très court (closed hat) ou un peu plus long (open hat). Un passe-haut pour ne garder que l'aigu.",
+      "why": "Comprendre qu'un charley n'est que du bruit filtré dans le temps te libère des samples : tu façonnes exactement la texture que tu veux. La base du sound design percussif.",
+      "brique": "r03"
+    },
+    {
+      "id": "gr-01", "domain": "groove", "depth": 1, "title": "LA VÉLOCITÉ D'ABORD",
+      "tip": "Le humaniseur n°1 d'une boucle programmée, ce n'est pas le timing — c'est la VÉLOCITÉ. Des notes toutes à la même force = un robot. Varie-les, même un peu.",
+      "abl": "Zone de vélocité sous le piano roll : tire les barres pour que chaque coup ait une force légèrement différente. Live 12 a aussi un bouton de randomisation légère pour dégrossir.",
+      "why": "Aucun humain ne frappe deux fois exactement pareil. La variation de force est le premier signal que l'oreille lit comme 'vivant' plutôt que 'machine'.",
+      "brique": "n04"
+    },
+    {
+      "id": "gr-02", "domain": "groove", "depth": 3, "title": "LE RETARD QUI DÉTEND",
+      "tip": "Décale légèrement tes charleys ou ton snare APRÈS le temps : ça détend, ça traîne (hip-hop, neo-soul, le 'laid-back'). En AVANCE du temps : ça presse, ça urge (punk, DnB).",
+      "abl": "Sélectionne les notes concernées, nudge-les de quelques millisecondes (flèches fines, ou décale-les d'un cheveu sur la grille). À l'oreille, pas au calcul.",
+      "why": "Le 'feel' d'un morceau tient à des écarts de quelques millisecondes au temps. Le cerveau les ressent sans les nommer : c'est la différence entre raide et groovy.",
+      "brique": "n22"
+    },
+    {
+      "id": "gr-03", "domain": "groove", "depth": 2, "title": "LA LONGUEUR FAIT LE GROOVE",
+      "tip": "On pense rythme = positions. Mais la LONGUEUR des notes groove autant : staccato (court, piqué) ou legato (lié, tenu) change tout le feel sans bouger une seule note de place.",
+      "abl": "Prends une bassline, raccourcis toutes les notes (staccato) : ça saute, ça funk. Allonge-les (legato) : ça coule, ça pousse. Même rythme, deux mondes.",
+      "why": "L'espace ENTRE les notes fait partie du rythme. Une basse hachée et une basse liée sur les mêmes temps groovent de façons opposées. Un deuxième levier souvent oublié.",
+      "brique": "n03"
+    },
+    {
+      "id": "gr-04", "domain": "groove", "depth": 2, "title": "LE GHOST PARTOUT",
+      "tip": "Les notes fantômes (très faibles, entre les coups principaux) ne s'entendent pas — elles se SENTENT. Elles remplissent l'espace et humanisent. Sur le snare, la basse, les hats.",
+      "abl": "Ajoute des notes à très faible vélocité (25-35) entre tes coups forts, légèrement décalées. Sur un snare : un murmure entre les frappes. Sur une basse : un rebond discret.",
+      "why": "Le batteur réel remplit les silences par des effleurements. Retire-les : tout devient raide. C'est le secret le mieux gardé des grooves qui 'respirent'.",
+      "brique": "r05"
+    },
+    {
+      "id": "wf-01", "domain": "workflow", "depth": 1, "title": "JOUE D'ABORD, SAUVE APRÈS",
+      "tip": "Tu improvises un truc cool sur ton Novation mais tu n'enregistrais pas ? Pas grave : Live a gardé ce que tu viens de jouer. Récupère-le.",
+      "abl": "Bouton Capture MIDI (l'icône en haut). Live attrape les dernières notes jouées, même sans enregistrement actif, et crée le clip. Ça tue la peur du bouton rouge.",
+      "why": "Les meilleures idées arrivent quand on joue librement, pas quand on 's'enregistre'. Capture te laisse explorer sans pression et ne rien perdre.",
+      "brique": null
+    },
+    {
+      "id": "wf-02", "domain": "workflow", "depth": 2, "title": "VOLER LES NOTES D'UN AUDIO",
+      "tip": "Une mélodie ou des accords dans un fichier audio que tu aimes ? Live peut en extraire les notes MIDI. Tu récupères l'harmonie pour la rejouer avec TES sons.",
+      "abl": "Clic droit sur un clip audio > Convert > Melody/Harmony/Drums to MIDI. Live analyse et te sort les notes sur une piste MIDI.",
+      "why": "C'est la machine à décortiquer : comprendre ce qui se passe dans un morceau, ou repartir de son squelette harmonique. Idéal pour apprendre en reverse. (À coupler avec l'Analyste — docs/ABLETON.md §3.)",
+      "brique": null
+    },
+    {
+      "id": "wf-03", "domain": "workflow", "depth": 3, "title": "LE RESAMPLING",
+      "tip": "Geste de sioux infini : enregistre TA propre sortie en audio, puis découpe-la, pitche-la, retourne-la. Tu crées de la matière neuve à partir de ce que tu viens de faire.",
+      "abl": "Crée une piste audio, règle son entrée sur 'Resampling', enregistre pendant que ta boucle joue. Tu obtiens un clip audio de ton mix, à charcuter dans un Simpler.",
+      "why": "Le resampling transforme tes propres sons en matière première : chop, glitch, textures impossibles à programmer. Une source créative sans fin, gratuite.",
+      "brique": null
+    },
+    {
+      "id": "wf-04", "domain": "workflow", "depth": 1, "title": "GROUPER POUR DOMPTER",
+      "tip": "Trop de pistes, ça part dans tous les sens ? Groupe-les par rôle (drums, basses, accords). Tu traites et mixes des blocs au lieu de vingt pistes.",
+      "abl": "Sélectionne plusieurs pistes, Ctrl+G. Le groupe a son propre volume et accepte des effets sur l'ensemble (la 'colle' du bus — co-01). Colorie tes groupes.",
+      "why": "Penser en bus (groupes) au lieu de pistes individuelles, c'est mixer comme un pro : par étages. Plus clair dans la tête, plus rapide, plus cohérent.",
+      "brique": null
+    },
+    {
+      "id": "wf-05", "domain": "workflow", "depth": 2, "title": "UN BOUTON POUR TOUT",
+      "tip": "Tu peux réduire un rack d'effets complexe à UN seul bouton, et le mapper sur un potard de ton Novation. Tu joues ton effet à la main, en live.",
+      "abl": "Mets tes effets dans un Audio Effect Rack, assigne les paramètres clés à un Macro (clic droit > Map). Puis MIDI Learn ce Macro sur un potard du Novation. Un geste physique = tout bouge.",
+      "why": "Automatiser à la souris est froid ; jouer un filtre ou un effet avec la main est musical et vivant. Les macros transforment la complexité en geste expressif.",
+      "brique": null
+    },
+    {
+      "id": "wf-06", "domain": "workflow", "depth": 1, "title": "GELER POUR SOUFFLER",
+      "tip": "Le CPU sature, ça craque ? Pas besoin de tout fermer : gèle les pistes lourdes. Réversible à tout moment.",
+      "abl": "Clic droit sur une piste > Freeze Track. Live calcule le son une fois et libère le CPU. Unfreeze quand tu veux retoucher. (Flatten pour rendre définitif.)",
+      "why": "Geler te laisse empiler des effets gourmands sans que la machine rame, et garde ta session fluide. Un réflexe simple qui évite la frustration technique.",
+      "brique": null
+    },
+    {
+      "id": "et-01", "domain": "etat-desprit", "depth": 1, "title": "LE TEST MONO",
+      "tip": "Le contrôle de vérité le plus brutal et le plus gratuit : passe ton mix en mono de temps en temps. S'il survit en mono, il survivra sur un système de club, un téléphone, un centre commercial.",
+      "abl": "Utility sur le master, Width à 0 % (mono). Écoute : qu'est-ce qui disparaît ? Ce qui s'évapore en mono était en danger. Remets en stéréo et corrige.",
+      "why": "Beaucoup de systèmes (clubs, enceintes Bluetooth) somment les canaux en mono, et des sons mal phasés s'annulent. Vérifier en mono garantit que ton morceau tient partout.",
+      "brique": "eq-04"
+    },
+    {
+      "id": "et-02", "domain": "etat-desprit", "depth": 2, "title": "MIXER DOUCEMENT",
+      "tip": "Prends tes décisions de mix à FAIBLE volume. Le fort flatte tout (l'oreille entend mieux les graves et les aigus quand c'est fort) et te trompe.",
+      "abl": "Baisse le monitoring jusqu'à un niveau de conversation. Si l'équilibre te plaît à faible volume, il tiendra à tout volume. Monte juste pour vérifier ponctuellement.",
+      "why": "À bas volume, l'oreille entend le spectre plus à plat (courbes de Fletcher-Munson) : tes choix de balance sont plus honnêtes et se transposent mieux ailleurs.",
+      "brique": null
+    },
+    {
+      "id": "et-03", "domain": "etat-desprit", "depth": 1, "title": "LA RÉFÉRENCE",
+      "tip": "Le 'plugin' le plus efficace est gratuit : un morceau pro que tu adores, dans ton genre, importé à côté du tien. Compare. Ton oreille se recalibre en trois secondes.",
+      "abl": "Glisse un morceau de référence sur une piste audio, baisse-le au même volume perçu que ton mix, alterne A/B. Où est ton grave en trop ? Tes aigus en moins ?",
+      "why": "On perd l'objectivité sur son propre morceau. Une référence externe redonne un étalon : tu entends instantanément ce qui cloche. Mieux que n'importe quel achat.",
+      "brique": null
+    },
+    {
+      "id": "et-04", "domain": "etat-desprit", "depth": 1, "title": "LA TÊTE REPOSÉE",
+      "tip": "Le meilleur outil de mix n'est pas dans Ableton : c'est la pause. Dix minutes loin du morceau, ou une nuit de sommeil, et tu entends d'un coup ce que tes oreilles fatiguées rataient.",
+      "abl": "Aucun. Sauvegarde, lève-toi, reviens plus tard. Le mix qui te semblait parfait à 2 h du matin se révèle au réveil.",
+      "why": "L'oreille se fatigue et s'habitue (masquage, lassitude). La distance restaure la fraîcheur de perception. Gratuit, et plus puissant que n'importe quel processeur.",
+      "brique": null
+    },
+    {
+      "id": "et-05", "domain": "etat-desprit", "depth": 2, "title": "FINI VAUT MIEUX QUE PARFAIT",
+      "tip": "Un morceau fini, même imparfait, t'apprend dix fois plus qu'un morceau parfait jamais terminé. Termine-le. Sors-le. Le prochain sera meilleur grâce à celui-là.",
+      "abl": "Aucun : c'est une décision. Fixe-toi une fin (ex. 'ce soir j'exporte, point'), bounce, et passe au suivant. Le perfectionnisme est une prison.",
+      "why": "On progresse en bouclant des projets, pas en peaufinant le même à l'infini. Chaque morceau terminé enseigne une leçon que l'inachevé garde pour lui.",
+      "brique": null
+    }
+  ]
+}

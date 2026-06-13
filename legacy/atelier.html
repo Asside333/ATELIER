@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#14101a">
+<title>ATELIER — la théorie par les mains</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Outfit:wght@300;400;500&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#14101a; --surface:#1d1824; --surface2:#262030; --line:#332b40;
+  --ink:#efe9dc; --ink-dim:#a59d92; --ink-faint:#675f70;
+  --amber:#f2a33c; --amber2:#ffc46a; --amber-dim:#8a6230;
+  --teal:#5fb8a8; --ok:#8fb573; --bad:#c9655a;
+  --ivory:#ece6da; --ivory-edge:#c9c2b2; --on-ivory:#1a1620;
+  --lab:46px;
+  --disp:'Bricolage Grotesque',sans-serif; --body:'Outfit',sans-serif; --mono:'Spline Sans Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:300;font-size:16px;line-height:1.45;overflow-x:hidden;
+  background-image:radial-gradient(720px 420px at 12% -8%,rgba(126,82,190,.16),transparent 60%),
+                   radial-gradient(640px 420px at 95% 108%,rgba(242,163,60,.10),transparent 60%);
+  background-attachment:fixed}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer}
+/* ---------- header ---------- */
+header{display:flex;align-items:baseline;justify-content:space-between;padding:16px 16px 11px;border-bottom:1px solid var(--line)}
+.logo{font-family:var(--disp);font-weight:800;font-size:21px;letter-spacing:.04em;
+  background:linear-gradient(92deg,var(--ink) 55%,var(--amber2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hud{display:flex;gap:13px;align-items:baseline;font-family:var(--mono);font-size:11px;color:var(--ink-dim)}
+.hud b{color:var(--amber);font-weight:500}
+.nmToggle{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:999px;padding:4px 9px;color:var(--ink-dim)}
+/* ---------- views ---------- */
+.view{display:none;padding:18px 16px 230px;max-width:580px;margin:0 auto}
+.view.active{display:block}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--amber);text-transform:uppercase}
+.manifesto{color:var(--ink-dim);font-size:14px;margin:6px 0 20px}
+.welcome{background:linear-gradient(135deg,var(--surface2),var(--surface));border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:20px;font-size:14px;color:var(--ink-dim)}
+.welcome b{color:var(--ink);font-weight:500}
+.welcome .btn{margin-top:10px}
+/* ---------- chemin ---------- */
+.module{margin-bottom:28px}
+.modhead{margin-bottom:6px}
+.modhead h2{font-family:var(--mono);font-size:11px;letter-spacing:.16em;display:flex;align-items:center;gap:10px;color:var(--mh,var(--ink-dim))}
+.modhead h2::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--mh,var(--line)),transparent)}
+.modintro{font-size:13px;color:var(--ink-dim);margin:5px 0 10px}
+.mprog{height:3px;border-radius:2px;background:var(--surface2);margin-bottom:11px;overflow:hidden}
+.mprog i{display:block;height:100%;background:var(--mh,var(--amber));border-radius:2px;transition:width .4s}
+.mrow{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:12px;border:1px solid var(--line);border-radius:11px;background:var(--surface);margin-bottom:8px;border-left:3px solid transparent}
+.mrow.cur{border-left-color:var(--mh,var(--amber));background:linear-gradient(90deg,rgba(255,255,255,.025),transparent 40%),var(--surface)}
+.mrow:disabled{opacity:.35}
+.mrow .dot{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--ink-faint);flex:none}
+.mrow.cur .dot{border-color:var(--mh,var(--amber));background:var(--mh,var(--amber));box-shadow:0 0 10px var(--mh,var(--amber))}
+.mrow.done .dot{border-color:var(--ok);background:var(--ok);box-shadow:none}
+.mrow .mt{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.02em;flex:1}
+.mrow.done .mt{color:var(--ink-dim)}
+.tag{font-family:var(--mono);font-size:9px;letter-spacing:.13em;border:1px solid;border-radius:999px;padding:2.5px 8px;opacity:.95}
+.t-CONSTRUIRE{color:var(--amber);border-color:var(--amber-dim)}
+.t-DECODER{color:var(--ok);border-color:#4d6342}
+.t-OREILLE{color:#b89ad6;border-color:#54466a}
+.t-GESTE{color:var(--teal);border-color:#36685f}
+.endnote{font-size:13px;color:var(--ink-dim);border:1px dashed var(--line);border-radius:11px;padding:13px;margin-top:4px}
+/* ---------- mission ---------- */
+.mhead{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.back{font-family:var(--mono);font-size:12px;color:var(--ink-dim);padding:7px 10px;border:1px solid var(--line);border-radius:999px}
+.mhead h1{font-family:var(--disp);font-weight:800;font-size:22px;flex:1;line-height:1.1}
+.instr{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:11px;padding:13px 14px;font-size:15px;margin-bottom:10px}
+.tip{font-size:13px;color:var(--teal);background:rgba(95,184,168,.07);border:1px solid rgba(95,184,168,.22);border-radius:9px;padding:9px 12px;margin-bottom:12px}
+.tip b{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--teal);display:block;margin-bottom:2px;font-weight:500}
+.ctxrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.btn{font-family:var(--mono);font-size:12px;letter-spacing:.05em;padding:11px 15px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);color:var(--ink)}
+.btn:active{transform:translateY(1px)}
+.btn.prime{background:linear-gradient(135deg,var(--amber),var(--amber2));color:#241605;border-color:transparent;font-weight:500;box-shadow:0 2px 12px rgba(242,163,60,.25)}
+.btn.live{border-color:var(--amber);color:var(--amber)}
+.btn:focus-visible,.mrow:focus-visible,.key:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.feed{min-height:22px;font-size:14px;color:var(--ink-dim);margin:10px 0 2px}
+.feed.good{color:var(--ok)} .feed.warn{color:var(--bad)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;min-height:30px;margin:6px 0 8px}
+.chip{font-family:var(--mono);font-size:12px;padding:4px 10px;border:1px solid var(--amber-dim);color:var(--amber);border-radius:999px}
+.selcount{font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+/* ---------- grille + outils ---------- */
+.tools{display:flex;gap:6px;margin:2px 0 8px;align-items:center}
+.tools .tl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:7px 11px;border-radius:999px;border:1px solid var(--line);color:var(--ink-dim)}
+.tools .tl.on{color:#241605;background:var(--amber);border-color:var(--amber);font-weight:500}
+.tools .thelp{font-size:11.5px;color:var(--ink-faint);margin-left:4px}
+.gridwrap{overflow-x:auto;margin:4px -4px;padding:4px}
+.pgrid{display:grid;gap:2px;min-width:344px}
+.glab{font-family:var(--mono);font-size:10px;color:var(--ink-dim);display:flex;align-items:center;padding-left:4px;height:32px;border-right:1px solid var(--line)}
+.glab.blackrow{color:var(--ink-faint)}
+.glab.hl{color:var(--amber)}
+.cell{height:32px;border-radius:4px;background:var(--surface);border:1px solid #251f2e;position:relative}
+.cell.blackrow{background:#181320}
+.cell.beat{border-left:1px solid #443b54}
+.cell.scl{background:#221b2c}
+.cell.scl.blackrow{background:#1d1626}
+.cell.on{background:var(--amber);border-color:var(--amber);box-shadow:0 0 9px rgba(242,163,60,.4)}
+.cell.on.v2{background:#c98a38;box-shadow:0 0 5px rgba(242,163,60,.22)}
+.cell.on.v3{background:#8a6230;box-shadow:none}
+.cell.tail{background:rgba(242,163,60,.34);border-color:rgba(242,163,60,.28)}
+.cell.gn{box-shadow:inset 0 0 0 2px rgba(95,184,168,.65)}
+.cell.gnt{box-shadow:inset 0 0 0 1px rgba(95,184,168,.3)}
+.cell.on.ok{background:var(--ok);border-color:var(--ok);box-shadow:none}
+.cell.on.bad{background:var(--bad);border-color:var(--bad);box-shadow:none}
+.cell.ph{filter:brightness(1.75)}
+.glegend{font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:6px;line-height:1.6}
+/* ---------- oreille ---------- */
+.earbox{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;text-align:center}
+.earbox .rnd{font-family:var(--mono);font-size:11px;color:var(--ink-dim);letter-spacing:.14em;margin-bottom:14px}
+.earbtns{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.earbtns .btn{flex:1;max-width:160px;padding:16px 10px;font-size:13px}
+.scoredots{display:flex;gap:7px;justify-content:center;margin-top:18px}
+.sd{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink-faint)}
+.sd.ok{background:var(--ok);border-color:var(--ok)} .sd.bad{background:var(--bad);border-color:var(--bad)}
+/* ---------- briques ---------- */
+.brickgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.brick{background:linear-gradient(180deg,var(--ivory) 0%,var(--ivory) 86%,var(--ivory-edge) 100%);color:var(--on-ivory);border-radius:7px 7px 11px 11px;padding:14px 12px 16px;text-align:left;min-height:88px;box-shadow:0 3px 0 #8d8678,0 7px 16px rgba(0,0,0,.45);border-top:3px solid var(--mh,transparent);position:relative;overflow:hidden}
+.brick .bno{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:#6f6a5e}
+.brick .bn{font-family:var(--disp);font-weight:800;font-size:15px;line-height:1.15;margin-top:5px}
+.brick.locked{background:var(--surface);color:var(--ink-faint);box-shadow:none;border:1px dashed var(--line)}
+.bdetail{background:linear-gradient(180deg,var(--ivory) 0%,var(--ivory) 92%,var(--ivory-edge) 100%);color:var(--on-ivory);border-radius:10px 10px 16px 16px;padding:20px 18px 24px;box-shadow:0 5px 0 #8d8678,0 16px 36px rgba(0,0,0,.55);border-top:4px solid var(--mh,var(--amber))}
+.bdetail .bn{font-family:var(--disp);font-weight:800;font-size:25px;margin:6px 0 10px}
+.bdetail p{font-size:14.5px;font-weight:400;margin-bottom:12px}
+.bdetail .lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:#8a6230;margin-bottom:3px}
+.bdetail .btn{background:#1a1620;color:var(--ivory);border-color:#1a1620;margin-top:6px}
+/* ---------- veil ---------- */
+.veil{position:fixed;inset:0;background:rgba(12,9,16,.9);display:none;align-items:center;justify-content:center;padding:22px;z-index:50;backdrop-filter:blur(4px)}
+.veil.show{display:flex}
+.veil .inner{max-width:440px;width:100%}
+.veil .acq{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--amber);text-align:center;margin-bottom:14px;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.55}}
+.drop{animation:drop .55s cubic-bezier(.2,.9,.3,1.25)}
+@keyframes drop{from{transform:translateY(-30px) rotate(-1deg);opacity:0}to{transform:none;opacity:1}}
+/* ---------- studio ---------- */
+.srow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.srow label{font-family:var(--mono);font-size:10px;color:var(--ink-dim);letter-spacing:.1em}
+select,input[type=number],input[type=range]{background:var(--surface2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px;font-family:var(--mono);font-size:12px}
+input[type=number]{width:62px}
+input[type=range]{padding:0;height:30px;accent-color:var(--amber);width:90px}
+.trk{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;padding:8px 13px;border-radius:999px;border:1px solid var(--line);color:var(--ink-dim)}
+.trk.on{color:#241605;background:var(--amber);border-color:var(--amber);font-weight:500}
+.trk.b.on{background:var(--teal);border-color:var(--teal)}
+.infob{display:none;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px;font-size:13.5px;color:var(--ink-dim);margin-bottom:12px}
+.infob.show{display:block}
+.infob b{color:var(--amber);font-weight:500}
+.sketches{margin-top:16px}
+.skrow{display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--line);border-radius:9px;margin-bottom:6px;background:var(--surface)}
+.skrow .nm{flex:1;font-size:14px}
+.skrow .ts{font-family:var(--mono);font-size:10px;color:var(--ink-faint)}
+.midistat{font-family:var(--mono);font-size:10px;color:var(--ink-dim)}
+.midistat.on{color:var(--ok)}
+/* ---------- clavier ---------- */
+#kbzone{position:fixed;left:0;right:0;bottom:54px;background:linear-gradient(180deg,rgba(20,16,26,.96),var(--bg));border-top:1px solid var(--line);padding:8px 8px 6px;display:none;z-index:20}
+#kbzone.show{display:block}
+#kb{position:relative;height:120px;max-width:580px;margin:0 auto}
+.key{position:absolute;top:0;border-radius:0 0 6px 6px;touch-action:none;user-select:none}
+.key.w{height:100%;background:linear-gradient(180deg,#f1ebde,#dcd4c2);border:1px solid #b7af9e;z-index:1}
+.key.b{height:60%;background:linear-gradient(180deg,#2a2434,#171220);border:1px solid #000;z-index:2}
+.key .klab{position:absolute;bottom:5px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:8.5px;color:#7a7466;pointer-events:none}
+.key.b .klab{color:#5f5a64;bottom:4px}
+.key.sel::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 7px var(--amber)}
+.key.flash.w{background:linear-gradient(180deg,var(--amber2),var(--amber))} .key.flash.b{background:var(--amber-dim)}
+/* ---------- nav ---------- */
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:rgba(20,16,26,.97);border-top:1px solid var(--line);z-index:30;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;padding:18px 0 16px;color:var(--ink-faint)}
+nav button.on{color:var(--amber)}
+@media(min-width:560px){.brickgrid{grid-template-columns:1fr 1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">ATELIER.</div>
+  <div class="hud">
+    <span>SÉRIE <b id="hStreak">0</b>J</span>
+    <span><b id="hDone">0</b>/<span id="hTotal">39</span></span>
+    <button class="nmToggle" id="nmToggle" aria-label="Basculer noms de notes">DO/C</button>
+  </div>
+</header>
+
+<main>
+  <section class="view active" id="v-path">
+    <div class="eyebrow">Le chemin</div>
+    <p class="manifesto">Tu fabriques d'abord. Le nom du concept vient après. Casque conseillé.</p>
+    <div id="welcome"></div>
+    <div id="pathList"></div>
+    <div class="endnote">39 missions, 9 modules. Tout ce que tu poses ici est stocké en données structurées — prêt pour l'export MIDI vers Ableton (v3).</div>
+  </section>
+
+  <section class="view" id="v-mission">
+    <div class="mhead">
+      <button class="back" id="mBack">← CHEMIN</button>
+      <h1 id="mTitle"></h1>
+      <span class="tag" id="mTag"></span>
+    </div>
+    <div class="instr" id="mInstr"></div>
+    <div id="mTip"></div>
+    <div class="ctxrow" id="mCtx"></div>
+    <div id="mBody"></div>
+    <div class="feed" id="mFeed"></div>
+    <div class="ctxrow" id="mActions"></div>
+  </section>
+
+  <section class="view" id="v-studio">
+    <div class="eyebrow">Studio libre</div>
+    <p class="manifesto">Deux pistes : une basse, un clavier. Comme un mini-Ableton.</p>
+    <div class="srow">
+      <button class="trk on" id="trkA">PISTE A · BASSE</button>
+      <button class="trk b" id="trkB">PISTE B · KEYS</button>
+    </div>
+    <div class="srow">
+      <label>SON</label><select id="stPatch"></select>
+      <label>BPM</label><input type="number" id="stBpm" min="60" max="200" value="132">
+      <label>SWING</label><input type="range" id="stSwing" min="0" max="40" value="0">
+    </div>
+    <div class="srow">
+      <label>GAMME</label>
+      <select id="stRoot"></select>
+      <select id="stMode"><option value="">aucune</option><option value="min" selected>mineure</option><option value="maj">majeure</option></select>
+      <button class="btn" id="stWhat" style="padding:7px 12px">?</button>
+      <button class="btn" id="stUp">OCT +</button><button class="btn" id="stDn">OCT −</button>
+    </div>
+    <div class="infob" id="scaleInfo">
+      <b>La gamme, c'est quoi ?</b> Un filtre : 7 notes sur 12 qui sonnent bien ensemble. Choisis une racine (la note-maison) et une couleur (mineure = sombre, majeure = lumineuse). Les lignes et cases <b>éclaircies</b> sont les notes du filtre — reste dessus et tout ce que tu poses sonnera juste. C'est exactement le bouton <b>Scale</b> d'un clip MIDI dans Ableton. T'en sortir exprès = créer une tension. T'en sortir sans le savoir = sonner faux.
+    </div>
+    <div class="tools" id="stTools"></div>
+    <div class="gridwrap"><div class="pgrid" id="stGrid"></div></div>
+    <div class="glegend" id="stLegend"></div>
+    <div class="srow" style="margin-top:12px">
+      <button class="btn prime" id="stPlay">▶ LIRE</button>
+      <button class="btn" id="stClear">EFFACER LA PISTE</button>
+      <button class="btn" id="stSave">SAUVER</button>
+      <button class="btn" id="midiBtn">MIDI</button>
+      <span class="midistat" id="midiStat"></span>
+    </div>
+    <div class="sketches" id="stSketches"></div>
+  </section>
+
+  <section class="view" id="v-bricks">
+    <div class="eyebrow">Le carnet de briques</div>
+    <p class="manifesto">Chaque concept gagné est une brique. Relisible partout, même sans son.</p>
+    <div class="brickgrid" id="brickGrid"></div>
+    <div id="brickDetail" style="margin-top:16px"></div>
+  </section>
+</main>
+
+<div id="kbzone"><div id="kb"></div></div>
+
+<nav>
+  <button id="nav-path" class="on">CHEMIN</button>
+  <button id="nav-studio">STUDIO</button>
+  <button id="nav-bricks">BRIQUES</button>
+</nav>
+
+<div class="veil" id="veil">
+  <div class="inner">
+    <div class="acq" id="veilEyebrow">BRIQUE ACQUISE</div>
+    <div class="bdetail drop" id="veilCard"></div>
+    <div style="text-align:center;margin-top:16px"><button class="btn prime" id="veilGo">CONTINUER →</button></div>
+  </div>
+</div>
+<script>
+/* =====================================================================
+   ATELIER v2 — moteur musical MIDI-first.
+   Toute note = {p: pitch MIDI, s: step, d: durée en steps, v: vélocité 0-1}.
+   Séquence = {bpm, steps, swing, tracks:[{patch, notes[]}]}.
+   L'export .mid (v3) sera un module pur : données -> Standard MIDI File.
+   Le rendu Web Audio ci-dessous est strictement séparé des données.
+   ===================================================================== */
+const $=s=>document.querySelector(s);
+const LS='atelier_v1';
+const S=Object.assign({done:[],streak:0,lastDay:'',sketches:[],names:'fr',seen:false},JSON.parse(localStorage.getItem(LS)||'{}'));
+function save(){localStorage.setItem(LS,JSON.stringify(S));}
+function today(){return new Date().toISOString().slice(0,10);}
+function markActivity(){const t=today();if(S.lastDay===t)return;const y=new Date(Date.now()-864e5).toISOString().slice(0,10);S.streak=(S.lastDay===y)?S.streak+1:1;S.lastDay=t;save();renderHeader();}
+
+/* ---------- noms (convention Ableton : Do3/C3 = MIDI 60) ---------- */
+const NFR=['Do','Do#','Ré','Ré#','Mi','Fa','Fa#','Sol','Sol#','La','La#','Si'];
+const NEN=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const isBlack=p=>[1,3,6,8,10].includes(((p%12)+12)%12);
+function noteName(p){const a=S.names==='fr'?NFR:NEN;return a[p%12]+(Math.floor(p/12)-2);}
+
+/* ---------- audio ---------- */
+let ctx=null,master=null;
+function AC(){
+  if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();
+    master=ctx.createGain();master.gain.value=.8;
+    const comp=ctx.createDynamicsCompressor();comp.threshold.value=-16;
+    master.connect(comp);comp.connect(ctx.destination);}
+  if(ctx.state==='suspended')ctx.resume();
+  return ctx;
+}
+const freq=p=>440*Math.pow(2,(p-69)/12);
+let LAST_BPM=132; /* utilisé par le wobble pour caler son LFO */
+const PATCHES={sub:'Sub (sinus pur)',bass:'Basse',wobble:'Wobble (LFO)',keys:'Keys',pad:'Pad',pluck:'Pluck',bell:'Cloche',stab:'Stab'};
+function playNote(patch,p,when,dur=.4,vel=.9){
+  AC();const t=(when==null)?ctx.currentTime:when;
+  const g=ctx.createGain();g.connect(master);
+  const f=ctx.createBiquadFilter();f.type='lowpass';f.connect(g);
+  const oscs=[];
+  const mk=(type,fr,det)=>{const o=ctx.createOscillator();o.type=type;o.frequency.value=fr;if(det)o.detune.value=det;o.connect(f);oscs.push(o);};
+  let peak=vel*.3,att=.007;
+  if(patch==='sub'){mk('sine',freq(p));f.frequency.value=180;peak=vel*.7;att=.012;}
+  else if(patch==='bass'){mk('sine',freq(p));mk('sawtooth',freq(p));f.frequency.value=260;peak=vel*.55;}
+  else if(patch==='wobble'){mk('sawtooth',freq(p));mk('square',freq(p),5);
+    f.frequency.value=120;f.Q.value=6;peak=vel*.42;
+    const lfo=ctx.createOscillator();lfo.type='sine';
+    lfo.frequency.value=LAST_BPM/60*2; /* croches : le LFO suit le tempo */
+    const lg=ctx.createGain();lg.gain.value=520;lfo.connect(lg);lg.connect(f.frequency);
+    f.frequency.value=620;lfo.start(t);lfo.stop(t+Math.max(dur,.06)+.1);}
+  else if(patch==='pluck'){mk('triangle',freq(p));f.frequency.value=3400;dur=Math.min(dur,.22);peak=vel*.4;}
+  else if(patch==='pad'){mk('sawtooth',freq(p),-8);mk('sawtooth',freq(p),8);f.frequency.value=1100;att=.14;peak=vel*.22;}
+  else if(patch==='bell'){const c=ctx.createOscillator();c.type='sine';c.frequency.value=freq(p);
+    const m=ctx.createOscillator();m.type='sine';m.frequency.value=freq(p)*3.01;
+    const mg=ctx.createGain();mg.gain.setValueAtTime(freq(p)*1.4,t);mg.gain.exponentialRampToValueAtTime(1,t+Math.min(dur,.8));
+    m.connect(mg);mg.connect(c.frequency);c.connect(f);oscs.push(c,m);f.frequency.value=5200;peak=vel*.3;}
+  else if(patch==='stab'){mk('sawtooth',freq(p),-10);mk('sawtooth',freq(p),10);mk('sawtooth',freq(p),0);
+    f.frequency.value=2600;f.Q.value=2;dur=Math.min(dur,.3);peak=vel*.26;}
+  else if(patch==='tick'){mk('square',2100);f.frequency.value=4000;dur=.04;peak=vel*.12;}
+  else {mk('sawtooth',freq(p),-6);mk('sawtooth',freq(p),6);f.frequency.value=1900;}
+  g.gain.setValueAtTime(.0001,t);
+  g.gain.linearRampToValueAtTime(peak,t+att);
+  g.gain.exponentialRampToValueAtTime(.0001,t+Math.max(dur,att+.05));
+  oscs.forEach(o=>{if(!o.context)return;});
+  oscs.forEach(o=>{o.start(t);o.stop(t+Math.max(dur,.06)+.15);});
+}
+let drone=null;
+function startDrone(p){stopDrone();AC();
+  const g=ctx.createGain();g.gain.value=0;g.connect(master);
+  const o1=ctx.createOscillator();o1.type='sine';o1.frequency.value=freq(p);o1.connect(g);
+  const g2=ctx.createGain();g2.gain.value=.3;g2.connect(g);
+  const o2=ctx.createOscillator();o2.type='sine';o2.frequency.value=freq(p+7);o2.connect(g2);
+  o1.start();o2.start();
+  g.gain.linearRampToValueAtTime(.13,ctx.currentTime+.5);
+  drone={g,o1,o2};
+}
+function stopDrone(){if(!drone)return;const d=drone;drone=null;
+  d.g.gain.linearRampToValueAtTime(0,ctx.currentTime+.25);
+  setTimeout(()=>{try{d.o1.stop();d.o2.stop();}catch(e){}},350);}
+
+/* ---------- lecteur (swing : retarde les steps impairs) ---------- */
+const Player={timer:null,tok:0,cfg:null,step:0,nextT:0,
+  stepDur(c){return 60/c.bpm/(c.steps/4);},
+  sw(c,s){return (s%2===1)?(c.swing||0)*this.stepDur(c):0;},
+  stop(){this.tok++;if(this.timer){clearInterval(this.timer);this.timer=null;}
+    if(this.cfg&&this.cfg.onStep)this.cfg.onStep(-1);this.cfg=null;},
+  once(cfg){this.stop();AC();LAST_BPM=cfg.bpm;const tok=this.tok,sd=this.stepDur(cfg),t0=ctx.currentTime+.07;
+    cfg.tracks.forEach(tr=>tr.notes.forEach(n=>playNote(tr.patch,n.p,t0+n.s*sd+this.sw(cfg,n.s),(n.d||1)*sd*.92,(n.v==null?.9:n.v))));
+    if(cfg.onStep){for(let s=0;s<cfg.steps;s++){const d=(t0+s*sd-ctx.currentTime)*1000;
+      setTimeout(()=>{if(this.tok===tok)cfg.onStep(s);},d);}
+      setTimeout(()=>{if(this.tok===tok)cfg.onStep(-1);},(t0+cfg.steps*sd-ctx.currentTime)*1000+30);}
+  },
+  loopStart(cfg){this.stop();AC();LAST_BPM=cfg.bpm;const tok=this.tok;this.cfg=cfg;this.step=0;this.nextT=ctx.currentTime+.07;
+    this.timer=setInterval(()=>{
+      if(this.tok!==tok)return;
+      const sd=this.stepDur(cfg);
+      while(this.nextT<ctx.currentTime+.13){
+        const st=this.step,t=this.nextT;
+        cfg.tracks.forEach(tr=>tr.notes.forEach(n=>{if(n.s===st)playNote(tr.patch,n.p,t+this.sw(cfg,st),(n.d||1)*sd*.92,(n.v==null?.9:n.v));}));
+        if(cfg.onStep){const d=Math.max(0,(t-ctx.currentTime)*1000);
+          setTimeout(()=>{if(this.tok===tok)cfg.onStep(st);},d);}
+        this.step=(this.step+1)%cfg.steps;this.nextT+=sd;
+      }
+    },25);
+  },
+  get playing(){return this.timer!==null;}
+};
+
+/* ---------- MIDI in ---------- */
+function connectMidi(){
+  const stat=$('#midiStat');
+  if(!navigator.requestMIDIAccess){stat.textContent='Web MIDI indisponible (utilise Chrome/Edge)';return;}
+  navigator.requestMIDIAccess().then(acc=>{
+    const hook=()=>{let names=[];acc.inputs.forEach(inp=>{inp.onmidimessage=onMidi;names.push(inp.name);});
+      stat.textContent=names.length?('MIDI : '+names.join(', ')):'MIDI : aucun clavier détecté';
+      stat.classList.toggle('on',names.length>0);};
+    hook();acc.onstatechange=hook;
+  }).catch(()=>{stat.textContent='Accès MIDI refusé';});
+}
+function onMidi(e){const[st,p,v]=e.data;const cmd=st&0xf0;
+  if(cmd===0x90&&v>0)keyTap(p,v/127);
+}
+
+/* =====================================================================
+   LES 39 MISSIONS — 9 modules
+   types : keys | grid | decode | ear
+   ===================================================================== */
+const MODULES=[
+ {name:'I — LE TERRAIN',hue:'#f2a33c',intro:'Les distances entre les notes. Tout le reste est construit là-dessus.'},
+ {name:'II — LE PIANO ROLL',hue:'#5fb8a8',intro:'Le geste avant la théorie : poser, étirer, doser. Les mains d\'abord.'},
+ {name:'III — LA GAMME SOMBRE',hue:'#b89ad6',intro:'Le filtre de notes qui fait ta couleur : le mineur. Là où vivent dubstep, jungle et garage.'},
+ {name:'IV — LES ACCORDS',hue:'#e8875f',intro:'Empiler des notes compatibles. Trois suffisent pour un objet.'},
+ {name:'V — LES PROGRESSIONS',hue:'#d6b25f',intro:'Des accords qui s\'enchaînent et racontent : tension, retour.'},
+ {name:'VI — LA MÉLODIE',hue:'#7fb069',intro:'Un motif, sa répétition, sa variation. La mémoire de l\'auditeur travaille pour toi.'},
+ {name:'VII — LA BASSE',hue:'#c46a8e',intro:'Ton territoire. Sub, rebond, wobble : la fondation qui parle.'},
+ {name:'VIII — LES ACCORDS RICHES',hue:'#6f9fd8',intro:'Septièmes, sus, neuvièmes : le velours des stabs garage.'},
+ {name:'IX — LE GROOVE',hue:'#f2a33c',intro:'Le temps, décalé. Syncope, swing, half-time : ce qui fait bouger.'}
+];
+const ROWS_BASS=[52,50,48,47,45,43,41,40];
+const ROWS_SUB=[48,47,45,43,41,40,38,36,35,33];
+const PROG_EPIC=[57,60,64].map(p=>({p,s:0,d:4})).concat(
+  [53,57,60].map(p=>({p,s:4,d:4})),[60,64,67].map(p=>({p,s:8,d:4})),[55,59,62].map(p=>({p,s:12,d:4})));
+const TICK16={patch:'tick',notes:[0,4,8,12].map(s=>({p:84,s,v:.8}))};
+const AM=[9,11,0,2,4,5,7]; /* classes de hauteur de La mineur */
+const inAm=p=>AM.includes(((p%12)+12)%12);
+
+const MISSIONS=[
+/* ============ I — LE TERRAIN ============ */
+{id:'m1',mod:0,type:'keys',title:'LE DOUBLE',tag:'CONSTRUIRE',
+ instr:"Un Do grave tourne en boucle. Trouve sur le clavier la note qui sonne comme sa jumelle — pas une voisine : la même, plus haut. Lance le drone, puis tape les touches jusqu'à fusion.",
+ tip:"Sur ton clavier MIDI comme ici : une note n'est jamais seule, elle existe à tous les étages.",
+ kb:[60,84],drone:48,maxSel:1,listen:'chord',
+ v:sel=>sel.length===1&&(sel[0]-48)%12===0,
+ hint:"Cherche la touche qui porte le même nom que le drone : Do.",
+ brick:{name:"L'OCTAVE",def:"La même note, plus haut ou plus bas. 12 touches d'écart, fréquence doublée.",
+  why:"Deux notes à l'octave fusionnent : l'oreille les entend comme une seule, élargie.",
+  abl:"Dans le piano roll, +12 demi-tons = même note. Doubler une bassline à l'octave = la grossir sans toucher l'harmonie."},
+ demo:{bpm:80,steps:8,tracks:[{patch:'keys',notes:[{p:48,s:0,d:2},{p:60,s:2,d:2},{p:48,s:4,d:4},{p:60,s:4,d:4}]}]}},
+
+{id:'m2',mod:0,type:'keys',title:'LE FROTTEMENT',tag:'CONSTRUIRE',
+ instr:"Choisis deux touches qui se touchent — la noire entre deux blanches compte. Écoute-les ensemble. Ce frottement est la plus petite distance qui existe en musique.",
+ kb:[60,79],maxSel:2,listen:'chord',
+ v:sel=>sel.length===2&&Math.abs(sel[0]-sel[1])===1,
+ hint:"Deux touches strictement voisines, noires comprises. Blanc-blanc avec une noire entre les deux ne compte pas.",
+ brick:{name:"LE DEMI-TON",def:"La plus petite distance entre deux notes : une touche, noires comprises.",
+  why:"Collées, deux notes frottent — tension maximale. Toute la musique se mesure en demi-tons.",
+  abl:"Une case verticale du piano roll = un demi-ton. Transposer un clip de +1 = tout monte d'un demi-ton."},
+ demo:{bpm:80,steps:8,tracks:[{patch:'keys',notes:[{p:64,s:0,d:2},{p:65,s:2,d:2},{p:64,s:4,d:4},{p:65,s:4,d:4}]}]}},
+
+{id:'n01',mod:0,type:'keys',title:'LE PAS ENTIER',tag:'CONSTRUIRE',
+ instr:"Maintenant deux touches avec exactement UNE touche entre elles (noires comprises). Écoute : ça frotte encore, mais c'est respirable. C'est le pas normal de la musique.",
+ tip:"Demi-ton = frottement. Ton = marche. Les gammes ne sont que des suites de ces deux pas.",
+ kb:[60,79],maxSel:2,listen:'chord',
+ v:sel=>sel.length===2&&Math.abs(sel[0]-sel[1])===2,
+ hint:"Une seule touche sautée entre les deux — compte les noires.",
+ brick:{name:"LE TON",def:"Deux demi-tons. Une touche sautée. Le pas de marche de la musique.",
+  why:"Le demi-ton colle, le ton respire. Toutes les échelles que tu vas construire alternent ces deux pas — c'est leur code génétique.",
+  abl:"Dans le piano roll : +2 cases. Mémorise les deux distances à l'œil, tu liras les gammes sans réfléchir."},
+ demo:{bpm:80,steps:8,tracks:[{patch:'keys',notes:[{p:60,s:0,d:2},{p:62,s:2,d:2},{p:60,s:4,d:4},{p:62,s:4,d:4}]}]}},
+
+{id:'m3',mod:0,type:'decode',title:'TROIS PAS',tag:'DECODER',
+ instr:"Écoute le modèle autant de fois que tu veux. Reconstruis-le sur la grille, note par note. Vérifie quand tu penses l'avoir.",
+ tip:"Première reconstruction à l'oreille : c'est le muscle que tu vas entraîner sur tout le chemin.",
+ bpm:100,steps:8,rows:[67,65,64,62,60,59,57],patch:'keys',
+ target:[{p:60,s:0,d:2},{p:62,s:2,d:2},{p:64,s:4,d:3}],
+ brick:{name:"LE MOUVEMENT CONJOINT",def:"Une mélodie qui avance par notes voisines, pas par sauts.",
+  why:"L'oreille suit sans effort ce qui marche pas à pas. Les sauts surprennent, les pas rassurent — une mélodie dose les deux.",
+  abl:"Dessine tes mélodies : beaucoup de pas, quelques sauts choisis."}},
+
+/* ============ II — LE PIANO ROLL ============ */
+{id:'n02',mod:1,type:'grid',title:'LA POSE',tag:'GESTE',
+ instr:"Lis la grille comme une carte : la hauteur monte vers le haut, le temps avance vers la droite. Pose exactement : Do3 colonne 1, Mi3 colonne 5, Sol3 colonne 9, Do4 colonne 13. Puis écoute.",
+ tip:"C'est LE geste Ableton : double-clic pour poser, re-clic pour enlever. Ici : un tap.",
+ bpm:100,steps:16,rows:[72,71,69,67,65,64,62,60],patch:'keys',marks:true,
+ v:notes=>notes.length===4&&!!notes.find(n=>n.p===60&&n.s===0)&&!!notes.find(n=>n.p===64&&n.s===4)&&!!notes.find(n=>n.p===67&&n.s===8)&&!!notes.find(n=>n.p===72&&n.s===12),
+ hint:"Colonne 1 = première colonne (un temps fort). Do3 en bas, Do4 tout en haut.",
+ brick:{name:"LE PIANO ROLL",def:"Une carte : hauteur en vertical, temps en horizontal. Chaque case = une note possible.",
+  why:"Tu viens de jouer un arpège de Do majeur sans le savoir. Lire la grille, c'est voir la musique avant de l'entendre.",
+  abl:"Les colonnes marquées = les temps forts (1, 2, 3, 4). La grille d'Ableton est exactement celle-ci, en plus grand."},
+ demo:{bpm:100,steps:16,tracks:[{patch:'keys',notes:[{p:60,s:0,d:2},{p:64,s:4,d:2},{p:67,s:8,d:2},{p:72,s:12,d:2}]}]}},
+
+{id:'n03',mod:1,type:'grid',title:'LA LONGUEUR',tag:'GESTE',
+ instr:"Nouvel outil au-dessus de la grille : ÉTIRER. Pose une note de basse, passe en ÉTIRER, tape une case plus à droite sur la même ligne : la note se tient. Objectif : une note tenue d'au moins 8 cases + trois notes courtes.",
+ tip:"Dans Ableton tu tires le bord droit de la note. Tenue = nappe, sub. Courte = pluck, stab.",
+ bpm:110,steps:16,rows:[52,50,48,47,45,43,41,40],patch:'bass',
+ v:notes=>notes.some(n=>(n.d||1)>=8)&&notes.filter(n=>(n.d||1)===1).length>=3,
+ hint:"En mode ÉTIRER : tape d'abord une case loin à droite de ta note. Puis repasse en POSER pour les courtes.",
+ brick:{name:"LA DURÉE",def:"Une note a une longueur. Tenue, elle porte. Courte, elle frappe.",
+  why:"Même hauteur, même son : la durée seule change le rôle. Le sub tient, le stab claque — la musique respire entre les deux.",
+  abl:"Tire le bord droit d'une note pour l'allonger. Raccourcir toutes tes notes = effet gate instantané."},
+ demo:{bpm:110,steps:16,tracks:[{patch:'bass',notes:[{p:45,s:0,d:8},{p:45,s:9},{p:48,s:11},{p:43,s:13}]}]}},
+
+{id:'n04',mod:1,type:'grid',title:'LA VÉLOCITÉ',tag:'GESTE',
+ instr:"Outil VÉLO : chaque tap sur une note posée baisse sa force (fort → moyen → fantôme → fort). Pose au moins 6 notes de basse sur une même ligne, puis rends-en au moins deux fantômes. Écoute la différence : ça respire.",
+ tip:"Les 'ghost notes' — notes fantômes — sont le secret du groove humain. Personne ne frappe deux fois pareil.",
+ bpm:126,steps:16,rows:[48,47,45,43,41,40],patch:'bass',
+ v:notes=>notes.length>=6&&notes.filter(n=>(n.v??.9)<=0.5).length>=2&&notes.filter(n=>(n.v??.9)>=0.85).length>=2,
+ hint:"Mode VÉLO, puis tape une note existante : elle pâlit à chaque tap. Il faut au moins 2 fortes et 2 fantômes.",
+ brick:{name:"LA VÉLOCITÉ",def:"La force de frappe d'une note (0-127 en MIDI). Fort, moyen, fantôme.",
+  why:"Une ligne où tout est à fond sonne robotique. Deux ghost notes suffisent à rendre une boucle vivante.",
+  abl:"Zone vélocité sous le piano roll : tire les barres. Varie de ±20 sur une bassline répétitive — elle se met à groover."},
+ demo:{bpm:126,steps:16,tracks:[{patch:'bass',notes:[{p:45,s:0,v:1},{p:45,s:2,v:.45},{p:45,s:4,v:.9},{p:45,s:6,v:.45},{p:45,s:8,v:1},{p:45,s:10,v:.45},{p:45,s:12,v:.9},{p:45,s:14,v:.65}]}]}},
+
+{id:'n05',mod:1,type:'decode',title:'LE PROFIL',tag:'DECODER',
+ instr:"Une phrase courte qui mélange notes tenues et notes brèves. Reconstruis les positions (la durée n'est pas vérifiée — mais écoute-la). Tu lis maintenant la grille à l'oreille.",
+ bpm:104,steps:16,rows:[67,65,64,62,60,59,57],patch:'keys',
+ target:[{p:57,s:0,d:6},{p:60,s:6},{p:62,s:8,d:4},{p:64,s:12},{p:60,s:14,d:2}],
+ brick:{name:"LE PHRASÉ",def:"Le dessin d'une phrase : où ça tient, où ça frappe, où ça respire.",
+  why:"Deux mélodies avec les mêmes notes mais un phrasé différent sont deux musiques différentes. Le silence et la tenue font partie des notes.",
+  abl:"Après avoir posé tes notes, retravaille uniquement les durées : c'est un deuxième passage de composition."}},
+
+/* ============ III — LA GAMME SOMBRE ============ */
+{id:'m4',mod:2,type:'keys',title:"L'ÉCHELLE SOMBRE",tag:'CONSTRUIRE',
+ instr:"Sélectionne toutes les touches blanches de La2 à La3 — les huit, pas une de plus. Puis écoute la montée. C'est une couleur que tu connais par cœur.",
+ kb:[55,72],maxSel:8,listen:'arp',
+ v:sel=>eqSet(sel,[57,59,60,62,64,65,67,69]),
+ hint:"Uniquement les blanches, de La2 jusqu'au La au-dessus, toutes incluses.",
+ brick:{name:"LA GAMME MINEURE",def:"7 notes choisies parmi 12, qui sonnent sombre. Le code : 2-1-2-2-1-2-2 demi-tons depuis la racine.",
+  why:"Une gamme est un filtre : 5 notes retirées sur 12, et tout ce qui reste sonne ensemble. Le mineur, c'est la couleur du dubstep, de la jungle, du garage.",
+  abl:"Active Scale sur un clip MIDI : Ableton surligne exactement ces notes."},
+ demo:{bpm:110,steps:8,tracks:[{patch:'keys',notes:[57,59,60,62,64,65,67,69].map((p,i)=>({p,s:i}))}]}},
+
+{id:'n06',mod:2,type:'keys',title:'LA JUMELLE CLAIRE',tag:'CONSTRUIRE',
+ instr:"Même geste, autre maison : toutes les blanches de Do3 à Do4. Écoute la montée, puis réécoute l'échelle sombre dans ton carnet. Mêmes touches blanches — couleur opposée. Tout est dans le point de départ.",
+ tip:"Le code change : 2-2-1-2-2-2-1. C'est l'ordre des pas qui fait la couleur, pas les notes.",
+ kb:[55,74],maxSel:8,listen:'arp',
+ v:sel=>eqSet(sel,[60,62,64,65,67,69,71,72]),
+ hint:"Les blanches de Do3 à Do4, les huit.",
+ brick:{name:"LA GAMME MAJEURE",def:"Le même alphabet, démarré ailleurs : 2-2-1-2-2-2-1. La couleur lumineuse.",
+  why:"La mineur et Do majeur utilisent les mêmes 7 notes — ce sont des gammes relatives. Seule la maison change, et tout bascule.",
+  abl:"Dans Scale : passe de A minor à C major — les notes surlignées ne bougent pas. Ta bassline, si."},
+ demo:{bpm:110,steps:8,tracks:[{patch:'keys',notes:[60,62,64,65,67,69,71,72].map((p,i)=>({p,s:i}))}]}},
+
+{id:'m5',mod:2,type:'decode',title:'LA BASSLINE',tag:'DECODER',
+ instr:"Une basse de garage en La mineur. Écoute, reconstruis. Repère d'abord la note qui revient — c'est elle qui tient tout.",
+ bpm:132,steps:16,rows:ROWS_BASS,patch:'bass',
+ target:[{p:45,s:0,d:2},{p:45,s:7},{p:48,s:8,d:2},{p:43,s:12,d:2},{p:45,s:14}],
+ brick:{name:"LA FONDAMENTALE",def:"La note-maison du morceau. La bassline y revient toujours.",
+  why:"Tout tourne autour d'elle ; quand la basse y retombe, le corps sait qu'il est rentré.",
+  abl:"Ta bassline part de la fondamentale et y retombe. Le reste est de la promenade."}},
+
+{id:'m6',mod:2,type:'keys',title:'DÉMÉNAGER LA MAISON',tag:'CONSTRUIRE',
+ instr:"Reconstruis l'échelle sombre, mais depuis Fa2. Le code du mineur : 2-1-2-2-1-2-2 demi-tons. Compte chaque touche, noires comprises. 2 = saute une touche.",
+ tip:"Fa mineur — la tonalité de ton dernier track. Tu construis ta propre maison.",
+ kb:[52,67],maxSel:8,listen:'arp',
+ v:sel=>eqSet(sel,[53,55,56,58,60,61,63,65]),
+ hint:"Depuis Fa2 : +2, +1, +2, +2, +1, +2, +2. Quatre touches noires au passage — normal.",
+ brick:{name:"LA TRANSPOSITION",def:"Déplacer un motif sans le déformer : mêmes écarts, autre départ.",
+  why:"Le motif fait la musique, pas les notes. Le code 2-1-2-2-1-2-2 survit à tous les déménagements.",
+  abl:"Sélectionne tout + flèches haut/bas : transposition. Les écarts restent, la couleur reste."},
+ demo:{bpm:110,steps:8,tracks:[{patch:'keys',notes:[53,55,56,58,60,61,63,65].map((p,i)=>({p,s:i}))}]}},
+
+/* ============ IV — LES ACCORDS ============ */
+{id:'m7',mod:3,type:'keys',title:"L'EMPILEMENT",tag:'CONSTRUIRE',
+ instr:"Depuis La2 : pose la touche, saute une blanche, pose, saute une blanche, pose. Trois notes. Écoute-les ensemble — c'est un objet, pas trois sons.",
+ kb:[55,72],maxSel:3,listen:'chord',
+ v:sel=>eqSet(sel,[57,60,64]),
+ hint:"La2, puis Do3, puis Mi3. Racine — saute une blanche — pose — saute une blanche — pose.",
+ brick:{name:"L'ACCORD MINEUR",def:"3 notes empilées : racine, +3 demi-tons, puis +4 (le 1-3-5 de la gamme).",
+  why:"Trois notes compatibles jouées ensemble = un accord. L'écart de 3 en bas le rend sombre.",
+  abl:"Empile dans le piano roll : racine, +3, +7. Stab garage instantané."},
+ demo:{bpm:90,steps:8,tracks:[{patch:'keys',notes:[{p:57,s:0,d:6},{p:60,s:0,d:6},{p:64,s:0,d:6}]}]}},
+
+{id:'m8',mod:3,type:'keys',title:'LE FRÈRE LUMINEUX',tag:'CONSTRUIRE',
+ instr:"Exactement le même geste, mais depuis Do3. Écoute, puis réécoute l'accord d'avant dans ton carnet. Un seul détail change — et tout bascule.",
+ kb:[55,72],maxSel:3,listen:'chord',
+ v:sel=>eqSet(sel,[60,64,67]),
+ hint:"Do3, puis Mi3, puis Sol3 — racine, saute une blanche, pose, saute une blanche, pose.",
+ brick:{name:"L'ACCORD MAJEUR",def:"Même empilement, mais 4 demi-tons en bas : racine, +4, +7.",
+  why:"Un seul demi-ton de différence avec le mineur — et la couleur bascule. La note du milieu décide.",
+  abl:"+3 ou +4 au-dessus de la racine : c'est l'interrupteur sombre / lumineux."},
+ demo:{bpm:90,steps:8,tracks:[{patch:'keys',notes:[{p:60,s:0,d:6},{p:64,s:0,d:6},{p:67,s:0,d:6}]}]}},
+
+{id:'m9',mod:3,type:'ear',title:"L'OREILLE TRANCHE",tag:'OREILLE',
+ instr:"Cinq accords, un par un. Pour chacun : sombre ou lumineux ? Mineur ou majeur ? Il en faut 4 sur 5. Ton oreille sait déjà — laisse-la trancher avant la tête.",
+ brick:{name:"LA TIERCE",def:"La note du milieu de l'accord — celle qui décide majeur ou mineur.",
+  why:"Tu viens de le prouver : ton oreille entend la différence. La certitude vient avec la répétition, pas avec la théorie.",
+  abl:"Doute sur un accord ? Isole la note du milieu, bouge-la d'un demi-ton, écoute la bascule."},
+ demo:{bpm:90,steps:8,tracks:[{patch:'keys',notes:[{p:57,s:0,d:3},{p:60,s:0,d:3},{p:64,s:0,d:3},{p:57,s:4,d:3},{p:61,s:4,d:3},{p:64,s:4,d:3}]}]}},
+
+{id:'n07',mod:3,type:'keys',title:'LE RENVERSEMENT',tag:'CONSTRUIRE',
+ instr:"L'accord de La mineur, réarrangé : on garde les mêmes trois noms de notes, mais le La quitte le bas pour passer à l'étage du dessus. Sélectionne Do3, Mi3, La3 — et compare avec l'accord d'origine dans ton carnet.",
+ kb:[55,74],maxSel:3,listen:'chord',
+ v:sel=>eqSet(sel,[60,64,69]),
+ hint:"Do3 (60), Mi3 (64), La3 (69). Les mêmes trois noms que l'accord mineur — la racine est passée à l'étage.",
+ brick:{name:"LE RENVERSEMENT",def:"Le même accord, autre étage : la racine monte d'une octave. Mêmes notes, autre dessin.",
+  why:"Trois notes = trois empilements possibles. Le renversement garde l'harmonie mais change le geste — c'est ce qui rend les stabs garage si mobiles.",
+  abl:"Sélectionne la note du bas d'un accord, +12 : renversement. Enchaîne des accords par renversements proches = voicing fluide."},
+ demo:{bpm:90,steps:8,tracks:[{patch:'keys',notes:[{p:57,s:0,d:3},{p:60,s:0,d:3},{p:64,s:0,d:3},{p:60,s:4,d:3},{p:64,s:4,d:3},{p:69,s:4,d:3}]}]}},
+
+{id:'m10',mod:3,type:'decode',title:'DEUX STABS',tag:'DECODER',
+ instr:"Deux accords frappés, un par moitié de mesure. Six notes en tout. Reconstruis — commence par les racines, les notes les plus graves.",
+ bpm:120,steps:16,rows:[65,64,62,60,59,57,55,53],patch:'keys',
+ target:[{p:57,s:0,d:3},{p:60,s:0,d:3},{p:64,s:0,d:3},{p:53,s:8,d:3},{p:57,s:8,d:3},{p:60,s:8,d:3}],
+ brick:{name:"LA PROGRESSION",def:"Des accords de la même gamme qui s'enchaînent en boucle.",
+  why:"Tous les accords construits sur une même gamme sont compatibles. L'enchaînement crée le récit : tension, retour.",
+  abl:"Reste dans les notes surlignées par Scale : tes accords s'accorderont toujours."}},
+
+/* ============ V — LES PROGRESSIONS ============ */
+{id:'m11',mod:4,type:'grid',title:'LA BOUCLE ÉPIQUE',tag:'CONSTRUIRE',
+ instr:"Quatre accords, un par temps fort (colonnes marquées) : racines La2, Fa2, Do3, Sol2. Pour chacun, le geste d'empilement en blanches : racine, saute une, pose, saute une, pose. Douze notes.",
+ tip:"Astuce Ableton : construis le premier accord, copie-le (Ctrl+D), déplace la copie. Ici, pose-les un par un — le geste s'imprime.",
+ bpm:90,steps:16,rows:[69,67,65,64,62,60,59,57,55,53],patch:'keys',marks:true,
+ v:notes=>{const C={0:[57,60,64],4:[53,57,60],8:[60,64,67],12:[55,59,62]};
+   if(notes.length!==12)return false;
+   if(!notes.every(n=>[0,4,8,12].includes(n.s)))return false;
+   return Object.keys(C).every(k=>{const got=notes.filter(n=>n.s===+k).map(n=>n.p).sort((a,b)=>a-b);
+     return JSON.stringify(got)===JSON.stringify(C[k]);});},
+ hint:"Temps 1 : La2-Do3-Mi3. Temps 2 : Fa2-La2-Do3. Temps 3 : Do3-Mi3-Sol3. Temps 4 : Sol2-Si2-Ré3.",
+ brick:{name:"LES DEGRÉS",def:"Les accords d'une gamme, numérotés depuis la maison. Tu viens de jouer i–VI–III–VII.",
+  why:"Les numéros rendent les progressions transportables : i–VI–III–VII fonctionne dans toutes les tonalités. C'est la boucle de la moitié de la pop sombre.",
+  abl:"Note tes progressions en degrés, pas en notes : réutilisables dans tous tes tracks, toutes tonalités."},
+ demo:{bpm:90,steps:16,tracks:[{patch:'keys',notes:PROG_EPIC}]}},
+
+{id:'m12',mod:4,type:'decode',title:'LES 4 MAGIQUES',tag:'DECODER',
+ instr:"La progression la plus célèbre de la pop, jouée à la basse : quatre notes, une par temps fort. Reconstruis. Tu l'as entendue mille fois.",
+ bpm:100,steps:16,rows:[50,48,47,45,43,41,40,38],patch:'bass',
+ target:[{p:48,s:0,d:3},{p:43,s:4,d:3},{p:45,s:8,d:3},{p:41,s:12,d:3}],
+ brick:{name:"LES 4 MAGIQUES",def:"I–V–vi–IV : la progression la plus utilisée de la pop. À la basse : Do, Sol, La, Fa.",
+  why:"Quatre degrés qui alternent lumière et ombre en boucle parfaite — des centaines de hits tournent dessus.",
+  abl:"Pose ces 4 racines à la basse, empile les accords au-dessus : un morceau existe déjà."}},
+
+{id:'m13',mod:4,type:'grid',title:'LA BASSE DESSINE',tag:'CONSTRUIRE',
+ instr:"Ta boucle épique joue en fond — lance-la. Pose une note de basse sous chaque accord : sa racine, sur les colonnes marquées. La1, Fa1, Do2, Sol1.",
+ bpm:90,steps:16,rows:[50,48,47,45,43,41,40,38],patch:'bass',marks:true,
+ ctxTracks:[{patch:'keys',notes:PROG_EPIC.map(n=>({...n,v:.55}))}],
+ v:notes=>notes.length===4&&eqSet(notes.filter(n=>n.s===0).map(n=>n.p),[45])&&eqSet(notes.filter(n=>n.s===4).map(n=>n.p),[41])&&eqSet(notes.filter(n=>n.s===8).map(n=>n.p),[48])&&eqSet(notes.filter(n=>n.s===12).map(n=>n.p),[43]),
+ hint:"Une seule note par temps fort : La1 (temps 1), Fa1 (2), Do2 (3), Sol1 (4).",
+ brick:{name:"LA BASSE FONDAMENTALE",def:"La basse joue la racine de chaque accord : elle dessine l'harmonie toute seule.",
+  why:"Même sans les accords, une basse qui suit les racines fait entendre la progression. En électronique, la basse EST souvent l'harmonie.",
+  abl:"Mute tes pads : si la bassline raconte encore la progression, elle est juste."},
+ demo:{bpm:90,steps:16,tracks:[{patch:'keys',notes:PROG_EPIC.map(n=>({...n,v:.5}))},{patch:'bass',notes:[{p:45,s:0,d:3},{p:41,s:4,d:3},{p:48,s:8,d:3},{p:43,s:12,d:3}]}]}},
+
+{id:'n08',mod:4,type:'grid',title:'LA PORTE',tag:'CONSTRUIRE',
+ instr:"Deux accords : le premier crée un manque, le second referme la porte. Pose Mi3-Sol#3-Si3 sur le temps 1, puis La2-Do3-Mi3 sur le temps 3. Écoute en boucle : sens le besoin de rentrer.",
+ tip:"Le Sol# n'est pas dans La mineur — c'est une note empruntée, exprès. La tension a le droit de tricher.",
+ bpm:84,steps:16,rows:[72,71,69,68,67,65,64,62,60,59,57],patch:'pad',marks:true,
+ v:notes=>{const a=notes.filter(n=>n.s===0).map(n=>n.p).sort((x,y)=>x-y),b=notes.filter(n=>n.s===8).map(n=>n.p).sort((x,y)=>x-y);
+   return notes.length===6&&JSON.stringify(a)===JSON.stringify([64,68,71])&&JSON.stringify(b)===JSON.stringify([57,60,64]);},
+ hint:"Temps 1 : Mi3 (64), Sol#3 (68 — une noire), Si3 (71). Temps 3 : La2, Do3, Mi3.",
+ brick:{name:"LA CADENCE",def:"V → i : l'accord de tension puis l'accord-maison. La phrase qui se termine.",
+  why:"Le Sol# tire vers le La comme un aimant — un demi-ton de manque. Toute fin de phrase, de la techno à Bach, est une variante de ce geste.",
+  abl:"Avant de revenir sur ton accord-maison, place l'accord bâti sur la 5e note de la gamme : retour garanti."},
+ demo:{bpm:84,steps:16,tracks:[{patch:'pad',notes:[{p:64,s:0,d:7},{p:68,s:0,d:7},{p:71,s:0,d:7},{p:57,s:8,d:8},{p:60,s:8,d:8},{p:64,s:8,d:8}]}]}},
+
+{id:'n09',mod:4,type:'decode',title:"L'ANDALOUSE",tag:'DECODER',
+ instr:"Une descente de basse mythique — flamenco, mais aussi la moitié du psy-dub et de la dark techno. Quatre notes qui descendent, une par temps fort. Reconstruis.",
+ bpm:96,steps:16,rows:[48,47,45,43,41,40,38,36],patch:'bass',
+ target:[{p:45,s:0,d:3},{p:43,s:4,d:3},{p:41,s:8,d:3},{p:40,s:12,d:3}],
+ brick:{name:"LA DESCENTE ANDALOUSE",def:"i–VII–VI–V : quatre marches qui descendent vers la tension. La, Sol, Fa, Mi.",
+  why:"Une descente régulière qui se termine un demi-ton au-dessus du retour : l'auditeur est suspendu, la boucle peut tourner sans fin.",
+  abl:"Basse descendante par tons puis demi-ton final : tension cyclique parfaite pour une intro ou un breakdown."}},
+
+/* ============ VI — LA MÉLODIE ============ */
+{id:'n10',mod:5,type:'grid',title:'LE MOTIF',tag:'CONSTRUIRE',
+ instr:"Invente 3 à 5 notes dans la première moitié de la grille, en restant sur les lignes éclaircies (La mineur). Puis répète-les EXACTEMENT dans la deuxième moitié, 8 cases plus loin. Écoute en boucle.",
+ tip:"Composer = répéter plus que tu ne crois. Le cerveau de l'auditeur aime reconnaître.",
+ bpm:112,steps:16,rows:[69,67,65,64,62,60,59,57],patch:'pluck',scaleAm:true,
+ v:notes=>{const a=notes.filter(n=>n.s<8),b=notes.filter(n=>n.s>=8);
+   if(a.length<3||a.length>5||a.length!==b.length)return false;
+   if(!notes.every(n=>inAm(n.p)))return false;
+   const key=x=>x.map(n=>n.p+':'+n.s%8).sort().join('|');
+   return key(a)===key(b);},
+ hint:"Mêmes notes, mêmes positions, +8 colonnes. Et uniquement les lignes éclaircies.",
+ brick:{name:"LE MOTIF",def:"Une petite cellule mélodique qui se répète. L'unité de base de toute mélodie.",
+  why:"La répétition n'est pas de la paresse : c'est elle qui transforme des notes en idée. On retient ce qui revient.",
+  abl:"Compose 1 mesure, Ctrl+D pour dupliquer. La variation viendra après — d'abord, l'identité."},
+ demo:{bpm:112,steps:16,tracks:[{patch:'pluck',notes:[{p:57,s:0},{p:60,s:2},{p:64,s:3},{p:62,s:6},{p:57,s:8},{p:60,s:10},{p:64,s:11},{p:62,s:14}]}]}},
+
+{id:'n11',mod:5,type:'grid',title:'QUESTION, RÉPONSE',tag:'CONSTRUIRE',
+ instr:"Deux phrases dans la gamme (lignes éclaircies). La première se termine N'IMPORTE OÙ sauf sur un La : c'est la question, elle reste en l'air. La seconde se termine sur un La : la réponse, elle rentre. Au moins 3 notes chacune.",
+ bpm:112,steps:16,rows:[69,67,65,64,62,60,59,57],patch:'pluck',scaleAm:true,
+ v:notes=>{const a=notes.filter(n=>n.s<8),b=notes.filter(n=>n.s>=8);
+   if(a.length<3||b.length<3)return false;
+   if(!notes.every(n=>inAm(n.p)))return false;
+   const last=x=>x.reduce((m,n)=>n.s>m.s?n:m);
+   return last(a).p%12!==9&&last(b).p%12===9;},
+ hint:"Regarde la DERNIÈRE note de chaque moitié : la première ne doit pas être un La, la seconde doit en être un.",
+ brick:{name:"QUESTION-RÉPONSE",def:"Une phrase suspendue, une phrase qui rentre à la maison. Le dialogue de base.",
+  why:"Finir hors de la fondamentale = point d'interrogation. Finir dessus = point final. Ta mélodie parle déjà.",
+  abl:"Structure tes mélodies en paires de 1 ou 2 mesures : ouverte, puis fermée. L'auditeur attend la réponse — donne-la."},
+ demo:{bpm:112,steps:16,tracks:[{patch:'pluck',notes:[{p:64,s:0},{p:62,s:2},{p:60,s:4},{p:62,s:6,d:2},{p:64,s:8},{p:62,s:10},{p:60,s:12},{p:57,s:14,d:2}]}]}},
+
+{id:'n12',mod:5,type:'grid',title:'LA NOTE DE PASSAGE',tag:'CONSTRUIRE',
+ instr:"Relie Do3 à Mi3 en trois pas réguliers : Do3 colonne 1, la note entre les deux colonne 3, Mi3 colonne 5. Écoute : la note du milieu n'appartient pas à l'accord, mais elle est sur le chemin — donc elle passe.",
+ bpm:100,steps:8,rows:[67,65,64,62,60,59,57],patch:'keys',
+ v:notes=>notes.length===3&&!!notes.find(n=>n.p===60&&n.s===0)&&!!notes.find(n=>n.p===62&&n.s===2)&&!!notes.find(n=>n.p===64&&n.s===4),
+ hint:"Do3 (col. 1), Ré3 (col. 3), Mi3 (col. 5).",
+ brick:{name:"LA NOTE DE PASSAGE",def:"Une note hors accord, traversée en chemin entre deux notes de l'accord.",
+  why:"Elle crée une micro-tension immédiatement résolue : du mouvement sans danger. C'est ce qui rend une mélodie fluide au lieu de hachée.",
+  abl:"Entre deux notes d'accord distantes, remplis l'escalier avec les notes de la gamme : passage naturel."},
+ demo:{bpm:100,steps:8,tracks:[{patch:'keys',notes:[{p:60,s:0,d:2},{p:62,s:2,d:2},{p:64,s:4,d:3}]}]}},
+
+{id:'n13',mod:5,type:'decode',title:'LA PHRASE',tag:'DECODER',
+ instr:"Une mélodie complète en La mineur : un motif, sa variation, une fin qui rentre. Sept notes. Prends ton temps, réécoute par morceaux.",
+ bpm:112,steps:16,rows:[69,67,65,64,62,60,59,57],patch:'pluck',
+ target:[{p:57,s:0},{p:60,s:2},{p:62,s:4,d:2},{p:57,s:8},{p:60,s:10},{p:59,s:12},{p:57,s:14,d:2}],
+ brick:{name:"LA PHRASE",def:"Motif + variation + retour à la maison = une phrase mélodique complète.",
+  why:"Tu viens d'entendre la grammaire entière : l'idée, son écho modifié, la résolution. Toute mélodie qui te hante est bâtie comme ça.",
+  abl:"Quand une mélodie ne marche pas : vérifie qu'elle répète assez, qu'elle varie un peu, et qu'elle atterrit quelque part."}},
+
+/* ============ VII — LA BASSE ============ */
+{id:'n14',mod:6,type:'grid',title:'LE SUB',tag:'CONSTRUIRE',
+ instr:"Son SUB : une sinusoïde pure, le son le plus grave et le plus simple qui existe. Pose La0 sur chacun des quatre temps forts. Écoute au casque — tu le sens plus que tu ne l'entends.",
+ tip:"Le sub vit sous 100 Hz. Règle d'or : une seule note à la fois, jamais d'accord dans le sub — ça brouille tout.",
+ bpm:140,steps:16,rows:ROWS_SUB,patch:'sub',marks:true,
+ v:notes=>notes.length===4&&notes.every(n=>n.p===33&&[0,4,8,12].includes(n.s)),
+ hint:"La0 — tout en bas de la grille. Une note par colonne marquée, quatre en tout.",
+ brick:{name:"LE SUB",def:"La fondation : une sinusoïde sous 100 Hz, mono, une note à la fois.",
+  why:"Le sub porte le poids physique du morceau. Pur, il ne se mélange à rien — c'est pour ça qu'on le garde simple et seul.",
+  abl:"Operator ou Drift : une sine, zéro effet stéréo dessous 120 Hz. Coupe le sub de tous les autres sons avec un EQ."},
+ demo:{bpm:140,steps:16,tracks:[{patch:'sub',notes:[{p:33,s:0,d:3},{p:33,s:4,d:3},{p:33,s:8,d:3},{p:33,s:12,d:3}]}]}},
+
+{id:'n15',mod:6,type:'grid',title:'LE REBOND',tag:'CONSTRUIRE',
+ instr:"La même note à deux étages : La0 et La1. Pose au moins six notes en alternant les deux octaves comme un ballon qui rebondit. Écoute en boucle — c'est l'énergie de la house et du garage.",
+ bpm:128,steps:16,rows:ROWS_SUB,patch:'bass',
+ v:notes=>notes.length>=6&&notes.every(n=>n.p%12===9)&&notes.some(n=>n.p===33)&&notes.some(n=>n.p===45),
+ hint:"Uniquement des La (La0 = 33, La1 = 45), au moins six, les deux étages utilisés.",
+ brick:{name:"L'OCTAVE BOUNCE",def:"Une bassline qui alterne la même note sur deux octaves.",
+  why:"Une note, deux étages : harmonie immobile, énergie maximale. Le rebond crée le mouvement sans rien risquer.",
+  abl:"Duplique ta note de basse, +12 sur une copie sur deux. La disco, la house et le garage tournent là-dessus depuis 50 ans."},
+ demo:{bpm:128,steps:16,tracks:[{patch:'bass',notes:[{p:33,s:0},{p:45,s:2},{p:33,s:4},{p:45,s:6},{p:33,s:8},{p:45,s:10},{p:33,s:12},{p:45,s:14}]}]}},
+
+{id:'n16',mod:6,type:'grid',title:'LE WOBBLE',tag:'CONSTRUIRE',
+ instr:"Son WOBBLE : un filtre qui s'ouvre et se ferme tout seul, calé sur le tempo. Pose un La (0 ou 1) tenu sur au moins 8 cases, lance la lecture, écoute la machine onduler. Une note suffit — le mouvement vient du son.",
+ tip:"C'est un LFO : un oscillateur lent qui tourne un bouton à ta place. Ici il pilote le filtre, en croches.",
+ bpm:140,steps:16,rows:ROWS_SUB,patch:'wobble',
+ v:notes=>notes.some(n=>n.p%12===9&&(n.d||1)>=8),
+ hint:"Mode ÉTIRER : pose un La, puis tape 8 cases plus loin sur la même ligne. Lance la lecture en boucle.",
+ brick:{name:"LE LFO",def:"Low Frequency Oscillator : une onde lente qui pilote un paramètre — ici, le filtre.",
+  why:"Une note tenue est statique ; un LFO la fait vivre sans que tu touches à rien. Tout le dubstep est construit sur ce robot.",
+  abl:"Auto Filter sur ta basse : section LFO, rate synchronisé (1/8 ou 1/4). Monte Amount — ton wobble est né."},
+ demo:{bpm:140,steps:16,tracks:[{patch:'wobble',notes:[{p:33,s:0,d:16}]}]}},
+
+{id:'n17',mod:6,type:'decode',title:'LA TENUE ET LE COUP',tag:'DECODER',
+ instr:"Une basse qui vit sur deux durées : des tenues qui portent, des coups qui répondent. Cinq notes. Reconstruis les positions, puis écoute la respiration entre les deux.",
+ bpm:138,steps:16,rows:ROWS_SUB,patch:'bass',
+ target:[{p:33,s:0,d:6},{p:45,s:7},{p:45,s:9},{p:33,s:10,d:4},{p:43,s:15}],
+ brick:{name:"LE DIALOGUE DE BASSE",def:"Tenue grave + coups à l'octave : une basse qui se répond à elle-même.",
+  why:"Une seule ligne de basse peut faire deux voix : le poids et la réplique. C'est plus vivant que deux instruments séparés.",
+  abl:"Sur une même piste : notes longues à l'octave basse, notes courtes à l'octave au-dessus. Mixe-toi tout seul."}},
+
+/* ============ VIII — LES ACCORDS RICHES ============ */
+{id:'n18',mod:7,type:'keys',title:'LA SEPTIÈME',tag:'CONSTRUIRE',
+ instr:"Reprends l'accord de La mineur (La2, Do3, Mi3) et ajoute UNE note : Sol3. Quatre notes. Écoute l'accord simple, puis celui-ci : le velours est arrivé.",
+ kb:[55,72],maxSel:4,listen:'chord',
+ v:sel=>eqSet(sel,[57,60,64,67]),
+ hint:"La2 (57), Do3 (60), Mi3 (64), Sol3 (67) : l'accord d'avant + une blanche deux crans au-dessus.",
+ brick:{name:"LA SEPTIÈME",def:"L'accord de trois notes + une quatrième : la septième. Am devient Am7.",
+  why:"La quatrième note adoucit l'accord sans changer sa couleur — elle ajoute du flou élégant. Le son de la soul, du R&B, du garage.",
+  abl:"Sur n'importe quel accord : ajoute la note 3 cases sous l'octave de la racine (+10 demi-tons). Velours immédiat."},
+ demo:{bpm:84,steps:8,tracks:[{patch:'keys',notes:[{p:57,s:0,d:3},{p:60,s:0,d:3},{p:64,s:0,d:3},{p:57,s:4,d:4},{p:60,s:4,d:4},{p:64,s:4,d:4},{p:67,s:4,d:4}]}]}},
+
+{id:'n19',mod:7,type:'keys',title:'LE SUSPENDU',tag:'CONSTRUIRE',
+ instr:"Un accord qui refuse de choisir : La2, Ré3, Mi3. La note du milieu n'est ni la tierce mineure ni la majeure — elle est juste au-dessus. Écoute : ni sombre, ni lumineux. Suspendu.",
+ kb:[55,72],maxSel:3,listen:'chord',
+ v:sel=>eqSet(sel,[57,62,64]),
+ hint:"La2 (57), Ré3 (62), Mi3 (64). Le Ré remplace le Do : c'est lui qui suspend.",
+ brick:{name:"LE SUS",def:"Accord suspendu : la tierce est remplacée par sa voisine (sus4 ou sus2). Ni majeur, ni mineur.",
+  why:"Sans tierce, pas de couleur — donc pas de réponse. L'oreille attend que ça se résolve : tension douce, parfaite avant un drop.",
+  abl:"Prends un accord, déplace la note du milieu d'un demi-ton vers le haut : sus4. Résous-le sur l'accord normal juste après."},
+ demo:{bpm:84,steps:8,tracks:[{patch:'keys',notes:[{p:57,s:0,d:3},{p:62,s:0,d:3},{p:64,s:0,d:3},{p:57,s:4,d:4},{p:60,s:4,d:4},{p:64,s:4,d:4}]}]}},
+
+{id:'n20',mod:7,type:'keys',title:'LA NEUVIÈME',tag:'CONSTRUIRE',
+ instr:"Le stab ultime du garage : Am7 + encore une note. La2, Do3, Mi3, Sol3, Si3. Cinq notes. Écoute avec le son STAB sélectionné mentalement — tu vas le reconnaître immédiatement.",
+ tip:"Am9 : LE son des stabs UKG et du deep house. Tu l'as dans l'oreille depuis des années.",
+ kb:[55,74],maxSel:5,listen:'chord',
+ v:sel=>eqSet(sel,[57,60,64,67,71]),
+ hint:"Les quatre notes d'Am7, plus Si3 (71) tout en haut.",
+ brick:{name:"LA NEUVIÈME",def:"Septième + encore une note (la 9e). Am9 : cinq notes, le luxe.",
+  why:"Plus l'accord empile de notes de la gamme, plus il devient texture. La neuvième, c'est le moment où l'accord devient une nappe.",
+  abl:"Stab garage : Am9, notes courtes, vélocités variées, un coup de reverb courte. C'est la recette."},
+ demo:{bpm:84,steps:8,tracks:[{patch:'stab',notes:[{p:57,s:0},{p:60,s:0},{p:64,s:0},{p:67,s:0},{p:71,s:0},{p:57,s:4},{p:60,s:4},{p:64,s:4},{p:67,s:4},{p:71,s:4}]}]}},
+
+{id:'n21',mod:7,type:'decode',title:'LE STAB',tag:'DECODER',
+ instr:"Deux frappes du même accord riche, posées HORS des temps forts — avec du swing. Huit cases à trouver : quatre notes, deux positions. Commence par trouver les colonnes, ensuite les hauteurs.",
+ bpm:130,steps:16,swing:.25,rows:[71,69,67,65,64,62,60,59,57],patch:'stab',
+ target:[{p:57,s:2},{p:60,s:2},{p:64,s:2},{p:71,s:2},{p:57,s:10},{p:60,s:10},{p:64,s:10},{p:71,s:10}],
+ brick:{name:"LE STAB",def:"Un accord riche frappé court, à contretemps : l'accord devient percussion.",
+  why:"Le stab ne joue pas l'harmonie, il la ponctue. Posé hors du temps fort, il crée le groove harmonique du garage.",
+  abl:"Accord m9, durée très courte, sur les contretemps, swing 20-30%. Ajoute un chorus léger : stab UKG signé."}},
+
+/* ============ IX — LE GROOVE ============ */
+{id:'m14',mod:8,type:'grid',title:'LE DÉCALAGE',tag:'CONSTRUIRE',
+ instr:"Pose au moins quatre notes de basse — interdiction absolue des colonnes marquées (les temps forts). Lance la lecture : un clic tient le tempo. Écoute ce que le vide sur les temps forts fait au corps.",
+ bpm:132,steps:16,rows:[52,50,48,45,43,40],patch:'bass',marks:true,
+ ctxTracks:[TICK16],
+ v:notes=>notes.length>=4&&notes.every(n=>n.s%4!==0),
+ hint:"Zéro note sur les colonnes marquées. Tout entre les temps : c'est là que le groove vit.",
+ brick:{name:"LA SYNCOPE",def:"Frapper à côté des temps forts. Le groove naît du décalage.",
+  why:"Le corps attend le temps fort ; la note qui tombe juste avant ou après crée le manque qui fait danser. Le garage vit là.",
+  abl:"Décale tes notes de basse d'une double-croche : swing instantané."},
+ demo:{bpm:132,steps:16,tracks:[TICK16,{patch:'bass',notes:[{p:45,s:2},{p:45,s:6},{p:48,s:10},{p:43,s:14}]}]}},
+
+{id:'n22',mod:8,type:'grid',title:'LE SWING',tag:'CONSTRUIRE',
+ instr:"Pose huit La1 d'affilée, une case sur deux n'existe pas encore : remplis les huit premières colonnes, toutes. Lance la lecture — cette mission joue avec 30% de swing : écoute les paires devenir inégales, longue-courte, longue-courte.",
+ tip:"Le swing retarde une double-croche sur deux. 0% = machine. 25-35% = MPC, garage, hip-hop. C'est un réglage, pas un talent.",
+ bpm:130,steps:16,swing:.3,rows:[48,47,45,43,41,40],patch:'bass',
+ v:notes=>notes.filter(n=>n.p===45).length>=8,
+ hint:"Au moins huit notes sur la ligne La1. Lance la lecture en boucle et compare mentalement avec une horloge.",
+ brick:{name:"LE SWING",def:"Retarder systématiquement les doubles-croches impaires. La grille respire.",
+  why:"Huit notes identiques + un seul réglage = groove. Le swing est la preuve que le temps musical n'est pas le temps de l'horloge.",
+  abl:"Dans Ableton : glisse un Groove depuis le Groove Pool sur ton clip (MPC 16 Swing-62 pour le garage). Ou nudge tes notes à la main."},
+ demo:{bpm:130,steps:16,swing:.3,tracks:[{patch:'bass',notes:[0,1,2,3,4,5,6,7].map(s=>({p:45,s,v:s%2?0.6:1}))}]}},
+
+{id:'n23',mod:8,type:'grid',title:'LE HALF-TIME',tag:'CONSTRUIRE',
+ instr:"140 BPM — le tempo dubstep. Pose un La (0 ou 1) TENU d'au moins 4 cases dès la colonne 1, puis UNE frappe sur la colonne 9 — pile au milieu. Lance avec le clic : ça va vite, mais ça pèse comme si c'était deux fois plus lent.",
+ bpm:140,steps:16,rows:ROWS_SUB,patch:'sub',marks:true,
+ ctxTracks:[TICK16],
+ v:notes=>notes.some(n=>n.s===0&&(n.d||1)>=4&&n.p%12===9)&&notes.some(n=>n.s===8),
+ hint:"Colonne 1 : un La étiré (mode ÉTIRER). Colonne 9 : une note, n'importe laquelle de la grille.",
+ brick:{name:"LE HALF-TIME",def:"Un tempo rapide qui frappe une fois sur deux : 140 BPM qui pèsent comme 70.",
+  why:"La caisse claire tombe sur le 3 au lieu du 2 et du 4 : tout s'élargit. C'est l'espace du dubstep — vitesse en haut, lenteur en bas.",
+  abl:"Garde tes hats rapides, mets ton snare sur le temps 3 uniquement : half-time. Ton 140 BPM devient massif."},
+ demo:{bpm:140,steps:16,tracks:[TICK16,{patch:'sub',notes:[{p:33,s:0,d:6},{p:45,s:8,d:2},{p:33,s:11,d:4}]}]}},
+
+{id:'n24',mod:8,type:'decode',title:'LE CONTRETEMPS',tag:'DECODER',
+ instr:"Quatre notes de basse, aucune sur un temps fort — le squelette du 2-step. Reconstruis. Indice : compte les colonnes à voix haute en écoutant.",
+ bpm:126,steps:16,rows:ROWS_BASS,patch:'bass',
+ target:[{p:45,s:2},{p:48,s:6},{p:45,s:10},{p:40,s:14}],
+ brick:{name:"LE CONTRETEMPS",def:"Jouer entre les temps, jamais dessus. Le squelette du 2-step et du garage.",
+  why:"Quand rien ne tombe sur le temps fort, c'est l'auditeur qui le fournit de l'intérieur — son corps complète le motif. Il danse pour finir la phrase.",
+  abl:"Bassline 2-step : efface tout ce qui tombe sur les temps 1-2-3-4, garde le reste. Le trou EST le groove."}},
+
+{id:'m15',mod:8,type:'decode',title:'LE GALOP',tag:'DECODER',
+ instr:"Une cellule de basse jungle, rapide, en La mineur. Écoute en boucle, reconstruis les cinq notes. Dernier palier du chemin.",
+ bpm:160,steps:16,rows:ROWS_BASS,patch:'bass',
+ target:[{p:45,s:0,d:2},{p:45,s:3},{p:48,s:6,d:2},{p:43,s:10},{p:45,s:13}],
+ brick:{name:"LA CELLULE RYTHMIQUE",def:"Un motif court qui boucle et fait l'identité du morceau.",
+  why:"La jungle tourne sur des cellules : une mesure qui revient, décalée, variée. Le cerveau accroche à la répétition qui surprend.",
+  abl:"Construis une cellule de 1 mesure, duplique-la, varie une note sur quatre."}}
+];
+
+/* =====================================================================
+   UI
+   ===================================================================== */
+function eqSet(a,b){const x=[...a].sort((m,n)=>m-n),y=[...b].sort((m,n)=>m-n);
+  return x.length===y.length&&x.every((v,i)=>v===y[i]);}
+const div=(cls,txt)=>{const d=document.createElement('div');d.className=cls;if(txt!=null)d.textContent=txt;return d;};
+const btn=(cls,txt,fn)=>{const b=document.createElement('button');b.className=cls;b.textContent=txt;b.onclick=fn;return b;};
+const VLEVELS=[1,.65,.4];
+
+/* ---------- header / nav ---------- */
+function renderHeader(){$('#hStreak').textContent=S.streak;$('#hDone').textContent=S.done.length;$('#hTotal').textContent=MISSIONS.length;}
+const VIEWS=['path','studio','bricks','mission'];
+let curView='path';
+function show(v){curView=v;VIEWS.forEach(x=>{const el=$('#v-'+x);if(el)el.classList.toggle('active',x===v);});
+  ['path','studio','bricks'].forEach(x=>{const n=$('#nav-'+x);if(n)n.classList.toggle('on',x===v);});
+  $('#kbzone').classList.toggle('show',v==='studio'||(v==='mission'&&CUR&&CUR.type==='keys'));
+  Player.stop();stopDrone();
+  if(v==='studio')KB.mode='play';
+}
+$('#nav-path').onclick=()=>{renderPath();show('path');};
+$('#nav-studio').onclick=()=>{renderStudio();show('studio');setKeyboard(48,72,'play');};
+$('#nav-bricks').onclick=()=>{renderBricks();show('bricks');};
+$('#nmToggle').onclick=()=>{S.names=(S.names==='fr')?'en':'fr';save();
+  renderKB();if(curView==='path')renderPath();
+  if(curView==='studio')renderStudio();if(curView==='bricks')renderBricks();
+  if(curView==='mission'&&CUR)openMission(MISSIONS.indexOf(CUR));};
+
+/* ---------- chemin ---------- */
+function unlocked(i){return i===0||S.done.includes(MISSIONS[i-1].id);}
+function renderPath(){
+  const w=$('#welcome');w.innerHTML='';
+  if(!S.seen){const card=div('welcome');
+    card.innerHTML='<b>Bienvenue dans ton atelier.</b> Trois espaces : le <b>Chemin</b> (une mission à la fois, 5-10 minutes), le <b>Studio</b> (deux pistes libres, comme un mini-Ableton), les <b>Briques</b> (tout ce que tu as appris, relisible sans son). Commence par la mission 1.';
+    card.appendChild(btn('btn','COMPRIS',()=>{S.seen=true;save();renderPath();}));
+    w.appendChild(card);}
+  const host=$('#pathList');host.innerHTML='';
+  MODULES.forEach((md,mi)=>{const sec=div('module');sec.style.setProperty('--mh',md.hue);
+    const mh=div('modhead');const h=document.createElement('h2');h.textContent=md.name;mh.appendChild(h);
+    mh.appendChild(div('modintro',md.intro));sec.appendChild(mh);
+    const list=MISSIONS.filter(m=>m.mod===mi);
+    const done=list.filter(m=>S.done.includes(m.id)).length;
+    const prog=div('mprog');const bar=document.createElement('i');bar.style.width=(done/list.length*100)+'%';prog.appendChild(bar);sec.appendChild(prog);
+    MISSIONS.forEach((m,i)=>{if(m.mod!==mi)return;
+      const b=document.createElement('button');b.className='mrow';
+      const isDone=S.done.includes(m.id);
+      if(isDone)b.classList.add('done');
+      else if(unlocked(i))b.classList.add('cur');
+      else b.disabled=true;
+      b.appendChild(div('dot'));
+      b.appendChild(div('mt',(i+1)+'. '+m.title));
+      b.appendChild(div('tag t-'+m.tag,m.tag));
+      b.onclick=()=>openMission(i);
+      sec.appendChild(b);});
+    host.appendChild(sec);});
+}
+
+/* ---------- clavier ---------- */
+let KB={low:60,high:84,mode:'play',sel:new Set(),max:0,onChange:null};
+function setKeyboard(low,high,mode,max,onChange){KB={low,high,mode,sel:new Set(),max:max||0,onChange:onChange||null};renderKB();}
+function renderKB(){const el=$('#kb');el.innerHTML='';
+  const whites=[],blacks=[];
+  for(let p=KB.low;p<=KB.high;p++)(isBlack(p)?blacks:whites).push(p);
+  const ww=100/whites.length;const wx={};whites.forEach((p,i)=>wx[p]=i*ww);
+  const mk=(p,black,left,width)=>{const k=document.createElement('button');
+    k.className='key '+(black?'b':'w');k.style.left=left+'%';k.style.width=width+'%';
+    k.dataset.p=p;
+    k.appendChild(div('klab',black?'':noteName(p)));
+    if(KB.sel.has(p))k.classList.add('sel');
+    k.addEventListener('pointerdown',e=>{e.preventDefault();keyTap(p,.9);});
+    el.appendChild(k);};
+  whites.forEach(p=>mk(p,false,wx[p],ww-0.3));
+  blacks.forEach(p=>mk(p,true,wx[p-1]+ww*.62,ww*.72));
+}
+function flashKey(p){const k=$('#kb').querySelector('[data-p="'+p+'"]');if(!k)return;
+  k.classList.add('flash');setTimeout(()=>k.classList.remove('flash'),130);}
+function refreshKBsel(){document.querySelectorAll('#kb .key').forEach(k=>k.classList.toggle('sel',KB.sel.has(+k.dataset.p)));}
+function keyTap(p,vel){AC();
+  if(KB.mode==='select'){
+    if(KB.sel.has(p))KB.sel.delete(p);else KB.sel.add(p);
+    playNote('keys',p,null,.5,vel);refreshKBsel();if(KB.onChange)KB.onChange();
+  }else{
+    const patch=(curView==='studio')?STU.tracks[STU.active].patch:'keys';
+    playNote(patch,p,null,.45,vel);
+  }
+  flashKey(p);
+}
+
+/* ---------- grille (outils : poser / étirer / vélo) ---------- */
+const noteAt=(notes,p,s)=>notes.find(n=>n.p===p&&n.s===s);
+const noteCovering=(notes,p,s)=>notes.find(n=>n.p===p&&s>n.s&&s<n.s+(n.d||1));
+function renderGrid(host,opts){host.innerHTML='';
+  host.style.gridTemplateColumns='var(--lab) repeat('+opts.steps+',1fr)';
+  const tool=()=>opts.tool?opts.tool():'put';
+  opts.rows.forEach(p=>{
+    const lab=div('glab',noteName(p));
+    if(isBlack(p))lab.classList.add('blackrow');
+    if(opts.hl&&opts.hl(p))lab.classList.add('hl');
+    host.appendChild(lab);
+    for(let s=0;s<opts.steps;s++){
+      const c=div('cell');c.dataset.p=p;c.dataset.s=s;
+      if(isBlack(p))c.classList.add('blackrow');
+      if(s%4===0)c.classList.add('beat');
+      if(opts.hl&&opts.hl(p))c.classList.add('scl');
+      const n=noteAt(opts.notes,p,s);
+      if(n){c.classList.add('on');const lv=VLEVELS.findIndex(v=>Math.abs(v-(n.v??.9))<.13);
+        if(lv===1)c.classList.add('v2');if(lv===2)c.classList.add('v3');}
+      else if(noteCovering(opts.notes,p,s))c.classList.add('tail');
+      if(opts.ghost){if(noteAt(opts.ghost,p,s))c.classList.add('gn');
+        else if(noteCovering(opts.ghost,p,s))c.classList.add('gnt');}
+      if(opts.editable)c.addEventListener('pointerdown',e=>{e.preventDefault();
+        const T=tool();
+        const ex=noteAt(opts.notes,p,s);
+        if(T==='len'){
+          const startLeft=[...opts.notes].filter(n2=>n2.p===p&&n2.s<=s).sort((a,b)=>b.s-a.s)[0];
+          if(ex){ex.d=1;}
+          else if(startLeft){startLeft.d=s-startLeft.s+1;}
+          else return;
+        }else if(T==='vel'){
+          if(!ex)return;
+          const cur=VLEVELS.findIndex(v=>Math.abs(v-(ex.v??.9))<.13);
+          ex.v=VLEVELS[(cur+1)%3];
+          playNote(opts.patch||'pluck',p,null,.2,ex.v);
+        }else{
+          if(ex)opts.notes.splice(opts.notes.indexOf(ex),1);
+          else{opts.notes.push({p,s,d:1,v:VLEVELS[0]});playNote(opts.patch||'pluck',p,null,.2,.85);}
+        }
+        renderGrid(host,opts);
+        if(opts.onEdit)opts.onEdit();});
+      host.appendChild(c);
+    }});
+}
+function playhead(host,s){host.querySelectorAll('.cell.ph').forEach(c=>c.classList.remove('ph'));
+  if(s<0)return;host.querySelectorAll('.cell[data-s="'+s+'"]').forEach(c=>c.classList.add('ph'));}
+function mkTools(host,modes,get,set){host.innerHTML='';
+  const defs={put:'POSER',len:'ÉTIRER',vel:'VÉLO'};
+  const help={put:'tap : pose / enlève',len:'tap à droite d\'une note : elle s\'étire',vel:'tap une note : fort → moyen → fantôme'};
+  const hsp=document.createElement('span');hsp.className='thelp';
+  modes.forEach(md=>{const b=btn('tl'+(get()===md?' on':''),defs[md],()=>{set(md);
+    host.querySelectorAll('.tl').forEach(x=>x.classList.remove('on'));b.classList.add('on');hsp.textContent=help[md];});
+    host.appendChild(b);});
+  hsp.textContent=help[get()];host.appendChild(hsp);
+}
+
+/* ---------- brique ---------- */
+function brickCard(m,withDemo){const i=MISSIONS.indexOf(m);
+  const d=div('bdetail');d.style.setProperty('--mh',MODULES[m.mod].hue);
+  d.appendChild(div('bno','BRIQUE Nº'+(i+1)+' — '+MODULES[m.mod].name));
+  d.appendChild(div('bn',m.brick.name));
+  const p1=document.createElement('p');p1.textContent=m.brick.def;d.appendChild(p1);
+  d.appendChild(div('lbl','POURQUOI ÇA SONNE'));
+  const p2=document.createElement('p');p2.textContent=m.brick.why;d.appendChild(p2);
+  d.appendChild(div('lbl','DANS ABLETON'));
+  const p3=document.createElement('p');p3.textContent=m.brick.abl;d.appendChild(p3);
+  if(withDemo){const demo=m.demo||{bpm:m.bpm,steps:m.steps,swing:m.swing||0,tracks:[{patch:m.patch||'keys',notes:m.target}]};
+    if(demo.tracks)d.appendChild(btn('btn','▶ ENTENDRE LA BRIQUE',()=>Player.once(demo)));}
+  return d;
+}
+function reveal(m){$('#veilCard').replaceWith((()=>{const c=brickCard(m,true);c.id='veilCard';c.classList.add('drop');return c;})());
+  $('#veil').classList.add('show');
+  $('#veilGo').onclick=()=>{$('#veil').classList.remove('show');Player.stop();renderPath();show('path');};
+}
+function finish(m){Player.stop();stopDrone();
+  if(!S.done.includes(m.id))S.done.push(m.id);
+  markActivity();save();renderHeader();reveal(m);
+}
+
+/* ---------- mission ---------- */
+let CUR=null;
+function openMission(i){const m=MISSIONS[i];if(!unlocked(i))return;CUR=m;
+  $('#mTitle').textContent=(i+1)+'. '+m.title;
+  const tg=$('#mTag');tg.textContent=m.tag;tg.className='tag t-'+m.tag;
+  $('#mInstr').textContent=m.instr;
+  const tipEl=$('#mTip');tipEl.innerHTML='';
+  if(m.tip){const t=div('tip');const b=document.createElement('b');b.textContent='◆ AU PASSAGE';
+    t.appendChild(b);t.appendChild(document.createTextNode(m.tip));tipEl.appendChild(t);}
+  const ctx=$('#mCtx'),body=$('#mBody'),act=$('#mActions'),feed=$('#mFeed');
+  ctx.innerHTML='';body.innerHTML='';act.innerHTML='';feed.textContent='';feed.className='feed';
+  show('mission');
+
+  if(m.type==='keys'){
+    setKeyboard(m.kb[0],m.kb[1],'select',m.maxSel,()=>renderChips());
+    $('#kbzone').classList.add('show');
+    const chips=div('chips');chips.id='selChips';body.appendChild(chips);
+    const sc=div('selcount');sc.id='selCount';body.appendChild(sc);
+    function renderChips(){const c=$('#selChips');c.innerHTML='';
+      [...KB.sel].sort((a,b)=>a-b).forEach(p=>c.appendChild(div('chip',noteName(p))));
+      $('#selCount').textContent=KB.sel.size+(m.maxSel?(' / '+m.maxSel+' notes'):' notes');}
+    renderChips();
+    if(m.drone){const db=btn('btn','LANCER LE DRONE',()=>{
+      if(drone){stopDrone();db.textContent='LANCER LE DRONE';db.classList.remove('live');}
+      else{startDrone(m.drone);db.textContent='DRONE EN COURS';db.classList.add('live');}});
+      ctx.appendChild(db);}
+    act.appendChild(btn('btn','ÉCOUTER MA SÉLECTION',()=>{
+      const sel=[...KB.sel].sort((a,b)=>a-b);if(!sel.length)return;
+      if(m.listen==='arp')Player.once({bpm:120,steps:sel.length+1,tracks:[{patch:'keys',notes:sel.map((p,j)=>({p,s:j,d:1.4}))}]});
+      else Player.once({bpm:80,steps:4,tracks:[{patch:'keys',notes:sel.map(p=>({p,s:0,d:3}))}]});}));
+    act.appendChild(btn('btn prime','VALIDER',()=>{
+      const sel=[...KB.sel];
+      if(m.v(sel)){feed.textContent='Juste.';feed.className='feed good';setTimeout(()=>finish(m),500);}
+      else{feed.textContent=m.hint;feed.className='feed warn';}}));
+  }
+
+  if(m.type==='decode'||m.type==='grid'){
+    const user=[];
+    let toolMode='put';
+    const toolsHost=div('tools');body.appendChild(toolsHost);
+    const modes=['put','len'];if(m.id==='n04'||m.type==='grid')modes.push('vel');
+    if(m.id==='n03'||m.id==='n04'||m.type==='grid'||m.type==='decode')
+      mkTools(toolsHost,modes,()=>toolMode,v=>toolMode=v);
+    const wrap=div('gridwrap');const grid=div('pgrid');wrap.appendChild(grid);body.appendChild(wrap);
+    const gopts={rows:m.rows,steps:m.steps,notes:user,editable:true,patch:m.patch,
+      tool:()=>toolMode,hl:m.scaleAm?inAm:null};
+    renderGrid(grid,gopts);
+    if(m.marks)body.appendChild(div('glegend','Colonnes à liseré clair = temps forts (1, 2, 3, 4).'));
+    const ph=s=>playhead(grid,s);
+    if(m.ctxTracks){const cb=btn('btn','LANCER LE FOND',()=>{
+      if(Player.playing){Player.stop();cb.textContent='LANCER LE FOND';cb.classList.remove('live');}
+      else{Player.loopStart({bpm:m.bpm,steps:m.steps,swing:m.swing||0,loop:true,onStep:ph,
+        tracks:[...m.ctxTracks,{patch:m.patch,notes:user}]});
+        cb.textContent='FOND EN COURS';cb.classList.add('live');}});
+      ctx.appendChild(cb);}
+    if(m.type==='decode'){
+      act.appendChild(btn('btn prime','▶ LE MODÈLE',()=>Player.once({bpm:m.bpm,steps:m.steps,swing:m.swing||0,onStep:ph,
+        tracks:[{patch:m.patch,notes:m.target}]})));
+      act.appendChild(btn('btn','▶ MA VERSION',()=>Player.once({bpm:m.bpm,steps:m.steps,swing:m.swing||0,onStep:ph,
+        tracks:[{patch:m.patch,notes:user}]})));
+      act.appendChild(btn('btn','VÉRIFIER',()=>{
+        const tset=new Set(m.target.map(n=>n.p+':'+n.s));let good=0;
+        grid.querySelectorAll('.cell.on').forEach(c=>{
+          const k=c.dataset.p+':'+c.dataset.s;
+          if(tset.has(k)){c.classList.add('ok');good++;}else c.classList.add('bad');});
+        if(good===m.target.length&&user.length===m.target.length){
+          feed.textContent='Reconstruit.';feed.className='feed good';setTimeout(()=>finish(m),600);}
+        else{feed.textContent=good+'/'+m.target.length+' justes — réécoute le modèle.';feed.className='feed warn';}}));
+    }else{
+      const playUser=loop=>{const cfg={bpm:m.bpm,steps:m.steps,swing:m.swing||0,onStep:ph,
+        tracks:[...(m.ctxTracks||[]),{patch:m.patch,notes:user}]};
+        loop?Player.loopStart(cfg):Player.once(cfg);};
+      act.appendChild(btn('btn','▶ ÉCOUTER',()=>playUser(false)));
+      act.appendChild(btn('btn','∞ BOUCLE',()=>{Player.playing?Player.stop():playUser(true);}));
+      act.appendChild(btn('btn prime','VALIDER',()=>{
+        if(m.v(user)){feed.textContent='Juste.';feed.className='feed good';setTimeout(()=>finish(m),500);}
+        else{feed.textContent=m.hint;feed.className='feed warn';}}));
+    }
+  }
+
+  if(m.type==='ear'){
+    let round=0,score=[],quality=null,root=null;
+    const box=div('earbox');
+    const rnd=div('rnd');box.appendChild(rnd);
+    const play=btn('btn prime','▶ ÉCOUTER L\'ACCORD',()=>playChord());box.appendChild(play);
+    const answers=div('earbtns');
+    answers.appendChild(btn('btn','SOMBRE (mineur)',()=>answer('min')));
+    answers.appendChild(btn('btn','LUMINEUX (majeur)',()=>answer('maj')));
+    box.appendChild(answers);
+    const dots=div('scoredots');box.appendChild(dots);
+    body.appendChild(box);
+    function newRound(){root=50+Math.floor(Math.random()*17);quality=Math.random()<.5?'min':'maj';
+      rnd.textContent='ACCORD '+(round+1)+' / 5';renderDots();}
+    function playChord(){const third=root+(quality==='min'?3:4);
+      Player.once({bpm:80,steps:4,tracks:[{patch:'keys',notes:[{p:root,s:0,d:3},{p:third,s:0,d:3},{p:root+7,s:0,d:3}]}]});}
+    function renderDots(){dots.innerHTML='';for(let k=0;k<5;k++){const d=div('sd');
+      if(score[k]===true)d.classList.add('ok');if(score[k]===false)d.classList.add('bad');dots.appendChild(d);}}
+    function answer(q){const ok=(q===quality);score.push(ok);renderDots();
+      feed.textContent=ok?'Oui — '+(quality==='min'?'mineur.':'majeur.')
+        :'Non — c\'était '+(quality==='min'?'mineur.':'majeur.');
+      feed.className=ok?'feed good':'feed warn';
+      round++;
+      if(round<5){setTimeout(()=>{feed.textContent='';newRound();playChord();},1100);}
+      else{const total=score.filter(Boolean).length;
+        if(total>=4){feed.textContent=total+'/5 — l\'oreille tranche.';feed.className='feed good';setTimeout(()=>finish(m),700);}
+        else{feed.textContent=total+'/5 — encore une série.';feed.className='feed warn';
+          setTimeout(()=>{round=0;score=[];newRound();},1300);}}}
+    newRound();
+  }
+}
+$('#mBack').onclick=()=>{renderPath();show('path');};
+
+/* ---------- briques ---------- */
+function renderBricks(){const host=$('#brickGrid');host.innerHTML='';$('#brickDetail').innerHTML='';
+  MISSIONS.forEach((m,i)=>{
+    const got=S.done.includes(m.id);
+    const b=document.createElement('button');b.className='brick'+(got?'':' locked');
+    b.style.setProperty('--mh',MODULES[m.mod].hue);
+    b.appendChild(div('bno','Nº'+(i+1)));
+    b.appendChild(div('bn',got?m.brick.name:'· · ·'));
+    if(got)b.onclick=()=>{const d=$('#brickDetail');d.innerHTML='';d.appendChild(brickCard(m,true));
+      d.scrollIntoView({behavior:'smooth',block:'nearest'});};
+    else b.disabled=true;
+    host.appendChild(b);});
+}
+
+/* ---------- studio : 2 pistes ---------- */
+const STU={bpm:132,steps:16,active:0,rowLow:40,tool:'put',
+  tracks:[{name:'A',patch:'sub',notes:[]},{name:'B',patch:'keys',notes:[]}]};
+function stuRows(){const r=[];for(let p=STU.rowLow+11;p>=STU.rowLow;p--)r.push(p);return r;}
+function inScale(p){const mode=$('#stMode').value;if(!mode)return false;
+  const root=+$('#stRoot').value;
+  const pat=mode==='min'?[0,2,3,5,7,8,10]:[0,2,4,5,7,9,11];
+  return pat.includes(((p-root)%12+12)%12);}
+function renderStudio(){
+  const rootSel=$('#stRoot');
+  if(!rootSel.options.length){NFR.forEach((n,i)=>{const o=document.createElement('option');
+    o.value=i;o.textContent=NFR[i];if(i===9)o.selected=true;rootSel.appendChild(o);});}
+  [...rootSel.options].forEach((o,i)=>o.textContent=(S.names==='fr'?NFR:NEN)[i]);
+  const pSel=$('#stPatch');
+  if(!pSel.options.length){Object.keys(PATCHES).forEach(k=>{const o=document.createElement('option');
+    o.value=k;o.textContent=PATCHES[k];pSel.appendChild(o);});}
+  pSel.value=STU.tracks[STU.active].patch;
+  $('#trkA').classList.toggle('on',STU.active===0);
+  $('#trkB').classList.toggle('on',STU.active===1);
+  mkTools($('#stTools'),['put','len','vel'],()=>STU.tool,v=>STU.tool=v);
+  renderStuGrid();renderSketches();
+  $('#stLegend').textContent='Piste active en ambre. L\'autre piste apparaît en contour turquoise — change de piste pour l\'éditer. Lignes éclaircies = notes de la gamme.';
+}
+function renderStuGrid(){const a=STU.tracks[STU.active],b=STU.tracks[1-STU.active];
+  renderGrid($('#stGrid'),{rows:stuRows(),steps:STU.steps,notes:a.notes,ghost:b.notes,
+    editable:true,patch:a.patch,tool:()=>STU.tool,hl:inScale});}
+function stuCfg(){STU.bpm=Math.min(200,Math.max(60,+$('#stBpm').value||132));
+  return {bpm:STU.bpm,steps:STU.steps,swing:(+$('#stSwing').value||0)/100,loop:true,
+    onStep:s=>playhead($('#stGrid'),s),
+    tracks:STU.tracks.map(t=>({patch:t.patch,notes:t.notes}))};}
+$('#trkA').onclick=()=>{STU.active=0;renderStudio();};
+$('#trkB').onclick=()=>{STU.active=1;renderStudio();};
+$('#stPatch').onchange=()=>{STU.tracks[STU.active].patch=$('#stPatch').value;renderStuGrid();};
+$('#stWhat').onclick=()=>$('#scaleInfo').classList.toggle('show');
+$('#stPlay').onclick=()=>{
+  if(Player.playing){Player.stop();$('#stPlay').textContent='▶ LIRE';$('#stPlay').classList.remove('live');}
+  else{Player.loopStart(stuCfg());
+    $('#stPlay').textContent='■ STOP';$('#stPlay').classList.add('live');}};
+$('#stClear').onclick=()=>{STU.tracks[STU.active].notes.length=0;renderStuGrid();};
+$('#stUp').onclick=()=>{STU.rowLow=Math.min(84,STU.rowLow+12);renderStuGrid();};
+$('#stDn').onclick=()=>{STU.rowLow=Math.max(21,STU.rowLow-12);renderStuGrid();};
+$('#stRoot').onchange=renderStuGrid;$('#stMode').onchange=renderStuGrid;
+$('#stSwing').oninput=()=>{if(Player.playing)Player.loopStart(stuCfg());};
+$('#stSave').onclick=()=>{
+  if(!STU.tracks.some(t=>t.notes.length)){$('#midiStat').textContent='Rien à sauver — pose des notes.';return;}
+  const name=prompt('Nom du sketch :','Sketch '+(S.sketches.length+1));
+  if(name==null)return;
+  S.sketches.push({name:name||('Sketch '+(S.sketches.length+1)),ts:Date.now(),
+    seq:{bpm:Math.min(200,Math.max(60,+$('#stBpm').value||132)),steps:STU.steps,swing:(+$('#stSwing').value||0)/100,
+      tracks:JSON.parse(JSON.stringify(STU.tracks))}});
+  markActivity();save();renderSketches();};
+function loadSketch(sk){Player.stop();
+  /* compatibilité v1 : {seq:{notes}, patch} -> piste A */
+  if(sk.seq&&sk.seq.notes){STU.tracks[0]={name:'A',patch:sk.patch||'bass',notes:sk.seq.notes.map(n=>({...n}))};
+    STU.tracks[1].notes.length=0;}
+  else if(sk.seq&&sk.seq.tracks){STU.tracks=sk.seq.tracks.map(t=>({name:t.name||'A',patch:t.patch,notes:t.notes.map(n=>({...n}))}));
+    while(STU.tracks.length<2)STU.tracks.push({name:'B',patch:'keys',notes:[]});
+    $('#stSwing').value=Math.round((sk.seq.swing||0)*100);}
+  $('#stBpm').value=sk.seq.bpm||132;
+  const ps=STU.tracks.flatMap(t=>t.notes.map(n=>n.p));
+  if(ps.length)STU.rowLow=Math.max(21,Math.min(...ps));
+  STU.active=0;renderStudio();}
+function renderSketches(){const host=$('#stSketches');host.innerHTML='';
+  if(!S.sketches.length)return;
+  host.appendChild(div('eyebrow','Sketches'));
+  S.sketches.forEach((sk,i)=>{const r=div('skrow');
+    r.appendChild(div('nm',sk.name));
+    r.appendChild(div('ts',new Date(sk.ts).toLocaleDateString('fr-FR')));
+    r.appendChild(btn('btn','CHARGER',()=>loadSketch(sk)));
+    r.appendChild(btn('btn','✕',()=>{if(confirm('Supprimer "'+sk.name+'" ?')){S.sketches.splice(i,1);save();renderSketches();}}));
+    host.appendChild(r);});
+}
+$('#midiBtn').onclick=connectMidi;
+
+/* ---------- init ---------- */
+document.addEventListener('pointerdown',()=>{if(ctx&&ctx.state==='suspended')ctx.resume();},{passive:true});
+renderHeader();renderPath();
+</script>
+</body>
+</html>

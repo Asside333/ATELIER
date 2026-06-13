@@ -1,0 +1,289 @@
+{
+  "schema": "mission/v1",
+  "_note": "19 missions complètes, prêtes à implémenter (modules X, XI, XII, T). Copie validée, convention d'octaves Ableton (Do3=60) vérifiée. Les kinds de validation non encore codés sont listés dans _predicates_a_implementer.",
+  "_predicates_a_implementer": ["dorian-bassline-free", "hat-flow", "ghost-snare", "knob-swept", "layered-octave", "ear-modes-3", "match-adsr", "compare-ab"],
+  "modules": [
+    {"id": 9,  "key": "X",  "name": "X — LES MODES", "hue": "#9b8cf2", "intro": "Une note qui change, et toute la couleur bascule. Les modes : le mineur décliné."},
+    {"id": 10, "key": "XI", "name": "XI — LE RYTHME AVANCÉ", "hue": "#e0704a", "intro": "Kick, snare, hats : la batterie qui parle. Le squelette de tes genres."},
+    {"id": 11, "key": "XII", "name": "XII — SOUND DESIGN MINIMAL", "hue": "#58c4d4", "intro": "Quatre paramètres qui changent tout : enveloppe, filtre, modulation, étages."},
+    {"id": 12, "key": "T",  "name": "T — ABLETON CRAFT", "hue": "#f2a33c", "intro": "Le Dojo : les gestes se font dans Live, et ATELIER vérifie. Entrelacé dans le chemin."}
+  ],
+  "missions": [
+    {
+      "id": "x01", "mod": 9, "type": "keys", "title": "LE MINEUR QUI SOURIT", "tag": "CONSTRUIRE",
+      "instr": "Reconstruis l'échelle sombre depuis La2 (les blanches de La2 à La3), mais remplace la 6e marche par la touche juste au-dessus : le Fa devient la noire qui le suit. Écoute la montée. C'est sombre, mais quelque chose s'est ouvert.",
+      "tip": "Cette couleur, tu l'as dans l'oreille : c'est celle d'une énorme part de la jungle et du garage.",
+      "kb": [55, 72], "maxSel": 8, "listen": "arp",
+      "validate": {"kind": "set-exact", "pitches": [57, 59, 60, 62, 64, 66, 67, 69]},
+      "hints": ["Tout pareil que La mineur, sauf UNE note : la sixième en partant du bas.", "Garde La2 Si2 Do3 Ré3 Mi3, puis Fa#3 (la noire), puis Sol3 La3.", "Les huit : 57, 59, 60, 62, 64, 66, 67, 69 — le 66 est la noire entre Fa3 et Sol3."],
+      "brick": {
+        "name": "LE DORIEN",
+        "def": "Le mineur avec une 6e relevée d'un demi-ton. Sombre dessous, lumière au milieu.",
+        "why": "Une seule note séparée du mineur naturel — et le caractère change : moins plaintif, plus groovy. C'est LA couleur de la jungle, du garage, du breakbeat UK.",
+        "abl": "Scale sur ton clip : choisis Dorian au lieu de Minor. Compare une même bassline dans les deux : le Fa# fait sourire le sombre.",
+        "plus": "Le mot vient des Grecs anciens, mais la couleur vient des clubs : So Solid Crew, LTJ Bukem, la moitié du catalogue Metalheadz vivent en dorien. Quand un morceau sombre te donne envie de bouger plutôt que de pleurer, cherche la 6e."
+      },
+      "demo": {"bpm": 112, "steps": 8, "tracks": [{"patch": "keys", "notes": [{"p":57,"s":0},{"p":59,"s":1},{"p":60,"s":2},{"p":62,"s":3},{"p":64,"s":4},{"p":66,"s":5},{"p":67,"s":6},{"p":69,"s":7}]}]},
+      "unlocks": {"seed": "Une bassline de 4 notes en La dorien — le Fa# obligatoire."}
+    },
+    {
+      "id": "x02", "mod": 9, "type": "keys", "title": "LA MENACE", "tag": "CONSTRUIRE",
+      "instr": "Toutes les touches blanches de Mi3 à Mi4, les huit. Écoute la montée, surtout les deux premières notes : l'échelle commence par le plus petit pas qui existe. Ça n'avance pas, ça rampe.",
+      "kb": [62, 79], "maxSel": 8, "listen": "arp",
+      "validate": {"kind": "set-exact", "pitches": [64, 65, 67, 69, 71, 72, 74, 76]},
+      "hints": ["Uniquement des blanches, de Mi3 jusqu'au Mi au-dessus.", "Mi3, Fa3, Sol3, La3, Si3, Do4, Ré4, Mi4 — aucune noire.", "64, 65, 67, 69, 71, 72, 74, 76."],
+      "brick": {
+        "name": "LE PHRYGIEN",
+        "def": "Le mode qui commence par un demi-ton. La 2nde mineure colle à la racine.",
+        "why": "Ce premier pas minuscule crée une menace immédiate : la note voisine pèse sur la maison. C'est l'ombre du flamenco, de la dark techno, du dubstep le plus noir.",
+        "abl": "Une bassline qui alterne la racine et la note juste au-dessus (+1 demi-ton) : menace instantanée. Scale : Phrygian.",
+        "plus": "Le riff métal le plus célèbre du monde et la moitié des drops de Vader sont phrygiens. Quand tu veux que ça inquiète sans accélérer : le demi-ton d'entrée suffit."
+      },
+      "demo": {"bpm": 112, "steps": 8, "tracks": [{"patch": "keys", "notes": [{"p":64,"s":0},{"p":65,"s":1},{"p":67,"s":2},{"p":69,"s":3},{"p":71,"s":4},{"p":72,"s":5},{"p":74,"s":6},{"p":76,"s":7}]}]},
+      "unlocks": {"seed": "Deux notes seulement : la racine et sa voisine du dessus. Fais peur."}
+    },
+    {
+      "id": "x03", "mod": 9, "type": "decode", "title": "LA BASSLINE DORIENNE", "tag": "DECODER",
+      "instr": "Une basse de jungle en La dorien. Six notes. L'une d'elles est une touche noire — c'est elle qui signe la couleur. Trouve-la d'abord à l'oreille, le reste suivra.",
+      "bpm": 150, "steps": 16, "rows": [50, 48, 47, 45, 43, 42, 41, 40], "patch": "bass",
+      "target": [{"p":45,"s":0,"d":2},{"p":48,"s":4},{"p":42,"s":6},{"p":45,"s":8,"d":2},{"p":43,"s":12},{"p":42,"s":14}],
+      "validate": {"kind": "cells-exact"},
+      "hints": ["La note qui revient en début de moitié, c'est la maison : La1.", "La noire est Fa#1 (42), elle apparaît deux fois, sur des contretemps.", "45 sur 1 et 9 (tenues), 48 sur 5, 42 sur 7 et 15, 43 sur 13."],
+      "brick": {
+        "name": "LA NOTE CARACTÉRISTIQUE",
+        "def": "Chaque mode a UNE note qui le signe. En dorien : la 6e relevée.",
+        "why": "Le reste de l'échelle est commun au mineur — c'est cette note-là que l'oreille attend pour reconnaître la couleur. La jouer souvent affirme le mode ; l'éviter le rend ambigu.",
+        "abl": "Quand tu composes dans un mode : place sa note caractéristique aux endroits visibles (fins de phrase, contretemps accentués). C'est elle qui raconte."
+      },
+      "unlocks": {"studio": "Preset gamme 'La dorien' dans le studio."}
+    },
+    {
+      "id": "x04", "mod": 9, "type": "keys", "title": "L'AIMANT", "tag": "CONSTRUIRE",
+      "instr": "Reconstruis l'échelle sombre depuis La2, mais cette fois remplace la 7e marche par la touche au-dessus : le Sol devient la noire qui le suit. Écoute la fin de la montée : la dernière marche tire vers la maison comme un aimant.",
+      "tip": "Tu as déjà rencontré ce Sol# : c'était la note empruntée de LA PORTE (la cadence). Voici d'où elle vient.",
+      "kb": [55, 72], "maxSel": 8, "listen": "arp",
+      "validate": {"kind": "set-exact", "pitches": [57, 59, 60, 62, 64, 65, 68, 69]},
+      "hints": ["Tout La mineur, sauf la septième marche : Sol3 monte d'un demi-ton.", "La2 Si2 Do3 Ré3 Mi3 Fa3, puis Sol#3 (la noire), puis La3.", "57, 59, 60, 62, 64, 65, 68, 69."],
+      "brick": {
+        "name": "LE MINEUR HARMONIQUE",
+        "def": "Le mineur naturel avec une 7e relevée : la sensible, qui tire vers la racine.",
+        "why": "Ce demi-ton final transforme la dernière marche en aimant — c'est lui qui rend la cadence V→i irrésistible. Le mineur naturel raconte ; l'harmonique conclut.",
+        "abl": "Quand ton accord de tension (le V) sonne mou : relève sa tierce d'un demi-ton (le Sol devient Sol# dans La mineur). Le retour à la maison devient inévitable.",
+        "plus": "L'écart inhabituel entre la 6e et la 7e (un ton et demi) donne aussi sa couleur orientale au mode : psytrance, musiques tziganes et metal néoclassique puisent au même endroit."
+      },
+      "demo": {"bpm": 108, "steps": 8, "tracks": [{"patch": "keys", "notes": [{"p":57,"s":0},{"p":59,"s":1},{"p":60,"s":2},{"p":62,"s":3},{"p":64,"s":4},{"p":65,"s":5},{"p":68,"s":6},{"p":69,"s":7}]}]}
+    },
+    {
+      "id": "x05", "mod": 9, "type": "ear", "title": "L'OREILLE MODALE", "tag": "OREILLE",
+      "instr": "Six montées d'échelle, même racine à chaque fois. Pour chacune : naturel (le sombre que tu connais), dorien (le sombre qui sourit), ou phrygien (la menace) ? Il en faut 5 sur 6. Concentre-toi sur UNE note à chaque écoute : la 2e marche d'abord, puis la 6e.",
+      "validate": {"kind": "ear-modes-3", "choices": ["NATUREL", "DORIEN", "PHRYGIEN"], "rounds": 6, "pass": 5,
+        "scales": {"NATUREL": [0,2,3,5,7,8,10], "DORIEN": [0,2,3,5,7,9,10], "PHRYGIEN": [0,1,3,5,7,8,10]}},
+      "hints": ["Phrygien se reconnaît dès la 2e note : elle colle à la première.", "Si la 2e note est normale, écoute la 6e : haute = dorien, basse = naturel."],
+      "brick": {
+        "name": "L'OREILLE MODALE",
+        "def": "Reconnaître un mode à sa note caractéristique, sans réfléchir.",
+        "why": "Tu n'écoutes plus une échelle entière : tu guettes une note. C'est exactement comme ça que les producteurs identifient une couleur en deux secondes de morceau.",
+        "abl": "Exercice studio : même bassline, Scale sur Minor puis Dorian puis Phrygian. Trois exports, trois ambiances, zéro note déplacée à la main."
+      }
+    },
+
+    {
+      "id": "r01", "mod": 10, "type": "lanes", "title": "LE SQUELETTE", "tag": "CONSTRUIRE",
+      "instr": "Trois lignes : KICK, SNARE, HAT. Pose le kick sur les quatre temps forts, et le snare sur le 2e et le 4e seulement. Lance la boucle. Ce battement, c'est le squelette de presque toute la musique que tu aimes.",
+      "tip": "Dans Live : une piste Drum Rack, le kick sur les temps, le snare sur 2 et 4. Tout part de là, tout s'en écarte ensuite.",
+      "bpm": 126, "steps": 16, "lanes": ["kick", "snare", "hat"],
+      "validate": {"kind": "lanes-exact", "lanes": {"kick": [0, 4, 8, 12], "snare": [4, 12]}, "free": ["hat"]},
+      "hints": ["Kick : colonnes 1, 5, 9, 13. Snare : colonnes 5 et 13 uniquement.", "Le snare tombe AVEC le kick sur les temps 2 et 4 — c'est normal, ils cohabitent.", "kick = steps 0,4,8,12 · snare = steps 4,12. Les hats sont libres."],
+      "brick": {
+        "name": "LE BACKBEAT",
+        "def": "Kick sur les temps, snare sur le 2 et le 4. Le contrat de base du rythme.",
+        "why": "Le corps compte les temps grâce au kick ; le snare répond une fois sur deux. Cette alternance question-réponse est si universelle que tout le groove moderne se définit par rapport à elle — en la respectant ou en la trahissant.",
+        "abl": "Drum Rack : pose ce squelette en premier, TOUJOURS. C'est ta référence ; le caractère viendra de ce que tu déplaces ensuite."
+      },
+      "unlocks": {"studio": "La piste DRUMS du Morceau du Mois s'ouvre avec ce squelette."}
+    },
+    {
+      "id": "r02", "mod": 10, "type": "lanes", "title": "LE 2-STEP", "tag": "CONSTRUIRE",
+      "instr": "Garde le snare sur 2 et 4. Mais le kick : seulement sur le temps 1 et sur le 'et' juste avant le temps 2 — colonnes 1 et 7. Le trou sur le temps 3 est volontaire : ne le bouche pas. Lance la boucle et sens ce qui boite parfaitement.",
+      "tip": "Tu viens de poser la signature rythmique du UK garage. Le nom du genre entier vient de ce kick à deux pas.",
+      "bpm": 132, "steps": 16, "lanes": ["kick", "snare", "hat"],
+      "validate": {"kind": "lanes-exact", "lanes": {"kick": [0, 6], "snare": [4, 12]}, "free": ["hat"]},
+      "hints": ["Kick : colonne 1 et colonne 7. Rien d'autre. Surtout pas la colonne 9.", "Le deuxième kick tombe juste avant le snare du temps 2 ? Non — juste après : step 6, entre les temps 2 et 3.", "kick = steps 0 et 6 · snare = steps 4 et 12."],
+      "brick": {
+        "name": "LE 2-STEP",
+        "def": "Le kick quitte la grille des temps : un sur le 1, un syncopé, et du vide sur le 3.",
+        "why": "Le corps attend le kick du temps 3 — il ne vient jamais. Ce manque permanent, relancé à chaque mesure, c'est le moteur du garage : on danse pour combler le trou.",
+        "abl": "Prends n'importe quel beat 4/4 : efface le kick des temps 2 et 3, ajoute-en un syncopé entre les deux. Ton beat house vient de devenir UKG."
+      },
+      "unlocks": {"seed": "Une bassline sous TON 2-step : elle n'a le droit de toucher ni le step 0 ni le step 6."}
+    },
+    {
+      "id": "r03", "mod": 10, "type": "lanes", "title": "LE FLOW DES HATS", "tag": "CONSTRUIRE",
+      "instr": "Sur le squelette (kick 4, snare 2-4 déjà posés en fond), remplis la ligne HAT : une croche sur deux colonnes, les huit. Puis passe en VÉLO et affaiblis un hat sur deux. Termine par un OPEN sur la toute dernière colonne. Lance : les hats respirent au lieu de marteler.",
+      "bpm": 128, "steps": 16, "lanes": ["hat", "open"],
+      "ctx": [{"lane": "kick", "notes": [{"s":0},{"s":4},{"s":8},{"s":12}]}, {"lane": "snare", "notes": [{"s":4},{"s":12}]}],
+      "validate": {"kind": "predicate", "name": "hat-flow", "params": {"minHats": 8, "minGhosts": 3, "openAt": 14}},
+      "hints": ["Hats sur les colonnes impaires : 1, 3, 5, 7, 9, 11, 13 — et l'open en 15.", "Mode VÉLO : un tap sur un hat le rend fantôme. Alterne fort-faible.", "Huit hats minimum, au moins trois affaiblis, l'open sur le step 14 (15e colonne)."],
+      "brick": {
+        "name": "LE FLOW DES HATS",
+        "def": "Des charleys en croches, vélocités alternées, un open qui aère la fin de mesure.",
+        "why": "Les hats portent le tempo perçu : identiques, ils fatiguent ; alternés fort-faible, ils ondulent. L'open en fin de mesure relâche la pression juste avant de reboucler.",
+        "abl": "Sélectionne un hat sur deux (clic + Shift), baisse leur vélocité de 30. Remplace le dernier closed par un open. Deux minutes, un groove."
+      }
+    },
+    {
+      "id": "r04", "mod": 10, "type": "lanes-decode", "title": "LE BREAK", "tag": "DECODER",
+      "instr": "Un pattern de batterie cassé, une mesure, cinq frappes entre kick et snare. C'est l'ADN simplifié des breaks que la jungle découpe depuis trente ans. Écoute en boucle, reconstruis.",
+      "bpm": 160, "steps": 16, "lanes": ["kick", "snare"],
+      "target": [{"lane":"kick","s":0},{"lane":"snare","s":4},{"lane":"kick","s":7},{"lane":"kick","s":10},{"lane":"snare","s":12}],
+      "validate": {"kind": "cells-exact"},
+      "hints": ["Le snare reste fidèle au backbeat : 2 et 4.", "Les kicks : le 1, puis deux syncopés dans la deuxième moitié de la mesure... non — un avant le temps 3, un après.", "kick = 0, 7, 10 · snare = 4, 12."],
+      "brick": {
+        "name": "LE BREAKBEAT",
+        "def": "Un backbeat dont les kicks ont quitté la grille : le snare tient, le kick danse.",
+        "why": "La stabilité du snare donne la permission ; la liberté du kick donne la vie. Tous les breaks samplés de la jungle sont des variations de ce contrat.",
+        "abl": "Garde tes snares sur 2-4, puis déplace chaque kick (sauf le premier) d'une double-croche, écoute, recommence. Le break se trouve à l'oreille, pas au calcul.",
+        "plus": "Six secondes de batterie enregistrées en 1969 — le break 'Amen' — sont devenues le squelette de genres entiers. Ce que tu viens de poser en est l'épure."
+      }
+    },
+    {
+      "id": "r05", "mod": 10, "type": "lanes", "title": "LES GHOSTS DE CAISSE", "tag": "CONSTRUIRE",
+      "instr": "Snare sur 2 et 4, fort — c'est posé. Maintenant ajoute au moins deux snares FANTÔMES (mode VÉLO, niveau le plus faible) ailleurs dans la mesure, jamais sur les temps. Lance : la batterie s'est mise à parler entre les phrases.",
+      "bpm": 134, "steps": 16, "lanes": ["snare"],
+      "ctx": [{"lane": "kick", "notes": [{"s":0},{"s":6}]}],
+      "validate": {"kind": "predicate", "name": "ghost-snare", "params": {"strongAt": [4, 12], "minGhosts": 2, "ghostMaxV": 0.5}},
+      "hints": ["D'abord les deux forts : colonnes 5 et 13. Ensuite les fantômes, ailleurs.", "Un fantôme = mode VÉLO, deux taps sur la note (le niveau le plus pâle).", "Forts en 4 et 12 ; au moins deux snares à vélocité faible sur d'autres steps que 0, 4, 8, 12."],
+      "brick": {
+        "name": "LES GHOSTS DE CAISSE",
+        "def": "Des snares presque inaudibles entre les coups principaux : le murmure du batteur.",
+        "why": "On ne les entend pas consciemment, on les SENT : ils remplissent l'espace entre les temps et rendent la machine humaine. Retire-les : tout devient raide. C'est le secret le mieux gardé des beats qui groovent.",
+        "abl": "Duplique ton snare sur une note faible (vélocité 25-35) entre les coups, légèrement décalée de la grille. Dans un Drum Rack : même pad, autre vélocité."
+      }
+    },
+
+    {
+      "id": "sd01", "mod": 11, "type": "match", "title": "LES QUATRE VIES D'UNE NOTE", "tag": "OREILLE",
+      "instr": "Quatre fois la même note, la même hauteur, le même volume. Seule change la façon dont le son naît, vit et meurt. Écoute chacune et associe-la à son caractère : LA FRAPPE, LA NAPPE, LE CLAQUEMENT, LE POIDS.",
+      "validate": {"kind": "match-adsr", "pairs": [
+        {"sound": "pluck", "label": "LA FRAPPE"},
+        {"sound": "pad", "label": "LA NAPPE"},
+        {"sound": "stab", "label": "LE CLAQUEMENT"},
+        {"sound": "sub", "label": "LE POIDS"}
+      ], "pass": 4},
+      "hints": ["LA NAPPE est la seule qui met du temps à arriver.", "LE POIDS s'entend moins qu'il ne se sent — le plus grave, le plus rond."],
+      "brick": {
+        "name": "L'ADSR",
+        "def": "Attack, Decay, Sustain, Release : la forme de vie d'un son. Naissance, retombée, tenue, mort.",
+        "why": "Tu viens de prouver que l'enveloppe pèse plus que la note : même hauteur, quatre instruments. Avant de chercher 'un meilleur son', sculpte la vie de celui que tu as.",
+        "abl": "Sur n'importe quel instrument : Attack longue = nappe, courte = frappe ; Release courte = sec, longue = traîne. Quatre potards, tout le caractère."
+      },
+      "unlocks": {"studio": "Les enveloppes des sons du studio deviennent réglables (4 presets ADSR par son)."}
+    },
+    {
+      "id": "sd02", "mod": 11, "type": "knob", "title": "LE FILTRE INSTRUMENT", "tag": "GESTE",
+      "instr": "Une boucle de basse tourne. Devant toi, un seul bouton : le filtre. Pendant que ça joue, ferme-le à fond (le son s'éteint presque), puis rouvre-le lentement. Fais-le respirer au tempo. La mission est validée quand tu as balayé toute sa course en jouant.",
+      "tip": "Ce geste — ouvrir un filtre sur 8 mesures — est probablement le geste le plus utilisé de toute la musique électronique.",
+      "bpm": 132,
+      "validate": {"kind": "predicate", "name": "knob-swept", "params": {"param": "cutoff", "minRange": 0.7, "whilePlaying": true}},
+      "hints": ["Lance la boucle d'abord, puis touche le bouton.", "Va vraiment aux deux extrêmes : presque fermé, grand ouvert."],
+      "brick": {
+        "name": "LE CUTOFF",
+        "def": "La fréquence de coupure d'un filtre passe-bas : au-dessus, le son est rasé.",
+        "why": "Fermer un filtre, c'est éloigner le son ; l'ouvrir, c'est le faire entrer dans la pièce. C'est de la tension pure, sans toucher à une seule note — la dramaturgie au bout d'un doigt.",
+        "abl": "Auto Filter sur n'importe quoi. Automatise Frequency sur 8 mesures avant un drop : montée garantie. Map-le sur un potard de ton clavier MIDI : joue-le comme un instrument."
+      }
+    },
+    {
+      "id": "sd03", "mod": 11, "type": "compare", "title": "QU'EST-CE QUI BOUGE ?", "tag": "OREILLE",
+      "instr": "Deux versions de la même note tenue. Dans les deux, quelque chose ondule au tempo. Mais pas la même chose : dans l'une c'est le VOLUME qui bat, dans l'autre c'est la MATIÈRE du son qui s'ouvre et se ferme. Écoute A, écoute B, et dis laquelle est le wobble.",
+      "validate": {"kind": "compare-ab", "a": {"render": "tremolo"}, "b": {"render": "wobble"}, "answer": "B", "question": "Laquelle est le wobble (la matière qui bouge) ?"},
+      "hints": ["Le volume qui bat : le son disparaît et revient, identique.", "La matière qui bouge : le son reste là mais devient sombre puis brillant, sombre puis brillant."],
+      "brick": {
+        "name": "LA MODULATION",
+        "def": "Un LFO peut piloter n'importe quoi : volume (tremolo), filtre (wobble), hauteur (vibrato).",
+        "why": "Le robot qui tourne le bouton ne sait pas quel bouton il tourne — c'est TOI qui choisis la cible, et la cible fait tout le caractère. Même outil, mille effets.",
+        "abl": "Dans Drift ou Operator : section LFO, menu Destination. Essaie volume, filtre, pitch sur le même son tenu. Trois mondes."
+      }
+    },
+    {
+      "id": "sd04", "mod": 11, "type": "grid", "title": "LE LAYERING", "tag": "CONSTRUIRE",
+      "instr": "Studio guidé, deux pistes. Piste A (SUB) : pose une ligne simple de La graves, 4 notes max. Piste B (WOBBLE) : la MÊME ligne, exactement, une octave au-dessus. Lance les deux ensemble : un seul instrument, deux étages — le poids en bas, le caractère en haut.",
+      "bpm": 140, "steps": 16, "twoTracks": true,
+      "validate": {"kind": "predicate", "name": "layered-octave", "params": {"rootPc": 9, "maxNotes": 4, "trackBPlus": 12}},
+      "hints": ["Pose d'abord la piste A, simple. Puis bascule sur B et recopie en montant tout de 12.", "Mêmes steps, mêmes durées : seule l'octave change entre A et B."],
+      "brick": {
+        "name": "LE LAYERING SUB/MID",
+        "def": "Deux couches pour une seule basse : un sub pur qui porte, un médium texturé qui parle.",
+        "why": "Le sub passe dans les caissons mais disparaît sur un téléphone ; le médium fait l'inverse. Ensemble, ta basse existe partout. C'est l'architecture standard de toute basse moderne.",
+        "abl": "Deux pistes : Drift en sine pour le sub (coupe tout au-dessus de 120 Hz), ton son wobble au-dessus (coupe tout en-dessous de 120 Hz). Même MIDI sur les deux : duplique le clip."
+      },
+      "unlocks": {"studio": "Les pistes SUB et BASSE-MID du Morceau du Mois se lient (option 'recopier à l'octave')."}
+    },
+
+    {
+      "id": "t01", "mod": 12, "type": "daw", "title": "L'ALLER-RETOUR", "tag": "DOJO",
+      "instr": "Le geste fondateur du Dojo. ATELIER te donne un fichier MIDI (bouton ci-dessous). Dans Live : glisse-le sur une piste MIDI, écoute-le, puis clic droit sur le clip > Export MIDI Clip. Reviens ici et dépose le fichier exporté dans la zone. Si les notes reviennent intactes, le pont est ouvert.",
+      "provide": {"midi": {"bpm": 132, "steps": 16, "tracks": [{"notes": [{"p":45,"s":0,"d":2},{"p":48,"s":4},{"p":45,"s":8,"d":2},{"p":43,"s":12}]}]}},
+      "validate": {"kind": "daw:midi-roundtrip"},
+      "hints": ["Glisse le .mid directement de ton dossier Téléchargements vers une piste MIDI de Live.", "Pour exporter : clic droit sur le CLIP (pas la piste) > Export MIDI Clip."],
+      "brick": {
+        "name": "LE PONT MIDI",
+        "def": "Le format .mid traverse la frontière dans les deux sens : ATELIER ↔ Ableton.",
+        "why": "À partir de maintenant, tout ce que tu construis ici peut finir dans tes vrais projets — et tout geste fait dans Live peut être vérifié ici. L'app et le studio sont une seule pièce.",
+        "abl": "Glisser-déposer un .mid sur une piste = import. Clic droit sur un clip > Export MIDI Clip = export. Deux gestes, retiens-les : tout le Dojo passe par là."
+      }
+    },
+    {
+      "id": "t02", "mod": 12, "type": "daw", "title": "TRANSPOSER POUR DE VRAI", "tag": "DOJO",
+      "instr": "ATELIER te donne une boucle en La mineur. Dans Live : importe-la, sélectionne TOUTES les notes du clip (Ctrl+A dans le piano roll), puis monte tout de 8 demi-tons avec Shift+flèche haut (qui monte d'octave) et flèches... à toi de trouver la combinaison. Objectif : la boucle en FA mineur — ta tonalité. Exporte, dépose, vérifie.",
+      "tip": "Flèche haut = +1 demi-ton. Shift+flèche haut = +1 octave. 8 demi-tons = à toi de composer le geste.",
+      "provide": {"midi": {"bpm": 120, "steps": 16, "tracks": [{"notes": [{"p":57,"s":0,"d":4},{"p":60,"s":0,"d":4},{"p":64,"s":0,"d":4},{"p":57,"s":8,"d":4},{"p":62,"s":8,"d":4},{"p":64,"s":8,"d":4}]}]}},
+      "validate": {"kind": "daw:midi-transposed", "params": {"semitones": 8}},
+      "hints": ["Ctrl+A dans le piano roll du clip pour tout sélectionner d'abord.", "8 demi-tons = une octave moins 4 : Shift+haut puis 4 fois flèche bas. Ou 8 fois flèche haut."],
+      "brick": {
+        "name": "TRANSPOSER DANS LIVE",
+        "def": "Sélectionner tout, flèches : la transposition est un geste de deux secondes dans Live.",
+        "why": "Tu connaissais le concept (LA TRANSPOSITION) ; maintenant tu possèdes le geste, vérifié. Toute idée trouvée dans une tonalité peut rejoindre n'importe quel projet en deux secondes.",
+        "abl": "Astuce bonus : le champ Transpose dans les propriétés du clip (vue Clip) transpose sans toucher aux notes — pratique pour tester sans s'engager."
+      }
+    },
+    {
+      "id": "t03", "mod": 12, "type": "daw", "title": "SCALE, ALLUMÉ", "tag": "DOJO",
+      "instr": "Dans Live : crée un clip MIDI vide, ouvre-le, active Scale (en haut de l'éditeur), règle sur A Minor. Regarde le clavier vertical du piano roll : certaines rangées se sont éclaircies. Joue dedans deux minutes. Puis réponds à la question de vérification — elle prouve que tu as VU.",
+      "validate": {"kind": "daw:checklist-quiz", "checklist": ["Clip MIDI créé", "Scale activé", "Root: A, Scale: Minor"], "quiz": {"question": "Entre les rangées Sol et La du clavier, la touche noire (Sol#) est-elle éclaircie ou éteinte ?", "choices": ["Éclaircie (dans la gamme)", "Éteinte (hors gamme)"], "answer": 1}},
+      "hints": ["Le bouton Scale est dans la barre du haut de l'éditeur MIDI, à côté du choix de la fondamentale.", "Regarde bien le clavier vertical à gauche du piano roll : c'est lui qui répond à la question."],
+      "brick": {
+        "name": "SCALE DANS LIVE",
+        "def": "Le filtre de gamme d'Ableton : les notes sûres éclaircies, directement dans le piano roll.",
+        "why": "C'est exactement la gamme d'ATELIER, dans ton vrai studio. Avec Scale allumé, impossible de sonner faux par accident — et s'en échapper devient un choix, plus un risque.",
+        "abl": "Bonus : avec Scale actif, les flèches haut/bas transposent EN RESTANT dans la gamme. Compose une mélodie, déplace-la : elle reste juste."
+      }
+    },
+    {
+      "id": "t04", "mod": 12, "type": "daw", "title": "LE GROOVE POOL", "tag": "DOJO",
+      "instr": "ATELIER te donne huit doubles-croches de basse parfaitement droites — une horloge. Dans Live : importe, puis ouvre le Groove Pool (l'onglet vague à gauche), glisse 'MPC 16 Swing-62' sur ton clip, et clique Commit (dans les propriétés du clip) pour graver le swing dans les notes. Exporte, dépose : ATELIER mesurera si tes croches impaires sont vraiment en retard.",
+      "provide": {"midi": {"bpm": 130, "steps": 16, "tracks": [{"notes": [{"p":45,"s":0},{"p":45,"s":1},{"p":45,"s":2},{"p":45,"s":3},{"p":45,"s":4},{"p":45,"s":5},{"p":45,"s":6},{"p":45,"s":7}]}]}},
+      "validate": {"kind": "daw:midi-swing", "params": {"minDelayRatio": 0.12}},
+      "hints": ["Le Groove Pool s'ouvre par la petite icône de vague en bas à gauche, ou via le navigateur > Grooves.", "Sans Commit, le swing reste virtuel et l'export sera droit. Commit grave les décalages dans les notes."],
+      "brick": {
+        "name": "LE GROOVE POOL",
+        "def": "Des swings prêts à glisser sur n'importe quel clip — et Commit pour les graver.",
+        "why": "Le swing d'ATELIER était un curseur ; celui de Live est une bibliothèque de feels historiques (MPC, SP-1200…). Tu viens d'appliquer, de graver et de PROUVER un groove par la mesure.",
+        "abl": "Garde 2-3 grooves favoris dans le Pool. Le réglage Amount dose l'intensité. Un même groove sur drums ET bassline : tout respire ensemble."
+      }
+    },
+    {
+      "id": "t05", "mod": 12, "type": "daw", "title": "LA MAIN SUR LES VÉLOCITÉS", "tag": "DOJO",
+      "instr": "ATELIER te donne huit notes de basse, toutes à la même force — un robot. Dans Live : importe, ouvre la zone vélocité (sous le piano roll), et sculpte : au moins deux notes très fortes, au moins deux fantômes (sous 40), le reste entre les deux. Exporte, dépose : ATELIER vérifiera le relief.",
+      "provide": {"midi": {"bpm": 128, "steps": 16, "tracks": [{"notes": [{"p":45,"s":0},{"p":45,"s":2},{"p":45,"s":4},{"p":45,"s":6},{"p":45,"s":8},{"p":45,"s":10},{"p":45,"s":12},{"p":45,"s":14}]}]}},
+      "validate": {"kind": "daw:midi-velocity-shape", "params": {"minStrong": 2, "strongOver": 100, "minGhosts": 2, "ghostUnder": 40}},
+      "hints": ["La zone vélocité : le panneau sous les notes, des barres verticales. Tire-les à la souris.", "Sélectionne plusieurs notes puis tire UNE barre : elles bougent ensemble."],
+      "brick": {
+        "name": "LA MAIN SUR LES VÉLOCITÉS",
+        "def": "Sculpter les forces dans la zone vélocité de Live : le geste qui humanise tout.",
+        "why": "Tu connaissais la vélocité (la brique), tu l'avais réglée dans ATELIER (l'outil VÉLO) ; maintenant tu l'as sculptée dans ton vrai studio, et la mesure le confirme. Le concept a fini son voyage.",
+        "abl": "Raccourci d'or : sélectionner des notes + Alt+glisser dans la zone vélocité pour les pentes. Et la randomisation légère (boutons Vel dans Live 12) pour dégrossir avant de sculpter."
+      }
+    }
+  ]
+}
