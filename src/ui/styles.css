@@ -133,6 +133,8 @@ header {
 .feed { min-height: 22px; font-size: 14px; color: var(--ink-dim); margin: 10px 0 2px; }
 .feed.good { color: var(--ok); }
 .feed.warn { color: var(--bad); }
+.feed.hint { color: var(--teal); }
+.hintsarea { margin-top: 4px; }
 .chips { display: flex; gap: 6px; flex-wrap: wrap; min-height: 30px; margin: 6px 0 8px; }
 .chip { font-family: var(--mono); font-size: 12px; padding: 4px 10px; border: 1px solid var(--amber-dim); color: var(--amber); border-radius: 999px; }
 .selcount { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); }

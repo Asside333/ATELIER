@@ -154,5 +154,11 @@ export function playNote(patch, p, time, dur = 1, vel = DEFAULT_VEL, stepS = 0.1
   synth.triggerAttackRelease(hz, durS, time, amp)
 }
 
+/** Joue une note immédiatement, hors transport (feedback clavier, pose de note). */
+export async function playImmediate(patch, p, vel = 0.9, dur = 0.4) {
+  if (!_ready) await init()
+  playNote(patch, p, Tone.now() + 0.01, dur, vel, 0.125)
+}
+
 /** Retourne vrai si le moteur est initialisé. */
 export function isReady() { return _ready }
