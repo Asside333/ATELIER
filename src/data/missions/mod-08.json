@@ -1,0 +1,79 @@
+[
+  {
+    "schema": "mission/v1",
+    "id": "n18", "mod": 7, "type": "keys", "title": "LA SEPTIÈME", "tag": "CONSTRUIRE",
+    "instr": "Reprends l'accord de La mineur (La2, Do3, Mi3) et ajoute UNE note : Sol3. Quatre notes. Écoute l'accord simple, puis celui-ci : le velours est arrivé.",
+    "kb": [55, 72], "maxSel": 4, "listen": "chord",
+    "validate": { "kind": "set-exact", "pitches": [57, 60, 64, 67] },
+    "hints": [
+      "Reprends l'accord de La mineur et ajoute une quatrième note au-dessus : le velours arrive.",
+      "La note à ajouter est une blanche, deux crans au-dessus de la note la plus haute de l'accord (le Mi).",
+      "La2 (57), Do3 (60), Mi3 (64), Sol3 (67) : l'accord d'avant + une blanche deux crans au-dessus."
+    ],
+    "brick": {
+      "name": "LA SEPTIÈME",
+      "def": "L'accord de trois notes + une quatrième : la septième. Am devient Am7.",
+      "why": "La quatrième note adoucit l'accord sans changer sa couleur — elle ajoute du flou élégant. Le son de la soul, du R&B, du garage.",
+      "abl": "Sur n'importe quel accord : ajoute la note 3 cases sous l'octave de la racine (+10 demi-tons). Velours immédiat."
+    },
+    "demo": { "bpm": 84, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":57,"s":0,"d":3},{"p":60,"s":0,"d":3},{"p":64,"s":0,"d":3},{"p":57,"s":4,"d":4},{"p":60,"s":4,"d":4},{"p":64,"s":4,"d":4},{"p":67,"s":4,"d":4}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n19", "mod": 7, "type": "keys", "title": "LE SUSPENDU", "tag": "CONSTRUIRE",
+    "instr": "Un accord qui refuse de choisir : La2, Ré3, Mi3. La note du milieu n'est ni la tierce mineure ni la majeure — elle est juste au-dessus. Écoute : ni sombre, ni lumineux. Suspendu.",
+    "kb": [55, 72], "maxSel": 3, "listen": "chord",
+    "validate": { "kind": "set-exact", "pitches": [57, 62, 64] },
+    "hints": [
+      "Un accord qui refuse de choisir entre sombre et lumineux : la note du milieu n'est ni l'une ni l'autre, elle est juste au-dessus.",
+      "Pars de La mineur, mais remplace la note du milieu (le Do) par sa voisine du dessus.",
+      "La2 (57), Ré3 (62), Mi3 (64). Le Ré remplace le Do : c'est lui qui suspend."
+    ],
+    "brick": {
+      "name": "LE SUS",
+      "def": "Accord suspendu : la tierce est remplacée par sa voisine (sus4 ou sus2). Ni majeur, ni mineur.",
+      "why": "Sans tierce, pas de couleur — donc pas de réponse. L'oreille attend que ça se résolve : tension douce, parfaite avant un drop.",
+      "abl": "Prends un accord, déplace la note du milieu d'un demi-ton vers le haut : sus4. Résous-le sur l'accord normal juste après."
+    },
+    "demo": { "bpm": 84, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":57,"s":0,"d":3},{"p":62,"s":0,"d":3},{"p":64,"s":0,"d":3},{"p":57,"s":4,"d":4},{"p":60,"s":4,"d":4},{"p":64,"s":4,"d":4}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n20", "mod": 7, "type": "keys", "title": "LA NEUVIÈME", "tag": "CONSTRUIRE",
+    "instr": "Le stab ultime du garage : Am7 + encore une note. La2, Do3, Mi3, Sol3, Si3. Cinq notes. Écoute avec le son STAB sélectionné mentalement — tu vas le reconnaître immédiatement.",
+    "tip": "Am9 : LE son des stabs UKG et du deep house. Tu l'as dans l'oreille depuis des années.",
+    "kb": [55, 74], "maxSel": 5, "listen": "chord",
+    "validate": { "kind": "set-exact", "pitches": [57, 60, 64, 67, 71] },
+    "hints": [
+      "Le stab ultime du garage : reprends l'accord de septième et empile encore une note au sommet.",
+      "Cinq notes : La2, Do3, Mi3, Sol3, et une dernière tout en haut.",
+      "Les quatre notes de l'accord de septième (La2, Do3, Mi3, Sol3), plus Si3 (71) tout en haut."
+    ],
+    "brick": {
+      "name": "LA NEUVIÈME",
+      "def": "Septième + encore une note (la 9e). Am9 : cinq notes, le luxe.",
+      "why": "Plus l'accord empile de notes de la gamme, plus il devient texture. La neuvième, c'est le moment où l'accord devient une nappe.",
+      "abl": "Stab garage : Am9, notes courtes, vélocités variées, un coup de reverb courte. C'est la recette."
+    },
+    "demo": { "bpm": 84, "steps": 8, "tracks": [{ "patch": "stab", "notes": [{"p":57,"s":0},{"p":60,"s":0},{"p":64,"s":0},{"p":67,"s":0},{"p":71,"s":0},{"p":57,"s":4},{"p":60,"s":4},{"p":64,"s":4},{"p":67,"s":4},{"p":71,"s":4}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n21", "mod": 7, "type": "decode", "title": "LE STAB", "tag": "DECODER",
+    "instr": "Deux frappes du même accord riche, posées HORS des temps forts — avec du swing. Huit cases à trouver : quatre notes, deux positions. Commence par trouver les colonnes, ensuite les hauteurs.",
+    "bpm": 130, "steps": 16, "swing": 0.25, "rows": [71, 69, 67, 65, 64, 62, 60, 59, 57], "patch": "stab",
+    "target": [{"p":57,"s":2},{"p":60,"s":2},{"p":64,"s":2},{"p":71,"s":2},{"p":57,"s":10},{"p":60,"s":10},{"p":64,"s":10},{"p":71,"s":10}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Deux frappes du même accord riche, mais posées HORS des temps forts. Trouve d'abord les colonnes, ensuite les hauteurs.",
+      "Les deux frappes tombent juste après le premier et le troisième temps : colonnes 3 et 11. Quatre notes chacune.",
+      "Sur les colonnes 3 et 11 : La2, Do3, Mi3, Si3."
+    ],
+    "brick": {
+      "name": "LE STAB",
+      "def": "Un accord riche frappé court, à contretemps : l'accord devient percussion.",
+      "why": "Le stab ne joue pas l'harmonie, il la ponctue. Posé hors du temps fort, il crée le groove harmonique du garage.",
+      "abl": "Accord m9, durée très courte, sur les contretemps, swing 20-30%. Ajoute un chorus léger : stab UKG signé."
+    }
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "schema": "mission/v1",
+    "id": "m4", "mod": 2, "type": "keys", "title": "L'ÉCHELLE SOMBRE", "tag": "CONSTRUIRE",
+    "instr": "Sélectionne toutes les touches blanches de La2 à La3 — les huit, pas une de plus. Puis écoute la montée. C'est une couleur que tu connais par cœur.",
+    "kb": [55, 72], "maxSel": 8, "listen": "arp",
+    "validate": { "kind": "set-exact", "pitches": [57, 59, 60, 62, 64, 65, 67, 69] },
+    "hints": [
+      "Rien que des touches blanches, en partant de La2 et en montant jusqu'au La suivant.",
+      "Uniquement les blanches, de La2 jusqu'au La au-dessus, toutes incluses.",
+      "Les huit blanches : La2, Si2, Do3, Ré3, Mi3, Fa3, Sol3, La3."
+    ],
+    "brick": {
+      "name": "LA GAMME MINEURE",
+      "def": "7 notes choisies parmi 12, qui sonnent sombre. Le code : 2-1-2-2-1-2-2 demi-tons depuis la racine.",
+      "why": "Une gamme est un filtre : 5 notes retirées sur 12, et tout ce qui reste sonne ensemble. Le mineur, c'est la couleur du dubstep, de la jungle, du garage.",
+      "abl": "Active Scale sur un clip MIDI : Ableton surligne exactement ces notes."
+    },
+    "demo": { "bpm": 110, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":57,"s":0},{"p":59,"s":1},{"p":60,"s":2},{"p":62,"s":3},{"p":64,"s":4},{"p":65,"s":5},{"p":67,"s":6},{"p":69,"s":7}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n06", "mod": 2, "type": "keys", "title": "LA JUMELLE CLAIRE", "tag": "CONSTRUIRE",
+    "instr": "Même geste, autre maison : toutes les blanches de Do3 à Do4. Écoute la montée, puis réécoute l'échelle sombre dans ton carnet. Mêmes touches blanches — couleur opposée. Tout est dans le point de départ.",
+    "tip": "Le code change : 2-2-1-2-2-2-1. C'est l'ordre des pas qui fait la couleur, pas les notes.",
+    "kb": [55, 74], "maxSel": 8, "listen": "arp",
+    "validate": { "kind": "set-exact", "pitches": [60, 62, 64, 65, 67, 69, 71, 72] },
+    "hints": [
+      "Encore rien que des blanches — mais cette fois la maison est ailleurs : pars de Do3.",
+      "Les blanches de Do3 à Do4, les huit.",
+      "Do3, Ré3, Mi3, Fa3, Sol3, La3, Si3, Do4 — les huit blanches d'affilée."
+    ],
+    "brick": {
+      "name": "LA GAMME MAJEURE",
+      "def": "Le même alphabet, démarré ailleurs : 2-2-1-2-2-2-1. La couleur lumineuse.",
+      "why": "La mineur et Do majeur utilisent les mêmes 7 notes — ce sont des gammes relatives. Seule la maison change, et tout bascule.",
+      "abl": "Dans Scale : passe de A minor à C major — les notes surlignées ne bougent pas. Ta bassline, si."
+    },
+    "demo": { "bpm": 110, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":60,"s":0},{"p":62,"s":1},{"p":64,"s":2},{"p":65,"s":3},{"p":67,"s":4},{"p":69,"s":5},{"p":71,"s":6},{"p":72,"s":7}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "m5", "mod": 2, "type": "decode", "title": "LA BASSLINE", "tag": "DECODER",
+    "instr": "Une basse de garage en La mineur. Écoute, reconstruis. Repère d'abord la note qui revient — c'est elle qui tient tout.",
+    "bpm": 132, "steps": 16, "rows": [52, 50, 48, 47, 45, 43, 41, 40], "patch": "bass",
+    "target": [{"p":45,"s":0,"d":2},{"p":45,"s":7},{"p":48,"s":8,"d":2},{"p":43,"s":12,"d":2},{"p":45,"s":14}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Cinq notes. Repère d'abord celle qui revient le plus souvent : c'est la maison.",
+      "La maison, c'est La1 — elle tombe sur le tout premier temps, puis revient. Les deux autres notes s'en écartent un instant.",
+      "La1 sur les colonnes 1, 8 et 15 ; Do2 sur la 9 ; Sol1 sur la 13."
+    ],
+    "brick": {
+      "name": "LA FONDAMENTALE",
+      "def": "La note-maison du morceau. La bassline y revient toujours.",
+      "why": "Tout tourne autour d'elle ; quand la basse y retombe, le corps sait qu'il est rentré.",
+      "abl": "Ta bassline part de la fondamentale et y retombe. Le reste est de la promenade."
+    }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "m6", "mod": 2, "type": "keys", "title": "DÉMÉNAGER LA MAISON", "tag": "CONSTRUIRE",
+    "instr": "Reconstruis l'échelle sombre, mais depuis Fa2. Le code du mineur : 2-1-2-2-1-2-2 demi-tons. Compte chaque touche, noires comprises. 2 = saute une touche.",
+    "tip": "Fa mineur — la tonalité de ton dernier track. Tu construis ta propre maison.",
+    "kb": [52, 67], "maxSel": 8, "listen": "arp",
+    "validate": { "kind": "set-exact", "pitches": [53, 55, 56, 58, 60, 61, 63, 65] },
+    "hints": [
+      "Le même code que le mineur, mais à partir de Fa2 : 2-1-2-2-1-2-2 demi-tons.",
+      "Depuis Fa2 : +2, +1, +2, +2, +1, +2, +2. Quatre touches noires au passage — normal.",
+      "Fa2, Sol2, Sol#2, La#2, Do3, Do#3, Ré#3, Fa3."
+    ],
+    "brick": {
+      "name": "LA TRANSPOSITION",
+      "def": "Déplacer un motif sans le déformer : mêmes écarts, autre départ.",
+      "why": "Le motif fait la musique, pas les notes. Le code 2-1-2-2-1-2-2 survit à tous les déménagements.",
+      "abl": "Sélectionne tout + flèches haut/bas : transposition. Les écarts restent, la couleur reste."
+    },
+    "demo": { "bpm": 110, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":53,"s":0},{"p":55,"s":1},{"p":56,"s":2},{"p":58,"s":3},{"p":60,"s":4},{"p":61,"s":5},{"p":63,"s":6},{"p":65,"s":7}] }] }
+  }
+]

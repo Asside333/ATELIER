@@ -1,0 +1,81 @@
+[
+  {
+    "schema": "mission/v1",
+    "id": "n14", "mod": 6, "type": "grid", "title": "LE SUB", "tag": "CONSTRUIRE",
+    "instr": "Son SUB : une sinusoïde pure, le son le plus grave et le plus simple qui existe. Pose La0 sur chacun des quatre temps forts. Écoute au casque — tu le sens plus que tu ne l'entends.",
+    "tip": "Le sub vit sous 100 Hz. Règle d'or : une seule note à la fois, jamais d'accord dans le sub — ça brouille tout.",
+    "bpm": 140, "steps": 16, "rows": [48, 47, 45, 43, 41, 40, 38, 36, 35, 33], "patch": "sub", "marks": true,
+    "target": [{"p":33,"s":0},{"p":33,"s":4},{"p":33,"s":8},{"p":33,"s":12}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Le son le plus grave et le plus simple. Pose-le sur les quatre temps forts, rien d'autre.",
+      "La0 — tout en bas de la grille. Une note par colonne marquée, quatre en tout.",
+      "La0 (la ligne du bas) sur les colonnes 1, 5, 9 et 13."
+    ],
+    "brick": {
+      "name": "LE SUB",
+      "def": "La fondation : une sinusoïde sous 100 Hz, mono, une note à la fois.",
+      "why": "Le sub porte le poids physique du morceau. Pur, il ne se mélange à rien — c'est pour ça qu'on le garde simple et seul.",
+      "abl": "Operator ou Drift : une sine, zéro effet stéréo dessous 120 Hz. Coupe le sub de tous les autres sons avec un EQ."
+    },
+    "demo": { "bpm": 140, "steps": 16, "tracks": [{ "patch": "sub", "notes": [{"p":33,"s":0,"d":3},{"p":33,"s":4,"d":3},{"p":33,"s":8,"d":3},{"p":33,"s":12,"d":3}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n15", "mod": 6, "type": "grid", "title": "LE REBOND", "tag": "CONSTRUIRE",
+    "instr": "La même note à deux étages : La0 et La1. Pose au moins six notes en alternant les deux octaves comme un ballon qui rebondit. Écoute en boucle — c'est l'énergie de la house et du garage.",
+    "bpm": 128, "steps": 16, "rows": [48, 47, 45, 43, 41, 40, 38, 36, 35, 33], "patch": "bass",
+    "validate": { "kind": "predicate", "name": "octave-bounce", "params": { "pc": 9, "minNotes": 6, "mustInclude": [33, 45] } },
+    "hints": [
+      "Une seule note, mais à deux étages : fais-la rebondir entre le grave et l'aigu comme un ballon.",
+      "Uniquement des La (La0 = 33, La1 = 45), au moins six, les deux étages utilisés.",
+      "Au moins six notes, toutes des La, en alternant La0 (ligne du bas) et La1. Par exemple : La0, La1, La0, La1…"
+    ],
+    "brick": {
+      "name": "L'OCTAVE BOUNCE",
+      "def": "Une bassline qui alterne la même note sur deux octaves.",
+      "why": "Une note, deux étages : harmonie immobile, énergie maximale. Le rebond crée le mouvement sans rien risquer.",
+      "abl": "Duplique ta note de basse, +12 sur une copie sur deux. La disco, la house et le garage tournent là-dessus depuis 50 ans."
+    },
+    "demo": { "bpm": 128, "steps": 16, "tracks": [{ "patch": "bass", "notes": [{"p":33,"s":0},{"p":45,"s":2},{"p":33,"s":4},{"p":45,"s":6},{"p":33,"s":8},{"p":45,"s":10},{"p":33,"s":12},{"p":45,"s":14}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n16", "mod": 6, "type": "grid", "title": "LE WOBBLE", "tag": "CONSTRUIRE",
+    "instr": "Son WOBBLE : un filtre qui s'ouvre et se ferme tout seul, calé sur le tempo. Pose un La (0 ou 1) tenu sur au moins 8 cases, lance la lecture, écoute la machine onduler. Une note suffit — le mouvement vient du son.",
+    "tip": "C'est un LFO : un oscillateur lent qui tourne un bouton à ta place. Ici il pilote le filtre, en croches.",
+    "bpm": 140, "steps": 16, "rows": [48, 47, 45, 43, 41, 40, 38, 36, 35, 33], "patch": "wobble",
+    "validate": { "kind": "predicate", "name": "held-note", "params": { "pc": 9, "minDur": 8 } },
+    "hints": [
+      "Une note tenue suffit : le mouvement vient du son lui-même, pas de tes doigts. Pose un La long et écoute-le onduler.",
+      "Mode ÉTIRER : pose un La, puis tape 8 cases plus loin sur la même ligne. Lance la lecture en boucle.",
+      "Pose un La (La0 ou La1), passe en ÉTIRER, tape au moins 8 cases plus loin sur la même ligne. Une seule note tenue."
+    ],
+    "brick": {
+      "name": "LE LFO",
+      "def": "Low Frequency Oscillator : une onde lente qui pilote un paramètre — ici, le filtre.",
+      "why": "Une note tenue est statique ; un LFO la fait vivre sans que tu touches à rien. Tout le dubstep est construit sur ce robot.",
+      "abl": "Auto Filter sur ta basse : section LFO, rate synchronisé (1/8 ou 1/4). Monte Amount — ton wobble est né."
+    },
+    "demo": { "bpm": 140, "steps": 16, "tracks": [{ "patch": "wobble", "notes": [{"p":33,"s":0,"d":16}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n17", "mod": 6, "type": "decode", "title": "LA TENUE ET LE COUP", "tag": "DECODER",
+    "instr": "Une basse qui vit sur deux durées : des tenues qui portent, des coups qui répondent. Cinq notes. Reconstruis les positions, puis écoute la respiration entre les deux.",
+    "bpm": 138, "steps": 16, "rows": [48, 47, 45, 43, 41, 40, 38, 36, 35, 33], "patch": "bass",
+    "target": [{"p":33,"s":0,"d":6},{"p":45,"s":7},{"p":45,"s":9},{"p":33,"s":10,"d":4},{"p":43,"s":15}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Cinq notes : des tenues graves qui portent, des coups plus aigus qui répondent. Repère d'abord les positions.",
+      "Ça commence par un La0 tenu, puis deux coups de La1, puis un La0 tenu, et un Sol1 pour finir.",
+      "La0 colonne 1, La1 colonne 8, La1 colonne 10, La0 colonne 11, Sol1 colonne 16."
+    ],
+    "brick": {
+      "name": "LE DIALOGUE DE BASSE",
+      "def": "Tenue grave + coups à l'octave : une basse qui se répond à elle-même.",
+      "why": "Une seule ligne de basse peut faire deux voix : le poids et la réplique. C'est plus vivant que deux instruments séparés.",
+      "abl": "Sur une même piste : notes longues à l'octave basse, notes courtes à l'octave au-dessus. Mixe-toi tout seul."
+    }
+  }
+]

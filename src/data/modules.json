@@ -1,0 +1,11 @@
+[
+  { "id": 0, "key": "I",    "name": "I — LE TERRAIN",       "hue": "#f2a33c", "intro": "Les distances entre les notes. Tout le reste est construit là-dessus." },
+  { "id": 1, "key": "II",   "name": "II — LE PIANO ROLL",   "hue": "#5fb8a8", "intro": "Le geste avant la théorie : poser, étirer, doser. Les mains d'abord." },
+  { "id": 2, "key": "III",  "name": "III — LA GAMME SOMBRE", "hue": "#b89ad6", "intro": "Le filtre de notes qui fait ta couleur : le mineur. Là où vivent dubstep, jungle et garage." },
+  { "id": 3, "key": "IV",   "name": "IV — LES ACCORDS",      "hue": "#e8875f", "intro": "Empiler des notes compatibles. Trois suffisent pour un objet." },
+  { "id": 4, "key": "V",    "name": "V — LES PROGRESSIONS",  "hue": "#d6b25f", "intro": "Des accords qui s'enchaînent et racontent : tension, retour." },
+  { "id": 5, "key": "VI",   "name": "VI — LA MÉLODIE",       "hue": "#7fb069", "intro": "Un motif, sa répétition, sa variation. La mémoire de l'auditeur travaille pour toi." },
+  { "id": 6, "key": "VII",  "name": "VII — LA BASSE",        "hue": "#c46a8e", "intro": "Ton territoire. Sub, rebond, wobble : la fondation qui parle." },
+  { "id": 7, "key": "VIII", "name": "VIII — LES ACCORDS RICHES", "hue": "#6f9fd8", "intro": "Septièmes, sus, neuvièmes : le velours des stabs garage." },
+  { "id": 8, "key": "IX",   "name": "IX — LE GROOVE",        "hue": "#f2a33c", "intro": "Le temps, décalé. Syncope, swing, half-time : ce qui fait bouger." }
+]

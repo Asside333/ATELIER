@@ -1,0 +1,82 @@
+[
+  {
+    "schema": "mission/v1",
+    "id": "n02", "mod": 1, "type": "grid", "title": "LA POSE", "tag": "GESTE",
+    "instr": "Lis la grille comme une carte : la hauteur monte vers le haut, le temps avance vers la droite. Pose exactement : Do3 colonne 1, Mi3 colonne 5, Sol3 colonne 9, Do4 colonne 13. Puis écoute.",
+    "tip": "C'est LE geste Ableton : double-clic pour poser, re-clic pour enlever. Ici : un tap.",
+    "bpm": 100, "steps": 16, "rows": [72, 71, 69, 67, 65, 64, 62, 60], "patch": "keys", "marks": true,
+    "target": [{"p":60,"s":0},{"p":64,"s":4},{"p":67,"s":8},{"p":72,"s":12}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Lis la grille : le grave en bas, l'aigu en haut ; le temps avance vers la droite. Quatre notes, une par temps fort.",
+      "Colonne 1 = première colonne (un temps fort). Do3 en bas, Do4 tout en haut.",
+      "Do3 colonne 1, Mi3 colonne 5, Sol3 colonne 9, Do4 colonne 13."
+    ],
+    "brick": {
+      "name": "LE PIANO ROLL",
+      "def": "Une carte : hauteur en vertical, temps en horizontal. Chaque case = une note possible.",
+      "why": "Tu viens de jouer un arpège de Do majeur sans le savoir. Lire la grille, c'est voir la musique avant de l'entendre.",
+      "abl": "Les colonnes marquées = les temps forts (1, 2, 3, 4). La grille d'Ableton est exactement celle-ci, en plus grand."
+    },
+    "demo": { "bpm": 100, "steps": 16, "tracks": [{ "patch": "keys", "notes": [{"p":60,"s":0,"d":2},{"p":64,"s":4,"d":2},{"p":67,"s":8,"d":2},{"p":72,"s":12,"d":2}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n03", "mod": 1, "type": "grid", "title": "LA LONGUEUR", "tag": "GESTE",
+    "instr": "Nouvel outil au-dessus de la grille : ÉTIRER. Pose une note de basse, passe en ÉTIRER, tape une case plus à droite sur la même ligne : la note se tient. Objectif : une note tenue d'au moins 8 cases + trois notes courtes.",
+    "tip": "Dans Ableton tu tires le bord droit de la note. Tenue = nappe, sub. Courte = pluck, stab.",
+    "bpm": 110, "steps": 16, "rows": [52, 50, 48, 47, 45, 43, 41, 40], "patch": "bass",
+    "validate": { "kind": "predicate", "name": "duration-mix", "params": { "minHeld": 8, "minShort": 3 } },
+    "hints": [
+      "Il te faut deux choses : une note qui tient longtemps, et quelques notes brèves à côté.",
+      "En mode ÉTIRER : tape d'abord une case loin à droite de ta note. Puis repasse en POSER pour les courtes.",
+      "Pose une note, passe en ÉTIRER, tape 8 cases plus loin sur la même ligne (elle se tient). Puis, en POSER, ajoute trois notes courtes ailleurs."
+    ],
+    "brick": {
+      "name": "LA DURÉE",
+      "def": "Une note a une longueur. Tenue, elle porte. Courte, elle frappe.",
+      "why": "Même hauteur, même son : la durée seule change le rôle. Le sub tient, le stab claque — la musique respire entre les deux.",
+      "abl": "Tire le bord droit d'une note pour l'allonger. Raccourcir toutes tes notes = effet gate instantané."
+    },
+    "demo": { "bpm": 110, "steps": 16, "tracks": [{ "patch": "bass", "notes": [{"p":45,"s":0,"d":8},{"p":45,"s":9},{"p":48,"s":11},{"p":43,"s":13}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n04", "mod": 1, "type": "grid", "title": "LA VÉLOCITÉ", "tag": "GESTE",
+    "instr": "Outil VÉLO : chaque tap sur une note posée baisse sa force (fort → moyen → fantôme → fort). Pose au moins 6 notes de basse sur une même ligne, puis rends-en au moins deux fantômes. Écoute la différence : ça respire.",
+    "tip": "Les 'ghost notes' — notes fantômes — sont le secret du groove humain. Personne ne frappe deux fois pareil.",
+    "bpm": 126, "steps": 16, "rows": [48, 47, 45, 43, 41, 40], "patch": "bass",
+    "validate": { "kind": "predicate", "name": "velocity-relief", "params": { "minTotal": 6, "minStrong": 2, "minGhosts": 2 } },
+    "hints": [
+      "Pose une ligne de basse, puis enlève de la force à certaines notes : la boucle doit respirer, pas marteler.",
+      "Mode VÉLO, puis tape une note existante : elle pâlit à chaque tap. Il faut au moins 2 fortes et 2 fantômes.",
+      "Six notes minimum sur la même ligne. Garde-en deux à pleine force, rends-en deux fantômes (le niveau le plus pâle), le reste au milieu."
+    ],
+    "brick": {
+      "name": "LA VÉLOCITÉ",
+      "def": "La force de frappe d'une note (0-127 en MIDI). Fort, moyen, fantôme.",
+      "why": "Une ligne où tout est à fond sonne robotique. Deux ghost notes suffisent à rendre une boucle vivante.",
+      "abl": "Zone vélocité sous le piano roll : tire les barres. Varie de ±20 sur une bassline répétitive — elle se met à groover."
+    },
+    "demo": { "bpm": 126, "steps": 16, "tracks": [{ "patch": "bass", "notes": [{"p":45,"s":0,"v":1},{"p":45,"s":2,"v":0.45},{"p":45,"s":4,"v":0.9},{"p":45,"s":6,"v":0.45},{"p":45,"s":8,"v":1},{"p":45,"s":10,"v":0.45},{"p":45,"s":12,"v":0.9},{"p":45,"s":14,"v":0.65}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n05", "mod": 1, "type": "decode", "title": "LE PROFIL", "tag": "DECODER",
+    "instr": "Une phrase courte qui mélange notes tenues et notes brèves. Reconstruis les positions (la durée n'est pas vérifiée — mais écoute-la). Tu lis maintenant la grille à l'oreille.",
+    "bpm": 104, "steps": 16, "rows": [67, 65, 64, 62, 60, 59, 57], "patch": "keys",
+    "target": [{"p":57,"s":0,"d":6},{"p":60,"s":6},{"p":62,"s":8,"d":4},{"p":64,"s":12},{"p":60,"s":14,"d":2}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Cinq notes qui mélangent tenues et coups brefs. La durée n'est pas vérifiée — concentre-toi sur OÙ tombent les notes.",
+      "Ça commence par une note tenue tout en bas (un La), puis ça monte et redescend. Cinq positions à trouver.",
+      "La2 colonne 1, Do3 colonne 7, Ré3 colonne 9, Mi3 colonne 13, Do3 colonne 15."
+    ],
+    "brick": {
+      "name": "LE PHRASÉ",
+      "def": "Le dessin d'une phrase : où ça tient, où ça frappe, où ça respire.",
+      "why": "Deux mélodies avec les mêmes notes mais un phrasé différent sont deux musiques différentes. Le silence et la tenue font partie des notes.",
+      "abl": "Après avoir posé tes notes, retravaille uniquement les durées : c'est un deuxième passage de composition."
+    }
+  }
+]

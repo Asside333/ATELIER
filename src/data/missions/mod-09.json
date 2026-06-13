@@ -1,0 +1,100 @@
+[
+  {
+    "schema": "mission/v1",
+    "id": "m14", "mod": 8, "type": "grid", "title": "LE DÉCALAGE", "tag": "CONSTRUIRE",
+    "instr": "Pose au moins quatre notes de basse — interdiction absolue des colonnes marquées (les temps forts). Lance la lecture : un clic tient le tempo. Écoute ce que le vide sur les temps forts fait au corps.",
+    "bpm": 132, "steps": 16, "rows": [52, 50, 48, 45, 43, 40], "patch": "bass", "marks": true,
+    "ctx": [{ "patch": "tick", "notes": [{"p":84,"s":0,"v":0.8},{"p":84,"s":4,"v":0.8},{"p":84,"s":8,"v":0.8},{"p":84,"s":12,"v":0.8}] }],
+    "validate": { "kind": "predicate", "name": "off-beat", "params": { "minNotes": 4, "beat": 4 } },
+    "hints": [
+      "Lance le clic. Pose tes notes PARTOUT sauf sur les temps forts (les colonnes marquées). Écoute le vide sur les temps.",
+      "Zéro note sur les colonnes marquées. Tout entre les temps : c'est là que le groove vit.",
+      "Au moins quatre notes, aucune sur les colonnes 1, 5, 9, 13. Mets-les sur les colonnes intermédiaires."
+    ],
+    "brick": {
+      "name": "LA SYNCOPE",
+      "def": "Frapper à côté des temps forts. Le groove naît du décalage.",
+      "why": "Le corps attend le temps fort ; la note qui tombe juste avant ou après crée le manque qui fait danser. Le garage vit là.",
+      "abl": "Décale tes notes de basse d'une double-croche : swing instantané."
+    },
+    "demo": { "bpm": 132, "steps": 16, "tracks": [{ "patch": "tick", "notes": [{"p":84,"s":0,"v":0.8},{"p":84,"s":4,"v":0.8},{"p":84,"s":8,"v":0.8},{"p":84,"s":12,"v":0.8}] }, { "patch": "bass", "notes": [{"p":45,"s":2},{"p":45,"s":6},{"p":48,"s":10},{"p":43,"s":14}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n22", "mod": 8, "type": "grid", "title": "LE SWING", "tag": "CONSTRUIRE",
+    "instr": "Pose huit La1 d'affilée, une case sur deux n'existe pas encore : remplis les huit premières colonnes, toutes. Lance la lecture — cette mission joue avec 30% de swing : écoute les paires devenir inégales, longue-courte, longue-courte.",
+    "tip": "Le swing retarde une double-croche sur deux. 0% = machine. 25-35% = MPC, garage, hip-hop. C'est un réglage, pas un talent.",
+    "bpm": 130, "steps": 16, "swing": 0.3, "rows": [48, 47, 45, 43, 41, 40], "patch": "bass",
+    "validate": { "kind": "predicate", "name": "count-on-row", "params": { "pitch": 45, "minNotes": 8 } },
+    "hints": [
+      "Pose une rangée de La1 réguliers et lance la lecture : le swing va rendre les paires inégales tout seul.",
+      "Au moins huit notes sur la ligne La1. Lance la lecture en boucle et compare mentalement avec une horloge.",
+      "Remplis la ligne La1 (45) sur les huit premières colonnes au moins. Le swing fait le reste."
+    ],
+    "brick": {
+      "name": "LE SWING",
+      "def": "Retarder systématiquement les doubles-croches impaires. La grille respire.",
+      "why": "Huit notes identiques + un seul réglage = groove. Le swing est la preuve que le temps musical n'est pas le temps de l'horloge.",
+      "abl": "Dans Ableton : glisse un Groove depuis le Groove Pool sur ton clip (MPC 16 Swing-62 pour le garage). Ou nudge tes notes à la main."
+    },
+    "demo": { "bpm": 130, "steps": 16, "swing": 0.3, "tracks": [{ "patch": "bass", "notes": [{"p":45,"s":0,"v":1},{"p":45,"s":1,"v":0.6},{"p":45,"s":2,"v":1},{"p":45,"s":3,"v":0.6},{"p":45,"s":4,"v":1},{"p":45,"s":5,"v":0.6},{"p":45,"s":6,"v":1},{"p":45,"s":7,"v":0.6}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n23", "mod": 8, "type": "grid", "title": "LE HALF-TIME", "tag": "CONSTRUIRE",
+    "instr": "140 BPM — le tempo dubstep. Pose un La (0 ou 1) TENU d'au moins 4 cases dès la colonne 1, puis UNE frappe sur la colonne 9 — pile au milieu. Lance avec le clic : ça va vite, mais ça pèse comme si c'était deux fois plus lent.",
+    "bpm": 140, "steps": 16, "rows": [48, 47, 45, 43, 41, 40, 38, 36, 35, 33], "patch": "sub", "marks": true,
+    "ctx": [{ "patch": "tick", "notes": [{"p":84,"s":0,"v":0.8},{"p":84,"s":4,"v":0.8},{"p":84,"s":8,"v":0.8},{"p":84,"s":12,"v":0.8}] }],
+    "validate": { "kind": "predicate", "name": "half-time", "params": { "holdStep": 0, "holdMinDur": 4, "holdPC": 9, "beatStep": 8 } },
+    "hints": [
+      "Le tempo va vite, mais on ne frappe qu'une fois sur deux : ça pèse comme si c'était deux fois plus lent.",
+      "Colonne 1 : un La étiré (mode ÉTIRER). Colonne 9 : une note, n'importe laquelle de la grille.",
+      "Pose un La (La0 ou La1) sur la colonne 1, étire-le sur au moins 4 cases, puis une seule frappe sur la colonne 9."
+    ],
+    "brick": {
+      "name": "LE HALF-TIME",
+      "def": "Un tempo rapide qui frappe une fois sur deux : 140 BPM qui pèsent comme 70.",
+      "why": "La caisse claire tombe sur le 3 au lieu du 2 et du 4 : tout s'élargit. C'est l'espace du dubstep — vitesse en haut, lenteur en bas.",
+      "abl": "Garde tes hats rapides, mets ton snare sur le temps 3 uniquement : half-time. Ton 140 BPM devient massif."
+    },
+    "demo": { "bpm": 140, "steps": 16, "tracks": [{ "patch": "tick", "notes": [{"p":84,"s":0,"v":0.8},{"p":84,"s":4,"v":0.8},{"p":84,"s":8,"v":0.8},{"p":84,"s":12,"v":0.8}] }, { "patch": "sub", "notes": [{"p":33,"s":0,"d":6},{"p":45,"s":8,"d":2},{"p":33,"s":11,"d":4}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n24", "mod": 8, "type": "decode", "title": "LE CONTRETEMPS", "tag": "DECODER",
+    "instr": "Quatre notes de basse, aucune sur un temps fort — le squelette du 2-step. Reconstruis. Indice : compte les colonnes à voix haute en écoutant.",
+    "bpm": 126, "steps": 16, "rows": [52, 50, 48, 47, 45, 43, 41, 40], "patch": "bass",
+    "target": [{"p":45,"s":2},{"p":48,"s":6},{"p":45,"s":10},{"p":40,"s":14}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Quatre notes, aucune sur un temps fort — le squelette du 2-step. Compte les colonnes à voix haute en écoutant.",
+      "Toutes les notes tombent entre les temps, sur des colonnes paires (3, 7, 11, 15). Le premier temps est vide.",
+      "La1 colonne 3, Do2 colonne 7, La1 colonne 11, Mi1 colonne 15."
+    ],
+    "brick": {
+      "name": "LE CONTRETEMPS",
+      "def": "Jouer entre les temps, jamais dessus. Le squelette du 2-step et du garage.",
+      "why": "Quand rien ne tombe sur le temps fort, c'est l'auditeur qui le fournit de l'intérieur — son corps complète le motif. Il danse pour finir la phrase.",
+      "abl": "Bassline 2-step : efface tout ce qui tombe sur les temps 1-2-3-4, garde le reste. Le trou EST le groove."
+    }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "m15", "mod": 8, "type": "decode", "title": "LE GALOP", "tag": "DECODER",
+    "instr": "Une cellule de basse jungle, rapide, en La mineur. Écoute en boucle, reconstruis les cinq notes. Dernier palier du chemin.",
+    "bpm": 160, "steps": 16, "rows": [52, 50, 48, 47, 45, 43, 41, 40], "patch": "bass",
+    "target": [{"p":45,"s":0,"d":2},{"p":45,"s":3},{"p":48,"s":6,"d":2},{"p":43,"s":10},{"p":45,"s":13}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Une cellule de basse jungle, rapide. Cinq notes qui bouclent. Écoute plusieurs fois avant de poser.",
+      "La maison (La1) revient trois fois. Entre elles, ça monte vers Do2 puis redescend.",
+      "La1 colonne 1, La1 colonne 4, Do2 colonne 7, Sol1 colonne 11, La1 colonne 14."
+    ],
+    "brick": {
+      "name": "LA CELLULE RYTHMIQUE",
+      "def": "Un motif court qui boucle et fait l'identité du morceau.",
+      "why": "La jungle tourne sur des cellules : une mesure qui revient, décalée, variée. Le cerveau accroche à la répétition qui surprend.",
+      "abl": "Construis une cellule de 1 mesure, duplique-la, varie une note sur quatre."
+    }
+  }
+]

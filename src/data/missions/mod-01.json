@@ -1,0 +1,81 @@
+[
+  {
+    "schema": "mission/v1",
+    "id": "m1", "mod": 0, "type": "keys", "title": "LE DOUBLE", "tag": "CONSTRUIRE",
+    "instr": "Un Do grave tourne en boucle. Trouve sur le clavier la note qui sonne comme sa jumelle — pas une voisine : la même, plus haut. Lance le drone, puis tape les touches jusqu'à fusion.",
+    "tip": "Sur ton clavier MIDI comme ici : une note n'est jamais seule, elle existe à tous les étages.",
+    "kb": [60, 84], "drone": 48, "maxSel": 1, "listen": "chord",
+    "validate": { "kind": "predicate", "name": "octave-of", "params": { "pc": 0, "count": 1 } },
+    "hints": [
+      "La jumelle ne frotte pas, elle se fond. Cherche au-dessus du drone, pas à côté.",
+      "Elle porte le même nom que le drone : un Do. Monte de douze touches pour la trouver.",
+      "Le drone est un Do grave. Tape n'importe quel autre Do — Do3 (60), le plus bas du clavier ici."
+    ],
+    "brick": {
+      "name": "L'OCTAVE",
+      "def": "La même note, plus haut ou plus bas. 12 touches d'écart, fréquence doublée.",
+      "why": "Deux notes à l'octave fusionnent : l'oreille les entend comme une seule, élargie.",
+      "abl": "Dans le piano roll, +12 demi-tons = même note. Doubler une bassline à l'octave = la grossir sans toucher l'harmonie."
+    },
+    "demo": { "bpm": 80, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":48,"s":0,"d":2},{"p":60,"s":2,"d":2},{"p":48,"s":4,"d":4},{"p":60,"s":4,"d":4}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "m2", "mod": 0, "type": "keys", "title": "LE FROTTEMENT", "tag": "CONSTRUIRE",
+    "instr": "Choisis deux touches qui se touchent — la noire entre deux blanches compte. Écoute-les ensemble. Ce frottement est la plus petite distance qui existe en musique.",
+    "kb": [60, 79], "maxSel": 2, "listen": "chord",
+    "validate": { "kind": "predicate", "name": "interval", "params": { "semitones": 1 } },
+    "hints": [
+      "Les deux touches doivent se toucher vraiment — aucune touche entre elles, noires comprises.",
+      "Une blanche et la noire juste à côté font l'affaire. Deux blanches voisines aussi, là où il n'y a pas de noire entre elles (Mi-Fa, Si-Do).",
+      "Prends Mi3 (64) et Fa3 (65) : collées, rien entre les deux."
+    ],
+    "brick": {
+      "name": "LE DEMI-TON",
+      "def": "La plus petite distance entre deux notes : une touche, noires comprises.",
+      "why": "Collées, deux notes frottent — tension maximale. Toute la musique se mesure en demi-tons.",
+      "abl": "Une case verticale du piano roll = un demi-ton. Transposer un clip de +1 = tout monte d'un demi-ton."
+    },
+    "demo": { "bpm": 80, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":64,"s":0,"d":2},{"p":65,"s":2,"d":2},{"p":64,"s":4,"d":4},{"p":65,"s":4,"d":4}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n01", "mod": 0, "type": "keys", "title": "LE PAS ENTIER", "tag": "CONSTRUIRE",
+    "instr": "Maintenant deux touches avec exactement UNE touche entre elles (noires comprises). Écoute : ça frotte encore, mais c'est respirable. C'est le pas normal de la musique.",
+    "tip": "Demi-ton = frottement. Ton = marche. Les gammes ne sont que des suites de ces deux pas.",
+    "kb": [60, 79], "maxSel": 2, "listen": "chord",
+    "validate": { "kind": "predicate", "name": "interval", "params": { "semitones": 2 } },
+    "hints": [
+      "Cette fois, laisse exactement une touche libre entre les deux — compte les noires.",
+      "Une touche sautée, pas zéro, pas deux. Do et Ré, par exemple, ont une noire entre eux.",
+      "Pose Do3 (60) et Ré3 (62) : une seule touche (la noire Do#) saute entre les deux."
+    ],
+    "brick": {
+      "name": "LE TON",
+      "def": "Deux demi-tons. Une touche sautée. Le pas de marche de la musique.",
+      "why": "Le demi-ton colle, le ton respire. Toutes les échelles que tu vas construire alternent ces deux pas — c'est leur code génétique.",
+      "abl": "Dans le piano roll : +2 cases. Mémorise les deux distances à l'œil, tu liras les gammes sans réfléchir."
+    },
+    "demo": { "bpm": 80, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":60,"s":0,"d":2},{"p":62,"s":2,"d":2},{"p":60,"s":4,"d":4},{"p":62,"s":4,"d":4}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "m3", "mod": 0, "type": "decode", "title": "TROIS PAS", "tag": "DECODER",
+    "instr": "Écoute le modèle autant de fois que tu veux. Reconstruis-le sur la grille, note par note. Vérifie quand tu penses l'avoir.",
+    "tip": "Première reconstruction à l'oreille : c'est le muscle que tu vas entraîner sur tout le chemin.",
+    "bpm": 100, "steps": 8, "rows": [67, 65, 64, 62, 60, 59, 57], "patch": "keys",
+    "target": [{"p":60,"s":0,"d":2},{"p":62,"s":2,"d":2},{"p":64,"s":4,"d":3}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Trois notes seulement, qui montent par petits pas voisins. Réécoute et suis la montée.",
+      "Ça part du bas vers le milieu de la grille, en avançant d'une ligne à chaque fois. La première tombe sur le tout premier temps.",
+      "Do3 colonne 1, Ré3 colonne 3, Mi3 colonne 5. Trois marches qui montent."
+    ],
+    "brick": {
+      "name": "LE MOUVEMENT CONJOINT",
+      "def": "Une mélodie qui avance par notes voisines, pas par sauts.",
+      "why": "L'oreille suit sans effort ce qui marche pas à pas. Les sauts surprennent, les pas rassurent — une mélodie dose les deux.",
+      "abl": "Dessine tes mélodies : beaucoup de pas, quelques sauts choisis."
+    }
+  }
+]

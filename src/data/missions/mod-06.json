@@ -1,0 +1,80 @@
+[
+  {
+    "schema": "mission/v1",
+    "id": "n10", "mod": 5, "type": "grid", "title": "LE MOTIF", "tag": "CONSTRUIRE",
+    "instr": "Invente 3 à 5 notes dans la première moitié de la grille, en restant sur les lignes éclaircies (La mineur). Puis répète-les EXACTEMENT dans la deuxième moitié, 8 cases plus loin. Écoute en boucle.",
+    "tip": "Composer = répéter plus que tu ne crois. Le cerveau de l'auditeur aime reconnaître.",
+    "bpm": 112, "steps": 16, "rows": [69, 67, 65, 64, 62, 60, 59, 57], "patch": "pluck", "scale": "Amin",
+    "validate": { "kind": "predicate", "name": "motif-repeat", "params": { "splitAt": 8, "minNotes": 3, "maxNotes": 5, "scalePC": [9, 11, 0, 2, 4, 5, 7] } },
+    "hints": [
+      "Invente une petite phrase dans la première moitié, sur les lignes éclaircies, puis répète-la à l'identique dans la seconde.",
+      "Mêmes notes, mêmes positions, +8 colonnes. Et uniquement les lignes éclaircies.",
+      "3 à 5 notes entre les colonnes 1 et 8, puis exactement les mêmes 8 colonnes plus loin (colonnes 9 à 16). Reste sur les lignes claires."
+    ],
+    "brick": {
+      "name": "LE MOTIF",
+      "def": "Une petite cellule mélodique qui se répète. L'unité de base de toute mélodie.",
+      "why": "La répétition n'est pas de la paresse : c'est elle qui transforme des notes en idée. On retient ce qui revient.",
+      "abl": "Compose 1 mesure, Ctrl+D pour dupliquer. La variation viendra après — d'abord, l'identité."
+    },
+    "demo": { "bpm": 112, "steps": 16, "tracks": [{ "patch": "pluck", "notes": [{"p":57,"s":0},{"p":60,"s":2},{"p":64,"s":3},{"p":62,"s":6},{"p":57,"s":8},{"p":60,"s":10},{"p":64,"s":11},{"p":62,"s":14}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n11", "mod": 5, "type": "grid", "title": "QUESTION, RÉPONSE", "tag": "CONSTRUIRE",
+    "instr": "Deux phrases dans la gamme (lignes éclaircies). La première se termine N'IMPORTE OÙ sauf sur un La : c'est la question, elle reste en l'air. La seconde se termine sur un La : la réponse, elle rentre. Au moins 3 notes chacune.",
+    "bpm": 112, "steps": 16, "rows": [69, 67, 65, 64, 62, 60, 59, 57], "patch": "pluck", "scale": "Amin",
+    "validate": { "kind": "predicate", "name": "question-answer", "params": { "splitAt": 8, "minEach": 3, "rootPC": 9, "scalePC": [9, 11, 0, 2, 4, 5, 7] } },
+    "hints": [
+      "Deux phrases. La première reste en suspens (elle ne rentre pas à la maison), la seconde se pose sur la maison.",
+      "Regarde la DERNIÈRE note de chaque moitié : la première ne doit pas être un La, la seconde doit en être un.",
+      "Au moins 3 notes par moitié, toutes dans la gamme (lignes claires). Termine la première sur n'importe quelle note SAUF un La ; termine la seconde sur un La."
+    ],
+    "brick": {
+      "name": "QUESTION-RÉPONSE",
+      "def": "Une phrase suspendue, une phrase qui rentre à la maison. Le dialogue de base.",
+      "why": "Finir hors de la fondamentale = point d'interrogation. Finir dessus = point final. Ta mélodie parle déjà.",
+      "abl": "Structure tes mélodies en paires de 1 ou 2 mesures : ouverte, puis fermée. L'auditeur attend la réponse — donne-la."
+    },
+    "demo": { "bpm": 112, "steps": 16, "tracks": [{ "patch": "pluck", "notes": [{"p":64,"s":0},{"p":62,"s":2},{"p":60,"s":4},{"p":62,"s":6,"d":2},{"p":64,"s":8},{"p":62,"s":10},{"p":60,"s":12},{"p":57,"s":14,"d":2}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n12", "mod": 5, "type": "grid", "title": "LA NOTE DE PASSAGE", "tag": "CONSTRUIRE",
+    "instr": "Relie Do3 à Mi3 en trois pas réguliers : Do3 colonne 1, la note entre les deux colonne 3, Mi3 colonne 5. Écoute : la note du milieu n'appartient pas à l'accord, mais elle est sur le chemin — donc elle passe.",
+    "bpm": 100, "steps": 8, "rows": [67, 65, 64, 62, 60, 59, 57], "patch": "keys",
+    "target": [{"p":60,"s":0},{"p":62,"s":2},{"p":64,"s":4}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Relie Do3 à Mi3 en passant par la note juste entre les deux, en trois pas réguliers.",
+      "Trois notes : la première colonne, la troisième, la cinquième. La note du milieu n'est pas dans l'accord, elle est sur le chemin.",
+      "Do3 colonne 1, Ré3 colonne 3, Mi3 colonne 5."
+    ],
+    "brick": {
+      "name": "LA NOTE DE PASSAGE",
+      "def": "Une note hors accord, traversée en chemin entre deux notes de l'accord.",
+      "why": "Elle crée une micro-tension immédiatement résolue : du mouvement sans danger. C'est ce qui rend une mélodie fluide au lieu de hachée.",
+      "abl": "Entre deux notes d'accord distantes, remplis l'escalier avec les notes de la gamme : passage naturel."
+    },
+    "demo": { "bpm": 100, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":60,"s":0,"d":2},{"p":62,"s":2,"d":2},{"p":64,"s":4,"d":3}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n13", "mod": 5, "type": "decode", "title": "LA PHRASE", "tag": "DECODER",
+    "instr": "Une mélodie complète en La mineur : un motif, sa variation, une fin qui rentre. Sept notes. Prends ton temps, réécoute par morceaux.",
+    "bpm": 112, "steps": 16, "rows": [69, 67, 65, 64, 62, 60, 59, 57], "patch": "pluck",
+    "target": [{"p":57,"s":0},{"p":60,"s":2},{"p":62,"s":4,"d":2},{"p":57,"s":8},{"p":60,"s":10},{"p":59,"s":12},{"p":57,"s":14,"d":2}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Sept notes : un motif, sa variation, une fin qui rentre. Réécoute par morceaux.",
+      "Ça commence et finit sur La. La première moitié et la seconde se ressemblent, avec une fin différente.",
+      "La2 colonne 1, Do3 colonne 3, Ré3 colonne 5 ; puis La2 colonne 9, Do3 colonne 11, Si2 colonne 13, La2 colonne 15."
+    ],
+    "brick": {
+      "name": "LA PHRASE",
+      "def": "Motif + variation + retour à la maison = une phrase mélodique complète.",
+      "why": "Tu viens d'entendre la grammaire entière : l'idée, son écho modifié, la résolution. Toute mélodie qui te hante est bâtie comme ça.",
+      "abl": "Quand une mélodie ne marche pas : vérifie qu'elle répète assez, qu'elle varie un peu, et qu'elle atterrit quelque part."
+    }
+  }
+]

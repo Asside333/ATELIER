@@ -1,0 +1,96 @@
+[
+  {
+    "schema": "mission/v1",
+    "id": "m7", "mod": 3, "type": "keys", "title": "L'EMPILEMENT", "tag": "CONSTRUIRE",
+    "instr": "Depuis La2 : pose la touche, saute une blanche, pose, saute une blanche, pose. Trois notes. Écoute-les ensemble — c'est un objet, pas trois sons.",
+    "kb": [55, 72], "maxSel": 3, "listen": "chord",
+    "validate": { "kind": "set-exact", "pitches": [57, 60, 64] },
+    "hints": [
+      "Trois notes en partant de La2 : pose, saute une blanche, pose, saute une blanche, pose.",
+      "Tu empiles une note sur deux, en blanches. La racine est La2.",
+      "La2, puis Do3, puis Mi3 — racine, saute une blanche, pose, saute une blanche, pose."
+    ],
+    "brick": {
+      "name": "L'ACCORD MINEUR",
+      "def": "3 notes empilées : racine, +3 demi-tons, puis +4 (le 1-3-5 de la gamme).",
+      "why": "Trois notes compatibles jouées ensemble = un accord. L'écart de 3 en bas le rend sombre.",
+      "abl": "Empile dans le piano roll : racine, +3, +7. Stab garage instantané."
+    },
+    "demo": { "bpm": 90, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":57,"s":0,"d":6},{"p":60,"s":0,"d":6},{"p":64,"s":0,"d":6}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "m8", "mod": 3, "type": "keys", "title": "LE FRÈRE LUMINEUX", "tag": "CONSTRUIRE",
+    "instr": "Exactement le même geste, mais depuis Do3. Écoute, puis réécoute l'accord d'avant dans ton carnet. Un seul détail change — et tout bascule.",
+    "kb": [55, 72], "maxSel": 3, "listen": "chord",
+    "validate": { "kind": "set-exact", "pitches": [60, 64, 67] },
+    "hints": [
+      "Exactement le même geste qu'avant, mais en partant de Do3.",
+      "Empile une blanche sur deux depuis Do3 : trois notes.",
+      "Do3, puis Mi3, puis Sol3 — racine, saute une blanche, pose, saute une blanche, pose."
+    ],
+    "brick": {
+      "name": "L'ACCORD MAJEUR",
+      "def": "Même empilement, mais 4 demi-tons en bas : racine, +4, +7.",
+      "why": "Un seul demi-ton de différence avec le mineur — et la couleur bascule. La note du milieu décide.",
+      "abl": "+3 ou +4 au-dessus de la racine : c'est l'interrupteur sombre / lumineux."
+    },
+    "demo": { "bpm": 90, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":60,"s":0,"d":6},{"p":64,"s":0,"d":6},{"p":67,"s":0,"d":6}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "m9", "mod": 3, "type": "ear", "title": "L'OREILLE TRANCHE", "tag": "OREILLE",
+    "instr": "Cinq accords, un par un. Pour chacun : sombre ou lumineux ? Mineur ou majeur ? Il en faut 4 sur 5. Ton oreille sait déjà — laisse-la trancher avant la tête.",
+    "validate": { "kind": "ear", "rounds": 5, "pass": 4, "mode": "major-minor" },
+    "hints": [
+      "Ne réfléchis pas : la première impression — sombre ou clair — est presque toujours juste.",
+      "Le mineur a quelque chose de tendu, de retenu ; le majeur sonne ouvert, résolu. C'est la note du milieu qui décide.",
+      "Doute ? Imagine la note du milieu glisser d'un demi-ton : vers le bas elle assombrit, vers le haut elle éclaire."
+    ],
+    "brick": {
+      "name": "LA TIERCE",
+      "def": "La note du milieu de l'accord — celle qui décide majeur ou mineur.",
+      "why": "Tu viens de le prouver : ton oreille entend la différence. La certitude vient avec la répétition, pas avec la théorie.",
+      "abl": "Doute sur un accord ? Isole la note du milieu, bouge-la d'un demi-ton, écoute la bascule."
+    },
+    "demo": { "bpm": 90, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":57,"s":0,"d":3},{"p":60,"s":0,"d":3},{"p":64,"s":0,"d":3},{"p":57,"s":4,"d":3},{"p":61,"s":4,"d":3},{"p":64,"s":4,"d":3}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n07", "mod": 3, "type": "keys", "title": "LE RENVERSEMENT", "tag": "CONSTRUIRE",
+    "instr": "L'accord de La mineur, réarrangé : on garde les mêmes trois noms de notes, mais le La quitte le bas pour passer à l'étage du dessus. Sélectionne Do3, Mi3, La3 — et compare avec l'accord d'origine dans ton carnet.",
+    "kb": [55, 74], "maxSel": 3, "listen": "chord",
+    "validate": { "kind": "set-exact", "pitches": [60, 64, 69] },
+    "hints": [
+      "Le même accord de La mineur, mais réarrangé : la note la plus grave monte d'un étage.",
+      "Garde Do et Mi en bas, et fais passer le La tout en haut au lieu d'en bas.",
+      "Do3 (60), Mi3 (64), La3 (69). Les mêmes trois noms que l'accord mineur — la racine est passée à l'étage."
+    ],
+    "brick": {
+      "name": "LE RENVERSEMENT",
+      "def": "Le même accord, autre étage : la racine monte d'une octave. Mêmes notes, autre dessin.",
+      "why": "Trois notes = trois empilements possibles. Le renversement garde l'harmonie mais change le geste — c'est ce qui rend les stabs garage si mobiles.",
+      "abl": "Sélectionne la note du bas d'un accord, +12 : renversement. Enchaîne des accords par renversements proches = voicing fluide."
+    },
+    "demo": { "bpm": 90, "steps": 8, "tracks": [{ "patch": "keys", "notes": [{"p":57,"s":0,"d":3},{"p":60,"s":0,"d":3},{"p":64,"s":0,"d":3},{"p":60,"s":4,"d":3},{"p":64,"s":4,"d":3},{"p":69,"s":4,"d":3}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "m10", "mod": 3, "type": "decode", "title": "DEUX STABS", "tag": "DECODER",
+    "instr": "Deux accords frappés, un par moitié de mesure. Six notes en tout. Reconstruis — commence par les racines, les notes les plus graves.",
+    "bpm": 120, "steps": 16, "rows": [65, 64, 62, 60, 59, 57, 55, 53], "patch": "keys",
+    "target": [{"p":57,"s":0,"d":3},{"p":60,"s":0,"d":3},{"p":64,"s":0,"d":3},{"p":53,"s":8,"d":3},{"p":57,"s":8,"d":3},{"p":60,"s":8,"d":3}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Deux accords frappés, un par moitié de mesure. Commence par les notes les plus graves.",
+      "Le premier accord tombe sur la colonne 1, le second sur la colonne 9. Trois notes chacun.",
+      "Colonne 1 : La2, Do3, Mi3. Colonne 9 : Fa2, La2, Do3."
+    ],
+    "brick": {
+      "name": "LA PROGRESSION",
+      "def": "Des accords de la même gamme qui s'enchaînent en boucle.",
+      "why": "Tous les accords construits sur une même gamme sont compatibles. L'enchaînement crée le récit : tension, retour.",
+      "abl": "Reste dans les notes surlignées par Scale : tes accords s'accorderont toujours."
+    }
+  }
+]

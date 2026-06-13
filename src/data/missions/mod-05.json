@@ -1,0 +1,100 @@
+[
+  {
+    "schema": "mission/v1",
+    "id": "m11", "mod": 4, "type": "grid", "title": "LA BOUCLE ÉPIQUE", "tag": "CONSTRUIRE",
+    "instr": "Quatre accords, un par temps fort (colonnes marquées) : racines La2, Fa2, Do3, Sol2. Pour chacun, le geste d'empilement en blanches : racine, saute une, pose, saute une, pose. Douze notes.",
+    "tip": "Astuce Ableton : construis le premier accord, copie-le (Ctrl+D), déplace la copie. Ici, pose-les un par un — le geste s'imprime.",
+    "bpm": 90, "steps": 16, "rows": [69, 67, 65, 64, 62, 60, 59, 57, 55, 53], "patch": "keys", "marks": true,
+    "validate": { "kind": "cells-at-steps", "steps": { "0": [57, 60, 64], "4": [53, 57, 60], "8": [60, 64, 67], "12": [55, 59, 62] } },
+    "hints": [
+      "Quatre accords, un par temps fort. Pour chacun : la racine, saute une blanche, pose, saute une blanche, pose.",
+      "Les quatre racines, en bas de chaque accord : La2, Fa2, Do3, Sol2.",
+      "Temps 1 : La2-Do3-Mi3. Temps 2 : Fa2-La2-Do3. Temps 3 : Do3-Mi3-Sol3. Temps 4 : Sol2-Si2-Ré3."
+    ],
+    "brick": {
+      "name": "LES DEGRÉS",
+      "def": "Les accords d'une gamme, numérotés depuis la maison. Tu viens de jouer i–VI–III–VII.",
+      "why": "Les numéros rendent les progressions transportables : i–VI–III–VII fonctionne dans toutes les tonalités. C'est la boucle de la moitié de la pop sombre.",
+      "abl": "Note tes progressions en degrés, pas en notes : réutilisables dans tous tes tracks, toutes tonalités."
+    },
+    "demo": { "bpm": 90, "steps": 16, "tracks": [{ "patch": "keys", "notes": [{"p":57,"s":0,"d":4},{"p":60,"s":0,"d":4},{"p":64,"s":0,"d":4},{"p":53,"s":4,"d":4},{"p":57,"s":4,"d":4},{"p":60,"s":4,"d":4},{"p":60,"s":8,"d":4},{"p":64,"s":8,"d":4},{"p":67,"s":8,"d":4},{"p":55,"s":12,"d":4},{"p":59,"s":12,"d":4},{"p":62,"s":12,"d":4}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "m12", "mod": 4, "type": "decode", "title": "LES 4 MAGIQUES", "tag": "DECODER",
+    "instr": "La progression la plus célèbre de la pop, jouée à la basse : quatre notes, une par temps fort. Reconstruis. Tu l'as entendue mille fois.",
+    "bpm": 100, "steps": 16, "rows": [50, 48, 47, 45, 43, 41, 40, 38], "patch": "bass",
+    "target": [{"p":48,"s":0,"d":3},{"p":43,"s":4,"d":3},{"p":45,"s":8,"d":3},{"p":41,"s":12,"d":3}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Quatre notes de basse, une par temps fort. Tu l'as entendue mille fois — laisse l'oreille deviner la suite.",
+      "Ça part d'un Do, descend, remonte un peu, puis tombe le plus bas. Sur les colonnes 1, 5, 9, 13.",
+      "Do2 colonne 1, Sol1 colonne 5, La1 colonne 9, Fa1 colonne 13."
+    ],
+    "brick": {
+      "name": "LES 4 MAGIQUES",
+      "def": "I–V–vi–IV : la progression la plus utilisée de la pop. À la basse : Do, Sol, La, Fa.",
+      "why": "Quatre degrés qui alternent lumière et ombre en boucle parfaite — des centaines de hits tournent dessus.",
+      "abl": "Pose ces 4 racines à la basse, empile les accords au-dessus : un morceau existe déjà."
+    }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "m13", "mod": 4, "type": "grid", "title": "LA BASSE DESSINE", "tag": "CONSTRUIRE",
+    "instr": "Ta boucle épique joue en fond — lance-la. Pose une note de basse sous chaque accord : sa racine, sur les colonnes marquées. La1, Fa1, Do2, Sol1.",
+    "bpm": 90, "steps": 16, "rows": [50, 48, 47, 45, 43, 41, 40, 38], "patch": "bass", "marks": true,
+    "ctx": [{ "patch": "keys", "notes": [{"p":57,"s":0,"d":4,"v":0.55},{"p":60,"s":0,"d":4,"v":0.55},{"p":64,"s":0,"d":4,"v":0.55},{"p":53,"s":4,"d":4,"v":0.55},{"p":57,"s":4,"d":4,"v":0.55},{"p":60,"s":4,"d":4,"v":0.55},{"p":60,"s":8,"d":4,"v":0.55},{"p":64,"s":8,"d":4,"v":0.55},{"p":67,"s":8,"d":4,"v":0.55},{"p":55,"s":12,"d":4,"v":0.55},{"p":59,"s":12,"d":4,"v":0.55},{"p":62,"s":12,"d":4,"v":0.55}] }],
+    "validate": { "kind": "cells-at-steps", "steps": { "0": [45], "4": [41], "8": [48], "12": [43] } },
+    "hints": [
+      "Lance le fond : tu entends les accords. Pose UNE note de basse sous chacun — sa racine.",
+      "Quatre notes, une par temps fort, sur les colonnes marquées. Ce sont les racines des quatre accords.",
+      "La1 colonne 1, Fa1 colonne 5, Do2 colonne 9, Sol1 colonne 13."
+    ],
+    "brick": {
+      "name": "LA BASSE FONDAMENTALE",
+      "def": "La basse joue la racine de chaque accord : elle dessine l'harmonie toute seule.",
+      "why": "Même sans les accords, une basse qui suit les racines fait entendre la progression. En électronique, la basse EST souvent l'harmonie.",
+      "abl": "Mute tes pads : si la bassline raconte encore la progression, elle est juste."
+    },
+    "demo": { "bpm": 90, "steps": 16, "tracks": [{ "patch": "keys", "notes": [{"p":57,"s":0,"d":4,"v":0.5},{"p":60,"s":0,"d":4,"v":0.5},{"p":64,"s":0,"d":4,"v":0.5},{"p":53,"s":4,"d":4,"v":0.5},{"p":57,"s":4,"d":4,"v":0.5},{"p":60,"s":4,"d":4,"v":0.5},{"p":60,"s":8,"d":4,"v":0.5},{"p":64,"s":8,"d":4,"v":0.5},{"p":67,"s":8,"d":4,"v":0.5},{"p":55,"s":12,"d":4,"v":0.5},{"p":59,"s":12,"d":4,"v":0.5},{"p":62,"s":12,"d":4,"v":0.5}] }, { "patch": "bass", "notes": [{"p":45,"s":0,"d":3},{"p":41,"s":4,"d":3},{"p":48,"s":8,"d":3},{"p":43,"s":12,"d":3}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n08", "mod": 4, "type": "grid", "title": "LA PORTE", "tag": "CONSTRUIRE",
+    "instr": "Deux accords : le premier crée un manque, le second referme la porte. Pose Mi3-Sol#3-Si3 sur le temps 1, puis La2-Do3-Mi3 sur le temps 3. Écoute en boucle : sens le besoin de rentrer.",
+    "tip": "Le Sol# n'est pas dans La mineur — c'est une note empruntée, exprès. La tension a le droit de tricher.",
+    "bpm": 84, "steps": 16, "rows": [72, 71, 69, 68, 67, 65, 64, 62, 60, 59, 57], "patch": "pad", "marks": true,
+    "validate": { "kind": "cells-at-steps", "steps": { "0": [64, 68, 71], "8": [57, 60, 64] } },
+    "hints": [
+      "Deux accords : le premier crée un manque (la tension), le second referme la porte (le repos). Écoute le besoin de rentrer.",
+      "L'accord de tension est bâti sur Mi3 et contient une note empruntée, une noire. L'accord-maison est La mineur.",
+      "Colonne 1 : Mi3 (64), Sol#3 (68 — une noire), Si3 (71). Colonne 9 : La2, Do3, Mi3."
+    ],
+    "brick": {
+      "name": "LA CADENCE",
+      "def": "V → i : l'accord de tension puis l'accord-maison. La phrase qui se termine.",
+      "why": "Le Sol# tire vers le La comme un aimant — un demi-ton de manque. Toute fin de phrase, de la techno à Bach, est une variante de ce geste.",
+      "abl": "Avant de revenir sur ton accord-maison, place l'accord bâti sur la 5e note de la gamme : retour garanti."
+    },
+    "demo": { "bpm": 84, "steps": 16, "tracks": [{ "patch": "pad", "notes": [{"p":64,"s":0,"d":7},{"p":68,"s":0,"d":7},{"p":71,"s":0,"d":7},{"p":57,"s":8,"d":8},{"p":60,"s":8,"d":8},{"p":64,"s":8,"d":8}] }] }
+  },
+  {
+    "schema": "mission/v1",
+    "id": "n09", "mod": 4, "type": "decode", "title": "L'ANDALOUSE", "tag": "DECODER",
+    "instr": "Une descente de basse mythique — flamenco, mais aussi la moitié du psy-dub et de la dark techno. Quatre notes qui descendent, une par temps fort. Reconstruis.",
+    "bpm": 96, "steps": 16, "rows": [48, 47, 45, 43, 41, 40, 38, 36], "patch": "bass",
+    "target": [{"p":45,"s":0,"d":3},{"p":43,"s":4,"d":3},{"p":41,"s":8,"d":3},{"p":40,"s":12,"d":3}],
+    "validate": { "kind": "cells-exact" },
+    "hints": [
+      "Quatre notes de basse qui descendent régulièrement, une par temps fort. Une descente célèbre.",
+      "Ça part de La1 et descend marche par marche, presque par tons, jusqu'à un demi-ton du repos.",
+      "La1 colonne 1, Sol1 colonne 5, Fa1 colonne 9, Mi1 colonne 13."
+    ],
+    "brick": {
+      "name": "LA DESCENTE ANDALOUSE",
+      "def": "i–VII–VI–V : quatre marches qui descendent vers la tension. La, Sol, Fa, Mi.",
+      "why": "Une descente régulière qui se termine un demi-ton au-dessus du retour : l'auditeur est suspendu, la boucle peut tourner sans fin.",
+      "abl": "Basse descendante par tons puis demi-ton final : tension cyclique parfaite pour une intro ou un breakdown."
+    }
+  }
+]
