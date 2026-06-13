@@ -1,5 +1,5 @@
 const LS = 'atelier_v3'
-const DEFAULTS = { done: [], streak: 0, lastDay: '', seen: false, names: 'fr' }
+const DEFAULTS = { done: [], streak: 0, lastDay: '', seen: false, names: 'fr', sketches: [] }
 
 let S = { ...DEFAULTS, ...JSON.parse(localStorage.getItem(LS) || '{}') }
 
@@ -28,4 +28,17 @@ export function toggleNames() {
   S.names = S.names === 'fr' ? 'en' : 'fr'
   save()
   return S.names
+}
+
+export function addSketch(sketch) {
+  if (!S.sketches) S.sketches = []
+  S.sketches.push(sketch)
+  markActivity()
+  save()
+}
+
+export function removeSketch(i) {
+  if (!S.sketches) return
+  S.sketches.splice(i, 1)
+  save()
 }

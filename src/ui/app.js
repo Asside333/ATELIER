@@ -11,6 +11,7 @@ import { openMission, brickCard } from './mission.js'
 import { stop as playerStop } from '../core/player.js'
 import { init as engineInit, isReady as engineReady } from '../core/engine.js'
 import { setKBLang } from './keyboard.js'
+import { initStudio, renderStudio } from './studio.js'
 
 // ── DONNÉES ───────────────────────────────────────────────────────────────────
 
@@ -124,7 +125,12 @@ function renderBricks() {
 export function init() {
   // Buttons de navigation
   document.getElementById('nav-path').addEventListener('click', () => { playerStop(); goPath() })
-  document.getElementById('nav-studio').addEventListener('click', () => { playerStop(); showView('studio') })
+  document.getElementById('nav-studio').addEventListener('click', () => {
+    playerStop()
+    initStudio()
+    renderStudio()
+    showView('studio')
+  })
   document.getElementById('nav-bricks').addEventListener('click', () => { renderBricks(); showView('bricks') })
 
   // Toggle noms de notes
