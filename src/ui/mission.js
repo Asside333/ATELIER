@@ -68,7 +68,7 @@ export function brickCard(m, { allMissions, modules }, withListen = false) {
       bpm: m.bpm || 100, steps: m.steps || 16, swing: m.swing || 0,
       tracks: [{ patch: m.patch || 'keys', notes: m.target || [] }],
     }
-    if (demo.tracks?.length) {
+    if (demo.tracks?.some(t => t.notes?.length)) {
       d.appendChild(btn('btn', '▶ ENTENDRE LA BRIQUE', () => once(demo)))
     }
   }

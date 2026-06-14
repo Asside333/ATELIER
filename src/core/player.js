@@ -75,6 +75,8 @@ function buildStepEvents(cfg) {
 
 /**
  * Joue la séquence une fois sans boucle.
+ * Utilise Tone.Part (même approche que loopStart) pour éviter la confusion
+ * entre temps absolu du contexte audio et temps relatif du transport.
  */
 export async function once(cfg, { onStep, onEnd } = {}) {
   await engineInit()
@@ -82,33 +84,46 @@ export async function once(cfg, { onStep, onEnd } = {}) {
 
   const { bpm, steps = 16, swing = 0 } = cfg
   const sS = stepDur(bpm, steps)
-  const totalDur = steps * sS
+  const loopDur = steps * sS
 
   setWobbleBPM(bpm)
   Tone.getTransport().bpm.value = bpm
+  Tone.getTransport().loop = false
   Tone.getTransport().stop()
   Tone.getTransport().cancel()
+  Tone.getTransport().position = 0
 
-  const now = Tone.now() + 0.05
+  // Notes via Tone.Part (une seule passe, pas de boucle)
+  for (const track of (cfg.tracks || [])) {
+    const { patch, notes = [] } = track
+    const evts = notes
+      .filter(n => n.s >= 0 && n.s < steps)
+      .map(n => ({
+        time: stepTime(n.s, sS, swing),
+        p: n.p,
+        d: n.d ?? 1,
+        v: n.v ?? 0.9,
+      }))
 
-  // Notes
-  const events = buildEvents(cfg)
-  for (const ev of events) {
-    Tone.getDraw().schedule(() => {}, now + ev.time) // noop pour forcer le tick
-    const id = Tone.getTransport().schedule((time) => {
-      playNote(ev.patch, ev.p, time, ev.d, ev.v, ev.stepS)
-    }, now + ev.time)
-    _partIds.push(id)
+    if (!evts.length) continue
+
+    const part = new Tone.Part((time, ev) => {
+      playNote(patch, ev.p, time, ev.d, ev.v, sS)
+    }, evts)
+    part.loop = false
+    part.start(0)
+    _partIds.push(part)
   }
 
   // Playhead
   if (onStep) {
-    for (const ev of buildStepEvents(cfg)) {
-      const id = Tone.getTransport().schedule((time) => {
-        Tone.getDraw().schedule(() => onStep(ev.step), time)
-      }, now + ev.time)
-      _partIds.push(id)
-    }
+    const stepEvts = buildStepEvents(cfg).map(ev => ({ time: ev.time, step: ev.step }))
+    const stepPart = new Tone.Part((time, ev) => {
+      Tone.getDraw().schedule(() => onStep(ev.step), time)
+    }, stepEvts)
+    stepPart.loop = false
+    stepPart.start(0)
+    _partIds.push(stepPart)
   }
 
   // Fin
@@ -116,7 +131,7 @@ export async function once(cfg, { onStep, onEnd } = {}) {
     const id = Tone.getTransport().schedule(() => {
       onEnd()
       _running = false
-    }, now + totalDur)
+    }, loopDur)
     _partIds.push(id)
   }
 
