@@ -195,10 +195,10 @@ export function openMission(m, ctx) {
   }
 
   // ── Dispatch par type ─────────────────────────────────────────────────────
-  if (m.type === 'keys') _renderKeys(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang, state })
-  if (m.type === 'grid') _renderGrid(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang, state })
-  if (m.type === 'decode') _renderDecode(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang, state })
-  if (m.type === 'ear')  _renderEar(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang, state })
+  if (m.type === 'keys') _renderKeys(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang })
+  if (m.type === 'grid') _renderGrid(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang })
+  if (m.type === 'decode') _renderDecode(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang })
+  if (m.type === 'ear')  _renderEar(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang })
 
   // ── Hints progressifs ─────────────────────────────────────────────────────
   _attachHints(m.hints || [], actions, hintsEl, feed)
@@ -223,7 +223,7 @@ function _attachHints(hints, actions, hintsEl, feed) {
 
 // ── TYPE : KEYS ──────────────────────────────────────────────────────────────
 
-function _renderKeys(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
+function _renderKeys(m, { ctx, ctxEl, body, feed, actions, lang }) {
   // Drone
   if (m.drone) {
     ctxEl.appendChild(makeToggleBtn('LANCER LE DRONE', 'DRONE EN COURS', () => {
@@ -287,7 +287,14 @@ function _renderKeys(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
       feed.className = 'feed good'
       setTimeout(() => _finish(m, ctx), 500)
     } else {
-      feed.textContent = 'Pas encore — essaie une autre combinaison.'
+      const expected = m.validate.kind === 'set-exact'
+        ? m.validate.pitches.length
+        : (m.validate.params?.count ?? m.maxSel ?? 0)
+      if (expected && sel.length !== expected) {
+        feed.textContent = `Il faut ${expected} note${expected > 1 ? 's' : ''} — tu en as ${sel.length}.`
+      } else {
+        feed.textContent = 'Pas encore — essaie une autre combinaison.'
+      }
       feed.className = 'feed warn'
     }
   }))
@@ -295,7 +302,7 @@ function _renderKeys(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
 
 // ── TYPE : GRID ───────────────────────────────────────────────────────────────
 
-function _renderGrid(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang, state }) {
+function _renderGrid(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang }) {
   const userNotes = []
   let toolMode = 'put'
   const hlFn = m.scale ? (p => inScale(p, m.scale)) : null
@@ -335,6 +342,9 @@ function _renderGrid(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang, state 
 
   // Écouter / Boucle / Valider
   actions.appendChild(btn('btn', '▶ ÉCOUTER', () => {
+    if (!userNotes.length && !m.ctx?.length) {
+      feed.textContent = 'Pose des notes d\'abord.'; feed.className = 'feed warn'; return
+    }
     _resetToggles()
     once({
       bpm: m.bpm, steps: m.steps, swing: m.swing || 0,
@@ -367,7 +377,7 @@ function _renderGrid(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang, state 
 
 // ── TYPE : DECODE ─────────────────────────────────────────────────────────────
 
-function _renderDecode(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
+function _renderDecode(m, { ctx, ctxEl, body, feed, actions, lang }) {
   const userNotes = []
   let toolMode = 'put'
 
@@ -408,6 +418,9 @@ function _renderDecode(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
   }))
 
   actions.appendChild(btn('btn', '▶ MA VERSION', () => {
+    if (!userNotes.length) {
+      feed.textContent = 'Pose des notes d\'abord.'; feed.className = 'feed warn'; return
+    }
     once({
       bpm: m.bpm, steps: m.steps, swing: m.swing || 0,
       tracks: [{ patch: m.patch, notes: userNotes }],
@@ -437,7 +450,7 @@ function _renderDecode(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
 
 // ── TYPE : EAR ────────────────────────────────────────────────────────────────
 
-function _renderEar(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
+function _renderEar(m, { ctx, ctxEl, body, feed, actions }) {
   const rounds = m.validate.rounds || 5
   const pass = m.validate.pass ?? rounds - 1
   let round = 0, score = [], quality = null, root = null
@@ -449,10 +462,15 @@ function _renderEar(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
   const playBtn = btn('btn prime', "▶ ÉCOUTER L'ACCORD", () => _playChord())
   box.appendChild(playBtn)
 
+  const bMin = btn('btn', 'SOMBRE (mineur)', () => _answer('min'))
+  const bMaj = btn('btn', 'LUMINEUX (majeur)', () => _answer('maj'))
   const earBtns = el('div', 'earbtns')
-  earBtns.appendChild(btn('btn', 'SOMBRE (mineur)', () => _answer('min')))
-  earBtns.appendChild(btn('btn', 'LUMINEUX (majeur)', () => _answer('maj')))
+  earBtns.appendChild(bMin)
+  earBtns.appendChild(bMaj)
   box.appendChild(earBtns)
+
+  // Réponses verrouillées tant que l'accord n'a pas été écouté
+  const _setAnswerable = v => { bMin.disabled = !v; bMaj.disabled = !v }
 
   const dots = el('div', 'scoredots')
   box.appendChild(dots)
@@ -473,6 +491,7 @@ function _renderEar(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
     quality = Math.random() < 0.5 ? 'min' : 'maj'
     rndEl.textContent = `ACCORD ${round + 1} / ${rounds}`
     _renderDots()
+    _setAnswerable(false)
   }
 
   function _playChord() {
@@ -481,6 +500,7 @@ function _renderEar(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
       bpm: 80, steps: 4,
       tracks: [{ patch: 'keys', notes: [{ p: root, s: 0, d: 3 }, { p: third, s: 0, d: 3 }, { p: root + 7, s: 0, d: 3 }] }],
     })
+    _setAnswerable(true)
   }
 
   function _answer(q) {

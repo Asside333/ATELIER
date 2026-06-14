@@ -72,8 +72,12 @@ function _tap(p, vel) {
   if (KB.playSound) KB.playSound(p, vel)
 
   if (KB.mode === 'select') {
-    if (KB.sel.has(p)) KB.sel.delete(p)
-    else KB.sel.add(p)
+    if (KB.sel.has(p)) {
+      KB.sel.delete(p)
+    } else {
+      if (KB.max === 1) KB.sel.clear()  // comportement radio : une seule note
+      KB.sel.add(p)
+    }
     _refreshSel()
     if (KB.onChange) KB.onChange()
   }
@@ -107,6 +111,9 @@ function _render() {
     }
     if (KB.sel.has(p)) k.classList.add('sel')
     k.addEventListener('pointerdown', e => { e.preventDefault(); _tap(p, 0.9) })
+    k.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); _tap(p, 0.9) }
+    })
     el.appendChild(k)
   }
 

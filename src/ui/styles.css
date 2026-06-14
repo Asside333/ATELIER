@@ -129,7 +129,9 @@ header {
 .btn:active { transform: translateY(1px); }
 .btn.prime { background: linear-gradient(135deg, var(--amber), var(--amber2)); color: #241605; border-color: transparent; font-weight: 500; box-shadow: 0 2px 12px rgba(242,163,60,.25); }
 .btn.live { border-color: var(--amber); color: var(--amber); }
-.btn:focus-visible, .mrow:focus-visible, .key:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.btn:focus-visible, .mrow:focus-visible, .key:focus-visible,
+.tl:focus-visible, .trk:focus-visible, .nmToggle:focus-visible,
+.resetBtn:focus-visible, nav button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 .feed { min-height: 22px; font-size: 14px; color: var(--ink-dim); margin: 10px 0 2px; }
 .feed.good { color: var(--ok); }
 .feed.warn { color: var(--bad); }

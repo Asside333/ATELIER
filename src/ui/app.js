@@ -31,7 +31,6 @@ const store = { getState, markDone, markActivity }
 // ── NAV ───────────────────────────────────────────────────────────────────────
 
 const VIEWS = ['path', 'studio', 'bricks', 'mission']
-let _curView = 'path'
 
 function showView(id) {
   VIEWS.forEach(v => {
@@ -41,7 +40,6 @@ function showView(id) {
   const navMap = { path: 'nav-path', studio: 'nav-studio', bricks: 'nav-bricks' }
   Object.values(navMap).forEach(nbId => document.getElementById(nbId)?.classList.remove('on'))
   if (navMap[id]) document.getElementById(navMap[id])?.classList.add('on')
-  _curView = id
 }
 
 // ── HEADER ────────────────────────────────────────────────────────────────────
