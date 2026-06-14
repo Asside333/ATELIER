@@ -235,8 +235,8 @@ nav button { flex: 1; font-family: var(--mono); font-size: 10.5px; letter-spacin
 nav button.on { color: var(--amber); }
 
 /* ── RESET PROGRESSION ───────────────────────────────────────────────────── */
-.resetBtn { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--ink-faint); border-bottom: 1px solid var(--ink-faint); padding-bottom: 1px; opacity: .55; }
-.resetBtn:hover { opacity: 1; color: var(--bad); border-color: var(--bad); }
+.resetBtn { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--ink-dim); border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; }
+.resetBtn:hover { color: var(--bad); border-color: var(--bad); }
 
 /* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
 @media (min-width: 560px) { .brickgrid { grid-template-columns: 1fr 1fr 1fr; } }
