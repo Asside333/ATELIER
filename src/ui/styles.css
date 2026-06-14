@@ -234,6 +234,10 @@ nav { position: fixed; left: 0; right: 0; bottom: 0; display: flex; background: 
 nav button { flex: 1; font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; padding: 18px 0 16px; color: var(--ink-faint); }
 nav button.on { color: var(--amber); }
 
+/* ── RESET PROGRESSION ───────────────────────────────────────────────────── */
+.resetBtn { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--ink-faint); border-bottom: 1px solid var(--ink-faint); padding-bottom: 1px; opacity: .55; }
+.resetBtn:hover { opacity: 1; color: var(--bad); border-color: var(--bad); }
+
 /* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
 @media (min-width: 560px) { .brickgrid { grid-template-columns: 1fr 1fr 1fr; } }
 

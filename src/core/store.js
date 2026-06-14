@@ -42,3 +42,8 @@ export function removeSketch(i) {
   S.sketches.splice(i, 1)
   save()
 }
+
+export function resetProgress() {
+  localStorage.removeItem(LS)
+  location.reload()
+}

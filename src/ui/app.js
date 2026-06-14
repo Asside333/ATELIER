@@ -5,7 +5,7 @@
  * Charge les données, câble la nav, le header et les 4 vues.
  */
 import modules from '../data/modules.json'
-import { getState, markDone, markActivity, setSeen, toggleNames } from '../core/store.js'
+import { getState, markDone, markActivity, setSeen, toggleNames, resetProgress } from '../core/store.js'
 import { renderPath } from './path.js'
 import { openMission } from './mission.js'
 import { stop as playerStop } from '../core/player.js'
@@ -103,6 +103,11 @@ export function init() {
     const lang = toggleNames()
     document.getElementById('nmToggle').textContent = lang === 'fr' ? 'DO/C' : 'C/DO'
     setKBLang(lang)
+  })
+
+  // Réinitialisation
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if (confirm('Effacer toute la progression ? Cette action est irréversible.')) resetProgress()
   })
 
   // Unlock Web Audio au premier geste
