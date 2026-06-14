@@ -183,9 +183,11 @@ export function renderStudio() {
   }
   pSel.value = STU.tracks[STU.active].patch
 
-  // Boutons de piste
+  // Boutons de piste — libellé = patch courant
   $('#trkA').classList.toggle('on', STU.active === 0)
   $('#trkB').classList.toggle('on', STU.active === 1)
+  $('#trkA').textContent = 'PISTE A · ' + (PATCHES[STU.tracks[0].patch] || '?')
+  $('#trkB').textContent = 'PISTE B · ' + (PATCHES[STU.tracks[1].patch] || '?')
 
   // Outils
   mkTools($('#stTools'), ['put', 'len', 'vel'], () => STU.tool, v => { STU.tool = v })
@@ -214,8 +216,12 @@ export function initStudio() {
 
   // Son de la piste active
   $('#stPatch').addEventListener('change', () => {
-    STU.tracks[STU.active].patch = $('#stPatch').value
+    const t = STU.tracks[STU.active]
+    t.patch = $('#stPatch').value
+    $(STU.active === 0 ? '#trkA' : '#trkB').textContent =
+      'PISTE ' + t.name + ' · ' + (PATCHES[t.patch] || '?')
     renderStuGrid()
+    if (isRunning()) _startLoop()
   })
 
   // Info gamme
@@ -247,8 +253,11 @@ export function initStudio() {
     }
   })
 
-  // Swing live
+  // Swing / BPM live
   $('#stSwing').addEventListener('input', () => {
+    if (isRunning()) _startLoop()
+  })
+  $('#stBpm').addEventListener('input', () => {
     if (isRunning()) _startLoop()
   })
 

@@ -342,12 +342,15 @@ function _renderGrid(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang, state 
     }, { onStep: ph, onEnd: () => ph(-1) })
   }))
 
-  actions.appendChild(makeToggleBtn('∞ BOUCLE', '■ STOP', () => {
-    loopStart({
-      bpm: m.bpm, steps: m.steps, swing: m.swing || 0,
-      tracks: [...(m.ctx || []), { patch: m.patch, notes: userNotes }],
-    }, { onStep: ph })
-  }, () => ph(-1)))
+  // BOUCLE seulement hors missions à fond : le bouton FOND tient déjà ce rôle.
+  if (!m.ctx?.length) {
+    actions.appendChild(makeToggleBtn('∞ BOUCLE', '■ STOP', () => {
+      loopStart({
+        bpm: m.bpm, steps: m.steps, swing: m.swing || 0,
+        tracks: [{ patch: m.patch, notes: userNotes }],
+      }, { onStep: ph })
+    }, () => ph(-1)))
+  }
 
   actions.appendChild(btn('btn prime', 'VALIDER', () => {
     const result = validate(m.validate, userNotes.map(n => ({ p: n.p, s: n.s })))
