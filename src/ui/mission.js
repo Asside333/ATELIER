@@ -45,6 +45,46 @@ function btn(cls, text, onClick) {
 
 function $(sel) { return document.querySelector(sel) }
 
+// ── BASCULES DE LECTURE ────────────────────────────────────────────────────────
+// Évite la désynchro entre boutons : une seule lecture « live » à la fois.
+
+let _toggles = []
+
+function _resetToggles() {
+  _toggles.forEach(fn => fn())
+}
+
+/**
+ * Bouton-bascule de lecture. Démarrer une bascule (ou appeler _resetToggles
+ * depuis une lecture one-shot) réinitialise toutes les autres.
+ * @param {Function} startFn  démarre la lecture (loopStart…)
+ * @param {Function} [onReset] nettoyage visuel quand la bascule s'éteint (ex. playhead)
+ */
+function makeToggleBtn(offText, onText, startFn, onReset) {
+  let on = false
+  const off = () => {
+    if (!on) return
+    on = false
+    b.textContent = offText
+    b.classList.remove('live')
+    if (onReset) onReset()
+  }
+  const b = btn('btn', offText, () => {
+    if (on) {
+      playerStop()
+      off()
+    } else {
+      _resetToggles()
+      startFn()
+      on = true
+      b.textContent = onText
+      b.classList.add('live')
+    }
+  })
+  _toggles.push(off)
+  return b
+}
+
 // ── BRIQUE ────────────────────────────────────────────────────────────────────
 
 /**
@@ -113,6 +153,7 @@ export function openMission(m, ctx) {
   // Arrête tout ce qui tourne
   playerStop()
   hideKeyboard()
+  _toggles = []
 
   // ── En-tête ──────────────────────────────────────────────────────────────
   const mod = modules[m.mod]
@@ -185,21 +226,12 @@ function _attachHints(hints, actions, hintsEl, feed) {
 function _renderKeys(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
   // Drone
   if (m.drone) {
-    let droneOn = false
-    const droneBtn = btn('btn', 'LANCER LE DRONE', () => {
-      if (droneOn) {
-        playerStop(); droneOn = false
-        droneBtn.textContent = 'LANCER LE DRONE'; droneBtn.classList.remove('live')
-      } else {
-        loopStart({
-          bpm: 60, steps: 4,
-          tracks: [{ patch: 'keys', notes: [{ p: m.drone, s: 0, d: 4, v: 0.5 }] }],
-        })
-        droneOn = true
-        droneBtn.textContent = 'DRONE EN COURS'; droneBtn.classList.add('live')
-      }
-    })
-    ctxEl.appendChild(droneBtn)
+    ctxEl.appendChild(makeToggleBtn('LANCER LE DRONE', 'DRONE EN COURS', () => {
+      loopStart({
+        bpm: 60, steps: 4,
+        tracks: [{ patch: 'keys', notes: [{ p: m.drone, s: 0, d: 4, v: 0.5 }] }],
+      })
+    }))
   }
 
   // Chips de sélection
@@ -232,6 +264,7 @@ function _renderKeys(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
   actions.appendChild(btn('btn', 'ÉCOUTER MA SÉLECTION', () => {
     const sel = getKBSel()
     if (!sel.length) return
+    _resetToggles()
     if (m.listen === 'arp') {
       once({
         bpm: 120, steps: sel.length + 1,
@@ -292,46 +325,29 @@ function _renderGrid(m, { ctx, ctxEl, body, feed, actions, hintsEl, lang, state 
 
   // Bouton fond contextuel (ctx tracks)
   if (m.ctx?.length) {
-    let fondOn = false
-    const fondBtn = btn('btn', 'LANCER LE FOND', () => {
-      if (fondOn) {
-        playerStop(); fondOn = false
-        fondBtn.textContent = 'LANCER LE FOND'; fondBtn.classList.remove('live')
-      } else {
-        loopStart({
-          bpm: m.bpm, steps: m.steps, swing: m.swing || 0,
-          tracks: [...m.ctx, { patch: m.patch, notes: userNotes }],
-        }, { onStep: ph })
-        fondOn = true
-        fondBtn.textContent = 'FOND EN COURS'; fondBtn.classList.add('live')
-      }
-    })
-    ctxEl.appendChild(fondBtn)
+    ctxEl.appendChild(makeToggleBtn('LANCER LE FOND', 'FOND EN COURS', () => {
+      loopStart({
+        bpm: m.bpm, steps: m.steps, swing: m.swing || 0,
+        tracks: [...m.ctx, { patch: m.patch, notes: userNotes }],
+      }, { onStep: ph })
+    }, () => ph(-1)))
   }
 
   // Écouter / Boucle / Valider
   actions.appendChild(btn('btn', '▶ ÉCOUTER', () => {
+    _resetToggles()
     once({
       bpm: m.bpm, steps: m.steps, swing: m.swing || 0,
       tracks: [...(m.ctx || []), { patch: m.patch, notes: userNotes }],
-    }, { onStep: ph })
+    }, { onStep: ph, onEnd: () => ph(-1) })
   }))
 
-  let loopOn = false
-  const loopBtn = btn('btn', '∞ BOUCLE', () => {
-    if (loopOn) {
-      playerStop(); loopOn = false
-      loopBtn.textContent = '∞ BOUCLE'; loopBtn.classList.remove('live')
-    } else {
-      loopStart({
-        bpm: m.bpm, steps: m.steps, swing: m.swing || 0,
-        tracks: [...(m.ctx || []), { patch: m.patch, notes: userNotes }],
-      }, { onStep: ph })
-      loopOn = true
-      loopBtn.textContent = '■ STOP'; loopBtn.classList.add('live')
-    }
-  })
-  actions.appendChild(loopBtn)
+  actions.appendChild(makeToggleBtn('∞ BOUCLE', '■ STOP', () => {
+    loopStart({
+      bpm: m.bpm, steps: m.steps, swing: m.swing || 0,
+      tracks: [...(m.ctx || []), { patch: m.patch, notes: userNotes }],
+    }, { onStep: ph })
+  }, () => ph(-1)))
 
   actions.appendChild(btn('btn prime', 'VALIDER', () => {
     const result = validate(m.validate, userNotes.map(n => ({ p: n.p, s: n.s })))
@@ -385,14 +401,14 @@ function _renderDecode(m, { ctx, ctxEl, body, feed, actions, lang, state }) {
     once({
       bpm: m.bpm, steps: m.steps, swing: m.swing || 0,
       tracks: [{ patch: m.patch, notes: m.target }],
-    }, { onStep: ph })
+    }, { onStep: ph, onEnd: () => ph(-1) })
   }))
 
   actions.appendChild(btn('btn', '▶ MA VERSION', () => {
     once({
       bpm: m.bpm, steps: m.steps, swing: m.swing || 0,
       tracks: [{ patch: m.patch, notes: userNotes }],
-    }, { onStep: ph })
+    }, { onStep: ph, onEnd: () => ph(-1) })
   }))
 
   actions.appendChild(btn('btn', 'VÉRIFIER', () => {

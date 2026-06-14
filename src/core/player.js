@@ -126,14 +126,12 @@ export async function once(cfg, { onStep, onEnd } = {}) {
     _partIds.push(stepPart)
   }
 
-  // Fin
-  if (onEnd) {
-    const id = Tone.getTransport().schedule(() => {
-      onEnd()
-      _running = false
-    }, loopDur)
-    _partIds.push(id)
-  }
+  // Fin — toujours planifié : remet le drapeau à false et nettoie l'affichage
+  const endId = Tone.getTransport().schedule((time) => {
+    _running = false
+    if (onEnd) Tone.getDraw().schedule(() => onEnd(), time)
+  }, loopDur)
+  _partIds.push(endId)
 
   Tone.getTransport().start()
   _running = true
